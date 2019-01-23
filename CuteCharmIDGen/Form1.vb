@@ -44,23 +44,23 @@ Public Class Form1
         System.IO.File.WriteAllText(apppath & "/version.json", "{
 " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
 }")
-        'If My.Computer.Network.IsAvailable Then
-        '    My.Computer.Network.DownloadFile("LINK HERE: VERSION", TempPath & "\vsn.txt")
-        '    Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
-        '    Dim v As String = Reader.ReadToEnd
-        '    Reader.Close()
-        '    System.IO.File.Delete(TempPath & "\vsn.txt")
-        '    If Application.ProductVersion <> v Then
-        '        System.IO.File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
-        '    End If
-        'End If
+        If My.Computer.Network.IsAvailable Then
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/CuteCharmIDGenie/master/CuteCharmIDGen/bin/Debug/version.txt", TempPath & "\vsn.txt")
+            Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
+            Dim v As String = Reader.ReadToEnd
+            Reader.Close()
+            System.IO.File.Delete(TempPath & "\vsn.txt")
+            If Application.ProductVersion <> v Then
+                System.IO.File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
+            End If
+        End If
         LinkLabel1.Hide()
 #Else
         System.IO.File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
         Dim dat As String = System.IO.File.ReadAllText(TempPath & "\date.txt")
         Me.Text = "Cute Charm Glitch ID Generator (" & dat & ")"
         If My.Computer.Network.IsAvailable Then
-            My.Computer.Network.DownloadFile("LINK HERE: DATE", TempPath & "\dt.txt")
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/CuteCharmIDGenie/master/CuteCharmIDGen/Resources/date.txt", TempPath & "\dt.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
             Dim dtt As String = Reader.ReadToEnd
             Reader.Close()
