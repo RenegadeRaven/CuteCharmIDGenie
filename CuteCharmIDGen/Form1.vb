@@ -45,13 +45,13 @@ Public Class Form1
 " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
 }")
         'If My.Computer.Network.IsAvailable Then
-        '    'My.Computer.Network.DownloadFile("LINK HERE: VERSION", TempPath & "\vsn.txt")
+        '    My.Computer.Network.DownloadFile("LINK HERE: VERSION", TempPath & "\vsn.txt")
         '    Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
         '    Dim v As String = Reader.ReadToEnd
         '    Reader.Close()
         '    System.IO.File.Delete(TempPath & "\vsn.txt")
         '    If Application.ProductVersion <> v Then
-        'System.IO.File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
+        '        System.IO.File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
         '    End If
         'End If
         LinkLabel1.Hide()

@@ -1,0 +1,16 @@
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.Form1.resources
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.Resources.resources
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.vbproj.GenerateResource.cache
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.vbproj.CoreCompileInputs.cache
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.exe
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.xml
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.pdb
+C:\Users\Kochen Family\source\repos\CuteCharmIDGen\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.vbprojAssemblyReference.cache
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.vbprojAssemblyReference.cache
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.Form1.resources
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.Resources.resources
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.vbproj.GenerateResource.cache
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.vbproj.CoreCompileInputs.cache
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.exe
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.xml
+C:\Users\Kochen Family\Source\Repos\CuteCharmIDGenie\CuteCharmIDGen\obj\Debug\CuteCharmIDGen.pdb
