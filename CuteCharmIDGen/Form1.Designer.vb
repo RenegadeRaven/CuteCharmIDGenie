@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.gG = New System.Windows.Forms.GroupBox()
         Me.rSS = New System.Windows.Forms.RadioButton()
         Me.rHG = New System.Windows.Forms.RadioButton()
@@ -49,6 +50,22 @@ Partial Class Form1
         Me.SID = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.gA = New System.Windows.Forms.GroupBox()
+        Me.cSL = New System.Windows.Forms.CheckBox()
+        Me.cST = New System.Windows.Forms.CheckBox()
+        Me.cDD = New System.Windows.Forms.CheckBox()
+        Me.cY = New System.Windows.Forms.CheckBox()
+        Me.cDR = New System.Windows.Forms.CheckBox()
+        Me.cDL = New System.Windows.Forms.CheckBox()
+        Me.cDU = New System.Windows.Forms.CheckBox()
+        Me.cB = New System.Windows.Forms.CheckBox()
+        Me.cX = New System.Windows.Forms.CheckBox()
+        Me.cA = New System.Windows.Forms.CheckBox()
+        Me.cR = New System.Windows.Forms.CheckBox()
+        Me.cL = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.gG.SuspendLayout()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,6 +73,8 @@ Partial Class Form1
         CType(Me.pg2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gRC.SuspendLayout()
+        Me.gA.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'gG
@@ -281,7 +300,7 @@ Partial Class Form1
         '
         'bGO
         '
-        Me.bGO.Location = New System.Drawing.Point(622, 262)
+        Me.bGO.Location = New System.Drawing.Point(622, 294)
         Me.bGO.Name = "bGO"
         Me.bGO.Size = New System.Drawing.Size(75, 23)
         Me.bGO.TabIndex = 7
@@ -292,7 +311,7 @@ Partial Class Form1
         '
         Me.AR.Cursor = System.Windows.Forms.Cursors.Hand
         Me.AR.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.AR.Location = New System.Drawing.Point(586, 127)
+        Me.AR.Location = New System.Drawing.Point(586, 194)
         Me.AR.Name = "AR"
         Me.AR.ReadOnly = True
         Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
@@ -304,7 +323,7 @@ Partial Class Form1
         'TID
         '
         Me.TID.AutoSize = True
-        Me.TID.Location = New System.Drawing.Point(580, 82)
+        Me.TID.Location = New System.Drawing.Point(580, 160)
         Me.TID.Name = "TID"
         Me.TID.Size = New System.Drawing.Size(31, 13)
         Me.TID.TabIndex = 9
@@ -313,7 +332,7 @@ Partial Class Form1
         'SID
         '
         Me.SID.AutoSize = True
-        Me.SID.Location = New System.Drawing.Point(657, 82)
+        Me.SID.Location = New System.Drawing.Point(657, 160)
         Me.SID.Name = "SID"
         Me.SID.Size = New System.Drawing.Size(31, 13)
         Me.SID.TabIndex = 10
@@ -322,17 +341,191 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(586, 113)
+        Me.Label1.Location = New System.Drawing.Point(586, 180)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
         Me.Label1.TabIndex = 11
         Me.Label1.Text = "Action Replay Code:"
+        '
+        'gA
+        '
+        Me.gA.Controls.Add(Me.cSL)
+        Me.gA.Controls.Add(Me.cST)
+        Me.gA.Controls.Add(Me.cDD)
+        Me.gA.Controls.Add(Me.cY)
+        Me.gA.Controls.Add(Me.cDR)
+        Me.gA.Controls.Add(Me.cDL)
+        Me.gA.Controls.Add(Me.cDU)
+        Me.gA.Controls.Add(Me.cB)
+        Me.gA.Controls.Add(Me.cX)
+        Me.gA.Controls.Add(Me.cA)
+        Me.gA.Controls.Add(Me.cR)
+        Me.gA.Controls.Add(Me.cL)
+        Me.gA.Location = New System.Drawing.Point(552, 71)
+        Me.gA.Name = "gA"
+        Me.gA.Size = New System.Drawing.Size(213, 86)
+        Me.gA.TabIndex = 12
+        Me.gA.TabStop = False
+        Me.gA.Text = "Activation Button"
+        '
+        'cSL
+        '
+        Me.cSL.AutoSize = True
+        Me.cSL.Location = New System.Drawing.Point(76, 63)
+        Me.cSL.Name = "cSL"
+        Me.cSL.Size = New System.Drawing.Size(56, 17)
+        Me.cSL.TabIndex = 20
+        Me.cSL.Text = "Select"
+        Me.cSL.UseVisualStyleBackColor = True
+        '
+        'cST
+        '
+        Me.cST.AutoSize = True
+        Me.cST.Location = New System.Drawing.Point(167, 63)
+        Me.cST.Name = "cST"
+        Me.cST.Size = New System.Drawing.Size(48, 17)
+        Me.cST.TabIndex = 21
+        Me.cST.Text = "Start"
+        Me.cST.UseVisualStyleBackColor = True
+        '
+        'cDD
+        '
+        Me.cDD.AutoSize = True
+        Me.cDD.Location = New System.Drawing.Point(45, 63)
+        Me.cDD.Name = "cDD"
+        Me.cDD.Size = New System.Drawing.Size(32, 17)
+        Me.cDD.TabIndex = 19
+        Me.cDD.Text = "↓"
+        Me.cDD.UseVisualStyleBackColor = True
+        '
+        'cY
+        '
+        Me.cY.AutoSize = True
+        Me.cY.Location = New System.Drawing.Point(103, 40)
+        Me.cY.Name = "cY"
+        Me.cY.Size = New System.Drawing.Size(33, 17)
+        Me.cY.TabIndex = 15
+        Me.cY.Text = "Y"
+        Me.cY.UseVisualStyleBackColor = True
+        '
+        'cDR
+        '
+        Me.cDR.AutoSize = True
+        Me.cDR.Location = New System.Drawing.Point(69, 40)
+        Me.cDR.Name = "cDR"
+        Me.cDR.Size = New System.Drawing.Size(37, 17)
+        Me.cDR.TabIndex = 18
+        Me.cDR.Text = "→"
+        Me.cDR.UseVisualStyleBackColor = True
+        '
+        'cDL
+        '
+        Me.cDL.AutoSize = True
+        Me.cDL.Location = New System.Drawing.Point(7, 40)
+        Me.cDL.Name = "cDL"
+        Me.cDL.Size = New System.Drawing.Size(37, 17)
+        Me.cDL.TabIndex = 17
+        Me.cDL.Text = "←"
+        Me.cDL.UseVisualStyleBackColor = True
+        '
+        'cDU
+        '
+        Me.cDU.AutoSize = True
+        Me.cDU.Location = New System.Drawing.Point(45, 17)
+        Me.cDU.Name = "cDU"
+        Me.cDU.Size = New System.Drawing.Size(32, 17)
+        Me.cDU.TabIndex = 16
+        Me.cDU.Text = "↑"
+        Me.cDU.UseVisualStyleBackColor = True
+        '
+        'cB
+        '
+        Me.cB.AutoSize = True
+        Me.cB.Location = New System.Drawing.Point(135, 63)
+        Me.cB.Name = "cB"
+        Me.cB.Size = New System.Drawing.Size(33, 17)
+        Me.cB.TabIndex = 13
+        Me.cB.Text = "B"
+        Me.cB.UseVisualStyleBackColor = True
+        '
+        'cX
+        '
+        Me.cX.AutoSize = True
+        Me.cX.Location = New System.Drawing.Point(135, 17)
+        Me.cX.Name = "cX"
+        Me.cX.Size = New System.Drawing.Size(33, 17)
+        Me.cX.TabIndex = 14
+        Me.cX.Text = "X"
+        Me.cX.UseVisualStyleBackColor = True
+        '
+        'cA
+        '
+        Me.cA.AutoSize = True
+        Me.cA.Location = New System.Drawing.Point(173, 40)
+        Me.cA.Name = "cA"
+        Me.cA.Size = New System.Drawing.Size(33, 17)
+        Me.cA.TabIndex = 13
+        Me.cA.Text = "A"
+        Me.cA.UseVisualStyleBackColor = True
+        '
+        'cR
+        '
+        Me.cR.AutoSize = True
+        Me.cR.Location = New System.Drawing.Point(173, 17)
+        Me.cR.Name = "cR"
+        Me.cR.Size = New System.Drawing.Size(34, 17)
+        Me.cR.TabIndex = 1
+        Me.cR.Text = "R"
+        Me.cR.UseVisualStyleBackColor = True
+        '
+        'cL
+        '
+        Me.cL.AutoSize = True
+        Me.cL.Location = New System.Drawing.Point(7, 17)
+        Me.cL.Name = "cL"
+        Me.cL.Size = New System.Drawing.Size(32, 17)
+        Me.cL.TabIndex = 0
+        Me.cL.Text = "L"
+        Me.cL.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(-1, 315)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(19, 13)
+        Me.Label3.TabIndex = 15
+        Me.Label3.Text = "By"
+        '
+        'LinkLabel3
+        '
+        Me.LinkLabel3.AutoSize = True
+        Me.LinkLabel3.Location = New System.Drawing.Point(14, 315)
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.Size = New System.Drawing.Size(47, 13)
+        Me.LinkLabel3.TabIndex = 16
+        Me.LinkLabel3.TabStop = True
+        Me.LinkLabel3.Text = "Regnum"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Location = New System.Drawing.Point(684, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(80, 22)
+        Me.PictureBox1.TabIndex = 17
+        Me.PictureBox1.TabStop = False
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(776, 330)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.gA)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.SID)
         Me.Controls.Add(Me.TID)
@@ -342,9 +535,12 @@ Partial Class Form1
         Me.Controls.Add(Me.gG)
         Me.Controls.Add(Me.gSG)
         Me.Controls.Add(Me.gRC)
+        Me.Controls.Add(Me.LinkLabel3)
+        Me.Controls.Add(Me.Label3)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "Cute Charm Glitch ID Generator"
         Me.gG.ResumeLayout(False)
         Me.gG.PerformLayout()
         Me.gSG.ResumeLayout(False)
@@ -355,6 +551,9 @@ Partial Class Form1
         CType(Me.pg1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gRC.ResumeLayout(False)
         Me.gRC.PerformLayout()
+        Me.gA.ResumeLayout(False)
+        Me.gA.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -386,4 +585,20 @@ Partial Class Form1
     Friend WithEvents SID As Label
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Label1 As Label
+    Friend WithEvents gA As GroupBox
+    Friend WithEvents cSL As CheckBox
+    Friend WithEvents cST As CheckBox
+    Friend WithEvents cDD As CheckBox
+    Friend WithEvents cY As CheckBox
+    Friend WithEvents cDR As CheckBox
+    Friend WithEvents cDL As CheckBox
+    Friend WithEvents cDU As CheckBox
+    Friend WithEvents cB As CheckBox
+    Friend WithEvents cX As CheckBox
+    Friend WithEvents cA As CheckBox
+    Friend WithEvents cR As CheckBox
+    Friend WithEvents cL As CheckBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents LinkLabel3 As LinkLabel
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

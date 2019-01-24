@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("CuteCharmIDGen")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("CuteCharmIDGen")>
+<Assembly: AssemblyTitle("CuteCharmIDGenie")>
+<Assembly: AssemblyDescription("Generates IDs for the Cute Charm Glitch")>
+<Assembly: AssemblyCompany("Regnum")>
+<Assembly: AssemblyProduct("CuteCharmIDGenie")>
 <Assembly: AssemblyCopyright("Copyright © Regnum 2019")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("Regnum")>
 
 <Assembly: ComVisible(False)>
 

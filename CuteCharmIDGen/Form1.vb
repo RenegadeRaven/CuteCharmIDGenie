@@ -7,7 +7,9 @@ Public Class Form1
     Dim rnd(1) As Boolean '{Is Shiny Group random?, With Quirky?}
     Dim IDs(1) As Integer '{TID, SID} as numbers
     Dim hIDs(1) As String '{TID, SID} as hex
-    Dim code(3) As String 'AR Codes {D, P, Pt, HGSS}
+    Dim code(2) As String 'AR Codes {D, P, Pt, HGSS}
+    Dim butt As String 'Haha. It's Short for Button. The one that activates the AR code
+    Dim nButt As String = Nothing 'List of buttons
     Dim prob As Boolean = False 'Is there an Error?
 
     Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
@@ -38,6 +40,36 @@ Public Class Form1
         TID.Visible = False
         SID.Visible = False
         AR.Enabled = False
+
+        Dim ind As Char() = My.Settings.SavedButt.ToCharArray
+        For i = 0 To UBound(ind) Step 1
+            Select Case ind(i)
+                Case "7"
+                    cL.Checked = True
+                Case "9"
+                    cR.Checked = True
+                Case "1"
+                    cST.Checked = True
+                Case "3"
+                    cSL.Checked = True
+                Case "6"
+                    cA.Checked = True
+                Case "2"
+                    cB.Checked = True
+                Case "8"
+                    cX.Checked = True
+                Case "4"
+                    cY.Checked = True
+                Case "W"
+                    cDU.Checked = True
+                Case "A"
+                    cDL.Checked = True
+                Case "S"
+                    cDD.Checked = True
+                Case "D"
+                    cDR.Checked = True
+            End Select
+        Next i
     End Sub
 
     'On Exit
@@ -91,48 +123,111 @@ Public Class Form1
         System.IO.File.Delete(TempPath & "\date.txt")
 #End If
     End Sub
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://github.com/PlasticJustice/CuteCharmIDGenie/releases/latest")
+        Else
+            MsgBox("No Internet connection!
+You can not update at the moment.", vbOKOnly, "Error 404")
+        End If
+    End Sub
+
+    'Determines Activation Button
+    Private Sub ActButt()
+        Dim arButt(8) As String
+        Dim ind As Char() = nButt.ToCharArray
+        My.Settings.SavedButt = nButt
+        For i = 0 To UBound(ind) Step 1
+            Select Case ind(i)
+                Case "7"
+                    arButt(i) = My.Resources.L
+                Case "9"
+                    arButt(i) = My.Resources.R
+                Case "1"
+                    arButt(i) = My.Resources.Start
+                Case "3"
+                    arButt(i) = My.Resources.SEL
+                Case "6"
+                    arButt(i) = My.Resources.A
+                Case "2"
+                    arButt(i) = My.Resources.B
+                Case "8"
+                    arButt(i) = My.Resources.X
+                Case "4"
+                    arButt(i) = My.Resources.Y
+                Case "W"
+                    arButt(i) = My.Resources.Up
+                Case "A"
+                    arButt(i) = My.Resources.Left
+                Case "S"
+                    arButt(i) = My.Resources.Down
+                Case "D"
+                    arButt(i) = My.Resources.Right
+            End Select
+        Next i
+
+        Dim tnum As Integer = Convert.ToInt32(arButt(0), 16)
+        Dim tbutt = tnum 'Convert.ToString(tnum, 2)
+        For n = 0 To UBound(ind) Step 1
+            Dim num As Integer = Convert.ToInt32(arButt(n), 16)
+            'Dim bin As String = Convert.ToString(num, 2)
+            tbutt = tbutt And num 'bin
+        Next n
+        'tnum = Convert.ToInt32(tbutt, 2)
+        butt = Convert.ToString(tbutt, 16).ToUpper
+    End Sub
 
     'Generate AR Code
-    Private Function genAR()
-        'Diamond
-        code(0) = ""
+    Private Function GenAR()
+        ActButt()
 
-        'Pearl
-        code(1) = ""
+        'Diamond/Pearl
+        code(0) = "94000130 " & butt & "0000
+B2106FC0 00000000
+00000288 " & hIDs(1) & hIDs(0) & "
+D2000000 00000000"
 
         'Platinum
-        code(2) = "94000130 FFFB0000
+        code(1) = "94000130 " & butt & "0000
 B2101D40 00000000
 0000008C " & hIDs(1) & hIDs(0) & "
 D2000000 00000000"
 
         'HeartGold/SoulSilver
-        code(3) = "94000130 FFFB0000
+        code(2) = "94000130 " & butt & "0000
 B2111880 00000000
 00000084 " & hIDs(1) & hIDs(0) & "
 D2000000 00000000"
 
         If Game = 1 Then
+            AR.BackColor = Color.PowderBlue
             Return code(0)
         ElseIf Game = 2 Then
-            Return code(1)
+            AR.BackColor = Color.Pink
+            Return code(0)
         ElseIf Game = 3 Then
+            AR.BackColor = Color.Tan
+            Return code(1)
+        ElseIf Game = 4 Then
+            AR.BackColor = Color.Khaki
             Return code(2)
-        ElseIf Game = 4 Or Game = 5 Then
-            Return code(3)
+        ElseIf Game = 5 Then
+            AR.BackColor = Color.Silver
+            Return code(2)
         Else
+            AR.BackColor = DefaultBackColor
             Return "Error"
         End If
     End Function
 
     'Greys out PictureBoxes
-    Private Sub drawDE(ByVal pb As PictureBox)
+    Private Sub DrawDE(ByVal pb As PictureBox)
         pb.Enabled = False
         ControlPaint.DrawImageDisabled(pb.CreateGraphics, pb.BackgroundImage, 0, 0, Color.Gray)
     End Sub
 
     'Checks for empty options
-    Private Sub chks()
+    Private Sub Chks()
         If Game = 0 Then
             gG.ForeColor = Color.Red
             prob = True
@@ -142,16 +237,20 @@ D2000000 00000000"
         ElseIf rnd(0) = Nothing And rC.Checked = False Then
             gRC.ForeColor = Color.Red
             prob = True
+        ElseIf nButt = Nothing Then
+            gA.ForeColor = Color.Red
+            prob = True
         Else
             gG.ForeColor = DefaultForeColor
             gRC.ForeColor = DefaultForeColor
             gSG.ForeColor = DefaultForeColor
+            gA.ForeColor = DefaultForeColor
             prob = False
         End If
     End Sub
 
     'Picks IDs
-    Private Sub pickID()
+    Private Sub PickID()
         Dim name As String
         If Group = 1 Then
             name = TempPath & "/Groups/SG1.txt"
@@ -185,7 +284,7 @@ D2000000 00000000"
     End Sub
 
     'Verifies IDs
-    Private Sub vchk()
+    Private Sub Vchk()
         Dim result As Integer = ((IDs(0) Xor IDs(1)) >> 3)
         If result = (Group - 1) Then
             prob = False
@@ -335,6 +434,7 @@ D2000000 00000000"
     End Sub
 #End Region
 #Region "Game Selection"
+    'Game is Diamond
     Private Sub rD_CheckedChanged(sender As Object, e As EventArgs) Handles rD.CheckedChanged
         If rD.Checked = True Then
             Game = 1
@@ -342,6 +442,8 @@ D2000000 00000000"
             Game = 0
         End If
     End Sub
+
+    'Game is Pearl
     Private Sub rP_CheckedChanged(sender As Object, e As EventArgs) Handles rP.CheckedChanged
         If rP.Checked = True Then
             Game = 2
@@ -349,6 +451,8 @@ D2000000 00000000"
             Game = 0
         End If
     End Sub
+
+    'Game is Platinum
     Private Sub rPt_CheckedChanged(sender As Object, e As EventArgs) Handles rPt.CheckedChanged
         If rPt.Checked = True Then
             Game = 3
@@ -356,6 +460,8 @@ D2000000 00000000"
             Game = 0
         End If
     End Sub
+
+    'Game is HeartGold
     Private Sub rHG_CheckedChanged(sender As Object, e As EventArgs) Handles rHG.CheckedChanged
         If rHG.Checked = True Then
             Game = 4
@@ -363,6 +469,8 @@ D2000000 00000000"
             Game = 0
         End If
     End Sub
+
+    'Game is SoulSilver
     Private Sub rSS_CheckedChanged(sender As Object, e As EventArgs) Handles rSS.CheckedChanged
         If rSS.Checked = True Then
             Game = 5
@@ -371,6 +479,162 @@ D2000000 00000000"
         End If
     End Sub
 #End Region
+#Region "Button Selection"
+    'L Button
+    Private Sub cL_CheckedChanged(sender As Object, e As EventArgs) Handles cL.CheckedChanged
+        If cL.Checked = True Then
+            nButt = nButt & "7"
+        Else
+            nButt = nButt.Replace("7", "")
+        End If
+    End Sub
 
+    'R Button
+    Private Sub cR_CheckedChanged(sender As Object, e As EventArgs) Handles cR.CheckedChanged
+        If cR.Checked = True Then
+            nButt = nButt & "9"
+        Else
+            nButt = nButt.Replace("9", "")
+        End If
+    End Sub
 
+    'Start Button
+    Private Sub cST_CheckedChanged(sender As Object, e As EventArgs) Handles cST.CheckedChanged
+        If cST.Checked = True Then
+            nButt = nButt & "1"
+        Else
+            nButt = nButt.Replace("1", "")
+        End If
+    End Sub
+
+    'Select Button
+    Private Sub cSL_CheckedChanged(sender As Object, e As EventArgs) Handles cSL.CheckedChanged
+        If cSL.Checked = True Then
+            nButt = nButt & "3"
+        Else
+            nButt = nButt.Replace("3", "")
+        End If
+    End Sub
+
+    'A Button
+    Private Sub cA_CheckedChanged(sender As Object, e As EventArgs) Handles cA.CheckedChanged
+        If cA.Checked = True Then
+            nButt = nButt & "6"
+        Else
+            nButt = nButt.Replace("6", "")
+        End If
+    End Sub
+
+    'B Button
+    Private Sub cB_CheckedChanged(sender As Object, e As EventArgs) Handles cB.CheckedChanged
+        If cB.Checked = True Then
+            nButt = nButt & "2"
+        Else
+            nButt = nButt.Replace("2", "")
+        End If
+    End Sub
+
+    'X Button
+    Private Sub cX_CheckedChanged(sender As Object, e As EventArgs) Handles cX.CheckedChanged
+        If cX.Checked = True Then
+            nButt = nButt & "8"
+        Else
+            nButt = nButt.Replace("8", "")
+        End If
+    End Sub
+
+    'Y Button
+    Private Sub cY_CheckedChanged(sender As Object, e As EventArgs) Handles cY.CheckedChanged
+        If cY.Checked = True Then
+            nButt = nButt & "4"
+        Else
+            nButt = nButt.Replace("4", "")
+        End If
+    End Sub
+
+    'Up Button
+    Private Sub cDU_CheckedChanged(sender As Object, e As EventArgs) Handles cDU.CheckedChanged
+        If cDU.Checked = True Then
+            nButt = nButt & "W"
+            cDL.Enabled = False
+            cDD.Enabled = False
+            cDR.Enabled = False
+        Else
+            nButt = nButt.Replace("W", "")
+            cDL.Enabled = True
+            cDD.Enabled = True
+            cDR.Enabled = True
+        End If
+    End Sub
+
+    'Left Button
+    Private Sub cDL_CheckedChanged(sender As Object, e As EventArgs) Handles cDL.CheckedChanged
+        If cDL.Checked = True Then
+            nButt = nButt & "A"
+            cDU.Enabled = False
+            cDD.Enabled = False
+            cDR.Enabled = False
+        Else
+            nButt = nButt.Replace("A", "")
+            cDU.Enabled = True
+            cDD.Enabled = True
+            cDR.Enabled = True
+        End If
+    End Sub
+
+    'Down Button
+    Private Sub cDD_CheckedChanged(sender As Object, e As EventArgs) Handles cDD.CheckedChanged
+        If cDD.Checked = True Then
+            nButt = nButt & "S"
+            cDL.Enabled = False
+            cDU.Enabled = False
+            cDR.Enabled = False
+        Else
+            nButt = nButt.Replace("S", "")
+            cDL.Enabled = True
+            cDU.Enabled = True
+            cDR.Enabled = True
+        End If
+    End Sub
+
+    'Right Button
+    Private Sub cDR_CheckedChanged(sender As Object, e As EventArgs) Handles cDR.CheckedChanged
+        If cDR.Checked = True Then
+            nButt = nButt & "D"
+            cDL.Enabled = False
+            cDD.Enabled = False
+            cDU.Enabled = False
+        Else
+            nButt = nButt.Replace("D", "")
+            cDL.Enabled = True
+            cDD.Enabled = True
+            cDU.Enabled = True
+        End If
+    End Sub
+#End Region
+#Region "Author Details"
+    Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://github.com/PlasticJustice")
+        Else
+            MsgBox("No Internet connection!
+You can look me up later.", vbOKOnly, "Error 404")
+        End If
+    End Sub
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        Thread.Sleep(200)
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
+        Else
+            MsgBox("No Internet connection!
+        I appreciate the gesture.", vbOKOnly, "Error 404")
+        End If
+    End Sub
+    Private Sub PictureBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseDown
+        PictureBox1.Image = My.Resources.ppdbs
+    End Sub
+    Private Sub PictureBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseUp
+        PictureBox1.Image = Nothing
+    End Sub
+#End Region
 End Class
