@@ -1,12 +1,14 @@
 ﻿Imports System.Threading
+Imports System.IO
 Public Class Form1
 #Region "Variables"
     Dim Game As SByte = 0 'Game Selection
     Dim Group As SByte = 0 'Shiny Group Selection
     Dim rnd(1) As Boolean '{Is Shiny Group random?, With Quirky?}
-    Dim IDs(1) As Short '{TID, SID} as numbers
+    Dim IDs(1) As Integer '{TID, SID} as numbers
     Dim hIDs(1) As String '{TID, SID} as hex
     Dim code(3) As String 'AR Codes {D, P, Pt, HGSS}
+    Dim prob As Boolean = False 'Is there an Error?
 
     Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
     Dim res As String = System.IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
@@ -16,7 +18,8 @@ Public Class Form1
     'Startup
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UpdateChk()
-
+        rnd(0) = Nothing
+        rnd(1) = Nothing
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         drawDE(pg1)
@@ -79,7 +82,7 @@ Public Class Form1
     End Sub
 
     'Generate AR Code
-    Private Sub genAR()
+    Private Function genAR()
         'Diamond
         code(0) = ""
 
@@ -97,12 +100,99 @@ D2000000 00000000"
 B2111880 00000000
 00000084 SSSSTTTT
 D2000000 00000000"
-    End Sub
+
+        If Game = 1 Then
+            Return code(0)
+        ElseIf Game = 2 Then
+            Return code(1)
+        ElseIf Game = 3 Then
+            Return code(2)
+        ElseIf Game = 4 Or Game = 5 Then
+            Return code(3)
+        Else
+            Return "Error"
+        End If
+    End Function
 
     'Greys out PictureBoxes
     Private Sub drawDE(ByVal pb As PictureBox)
         pb.Enabled = False
         ControlPaint.DrawImageDisabled(pb.CreateGraphics, pb.BackgroundImage, 0, 0, Color.Gray)
+    End Sub
+
+    'Checks for empty options
+    Private Sub chks()
+        If Game = 0 Then
+            gG.ForeColor = Color.Red
+            prob = True
+        ElseIf Group = 0 And rC.Checked = True Then
+            gSG.ForeColor = Color.Red
+            prob = True
+        ElseIf rnd(0) = Nothing Then
+            gRC.ForeColor = Color.Red
+            prob = True
+        Else
+            gG.ForeColor = DefaultForeColor
+            gRC.ForeColor = DefaultForeColor
+            gSG.ForeColor = DefaultForeColor
+            prob = False
+        End If
+    End Sub
+
+    'Picks IDs
+    Private Sub pickID()
+        Dim name As String = TempPath & "/group.txt"
+        If File.Exists(name) Then
+            File.Delete(name)
+        End If
+        If Group = 1 Then
+            File.WriteAllText(name, My.Resources.Shiny_Group_1)
+        ElseIf Group = 2 Then
+            File.WriteAllText(name, My.Resources.Shiny_Group_2)
+        ElseIf Group = 3 Then
+            File.WriteAllText(name, My.Resources.Shiny_Group_3)
+        ElseIf Group = 4 Then
+            File.WriteAllText(name, My.Resources.Shiny_Group_4)
+        End If
+        Thread.Sleep(200)
+        Dim list As String = File.ReadAllText(name)
+        Dim sets() As String
+        sets = list.Split("
+")
+        Dim gen As New Random
+        Dim pick As Integer = gen.Next(1, UBound(sets))
+        Dim sel As String = sets(pick)
+        Dim sep As String() = sel.Split("/")
+        IDs(0) = Convert.ToUInt32(sep(LBound(sep)))
+        IDs(1) = Convert.ToUInt32(sep(UBound(sep)))
+        File.Delete(name)
+        Thread.Sleep(200)
+        TID.Text = "TID: " & IDs(0)
+        SID.Text = "SID: " & IDs(1)
+        TID.Show()
+        SID.Show()
+    End Sub
+
+    'Executes AR code generation
+    Private Sub bGO_Click(sender As Object, e As EventArgs) Handles bGO.Click
+        chks()
+        If prob = True Then
+            Exit Sub
+        End If
+        If rnd(0) = True Then
+            Dim gen As New Random
+            If rnd(1) = False Then
+                Group = gen.Next(1, 31) / 10
+            ElseIf rnd(1) = True Then
+                Group = gen.Next(1, 41) / 10
+            End If
+        End If
+        pickID()
+        Thread.Sleep(300)
+        hIDs(0) = Hex(IDs(0))
+        hIDs(1) = Hex(IDs(1))
+        AR.Text = genAR()
+        AR.Enabled = True
     End Sub
 
 #Region "Specific Shiny Group RadioButtons"
@@ -207,8 +297,43 @@ D2000000 00000000"
             rnd(1) = Nothing
         End If
     End Sub
-
-
+#End Region
+#Region "Game Selection"
+    Private Sub rD_CheckedChanged(sender As Object, e As EventArgs) Handles rD.CheckedChanged
+        If rD.Checked = True Then
+            Game = 1
+        Else
+            Game = 0
+        End If
+    End Sub
+    Private Sub rP_CheckedChanged(sender As Object, e As EventArgs) Handles rP.CheckedChanged
+        If rP.Checked = True Then
+            Game = 2
+        Else
+            Game = 0
+        End If
+    End Sub
+    Private Sub rPt_CheckedChanged(sender As Object, e As EventArgs) Handles rPt.CheckedChanged
+        If rPt.Checked = True Then
+            Game = 3
+        Else
+            Game = 0
+        End If
+    End Sub
+    Private Sub rHG_CheckedChanged(sender As Object, e As EventArgs) Handles rHG.CheckedChanged
+        If rHG.Checked = True Then
+            Game = 4
+        Else
+            Game = 0
+        End If
+    End Sub
+    Private Sub rSS_CheckedChanged(sender As Object, e As EventArgs) Handles rSS.CheckedChanged
+        If rSS.Checked = True Then
+            Game = 5
+        Else
+            Game = 0
+        End If
+    End Sub
 #End Region
 
 

@@ -37,7 +37,7 @@ Partial Class Form1
         Me.pg3 = New System.Windows.Forms.PictureBox()
         Me.pg2 = New System.Windows.Forms.PictureBox()
         Me.pg1 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gRC = New System.Windows.Forms.GroupBox()
         Me.rC = New System.Windows.Forms.RadioButton()
         Me.rRQ = New System.Windows.Forms.RadioButton()
         Me.rR = New System.Windows.Forms.RadioButton()
@@ -52,7 +52,7 @@ Partial Class Form1
         CType(Me.pg3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.gRC.SuspendLayout()
         Me.SuspendLayout()
         '
         'gG
@@ -221,17 +221,17 @@ Partial Class Form1
         Me.pg1.TabIndex = 0
         Me.pg1.TabStop = False
         '
-        'GroupBox1
+        'gRC
         '
-        Me.GroupBox1.Controls.Add(Me.rC)
-        Me.GroupBox1.Controls.Add(Me.rRQ)
-        Me.GroupBox1.Controls.Add(Me.rR)
-        Me.GroupBox1.Location = New System.Drawing.Point(392, 22)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(373, 49)
-        Me.GroupBox1.TabIndex = 5
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Shiny Group Selection"
+        Me.gRC.Controls.Add(Me.rC)
+        Me.gRC.Controls.Add(Me.rRQ)
+        Me.gRC.Controls.Add(Me.rR)
+        Me.gRC.Location = New System.Drawing.Point(392, 22)
+        Me.gRC.Name = "gRC"
+        Me.gRC.Size = New System.Drawing.Size(373, 49)
+        Me.gRC.TabIndex = 5
+        Me.gRC.TabStop = False
+        Me.gRC.Text = "Shiny Group Selection"
         '
         'rC
         '
@@ -324,8 +324,9 @@ Partial Class Form1
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.gG)
         Me.Controls.Add(Me.gSG)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.gRC)
         Me.Name = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form1"
         Me.gG.ResumeLayout(False)
         Me.gG.PerformLayout()
@@ -335,8 +336,8 @@ Partial Class Form1
         CType(Me.pg3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pg2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pg1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.gRC.ResumeLayout(False)
+        Me.gRC.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -357,7 +358,7 @@ Partial Class Form1
     Friend WithEvents sg3 As RadioButton
     Friend WithEvents sg2 As RadioButton
     Friend WithEvents sg1 As RadioButton
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents gRC As GroupBox
     Friend WithEvents rC As RadioButton
     Friend WithEvents rRQ As RadioButton
     Friend WithEvents rR As RadioButton
