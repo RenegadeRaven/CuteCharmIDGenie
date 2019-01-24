@@ -1,5 +1,6 @@
 ﻿Imports System.Threading
 Imports System.IO
+Imports System.IO.Compression
 Public Class Form1
 #Region "Variables"
     Dim Game As SByte = 0 'Game Selection
@@ -22,12 +23,13 @@ Public Class Form1
         UpdateChk()
         rnd(0) = Nothing
         rnd(1) = Nothing
-        Directory.CreateDirectory(TempPath & "/Groups")
         Dim name As String = TempPath & "/Groups"
-        File.WriteAllText(name & "/SG1.txt", My.Resources.Shiny_Group_1)
-        File.WriteAllText(name & "/SG2.txt", My.Resources.Shiny_Group_2)
-        File.WriteAllText(name & "/SG3.txt", My.Resources.Shiny_Group_3)
-        File.WriteAllText(name & "/SG4.txt", My.Resources.Shiny_Group_4)
+        If Directory.Exists(name) Then
+            Directory.Delete(name, True)
+        End If
+        Directory.CreateDirectory(name)
+        File.WriteAllBytes(name & "/ids.zip", My.Resources.Cute_Charm_Glitch_IDs)
+        ZipFile.ExtractToDirectory(name & "/ids.zip", name)
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         drawDE(pg1)
@@ -167,13 +169,11 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         Next i
 
         Dim tnum As Integer = Convert.ToInt32(arButt(0), 16)
-        Dim tbutt = tnum 'Convert.ToString(tnum, 2)
+        Dim tbutt = tnum
         For n = 0 To UBound(ind) Step 1
             Dim num As Integer = Convert.ToInt32(arButt(n), 16)
-            'Dim bin As String = Convert.ToString(num, 2)
-            tbutt = tbutt And num 'bin
+            tbutt = tbutt And num
         Next n
-        'tnum = Convert.ToInt32(tbutt, 2)
         butt = Convert.ToString(tbutt, 16).ToUpper
     End Sub
 
