@@ -20,6 +20,12 @@ Public Class Form1
         UpdateChk()
         rnd(0) = Nothing
         rnd(1) = Nothing
+        Directory.CreateDirectory(TempPath & "/Groups")
+        Dim name As String = TempPath & "/Groups"
+        File.WriteAllText(name & "/SG1.txt", My.Resources.Shiny_Group_1)
+        File.WriteAllText(name & "/SG2.txt", My.Resources.Shiny_Group_2)
+        File.WriteAllText(name & "/SG3.txt", My.Resources.Shiny_Group_3)
+        File.WriteAllText(name & "/SG4.txt", My.Resources.Shiny_Group_4)
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         drawDE(pg1)
@@ -32,6 +38,11 @@ Public Class Form1
         TID.Visible = False
         SID.Visible = False
         AR.Enabled = False
+    End Sub
+
+    'On Exit
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Directory.Delete(TempPath & "/Groups", True)
     End Sub
 
     'Checks For Update
@@ -98,7 +109,7 @@ D2000000 00000000"
         'HeartGold/SoulSilver
         code(3) = "94000130 FFFB0000
 B2111880 00000000
-00000084 SSSSTTTT
+00000084 " & hIDs(1) & hIDs(0) & "
 D2000000 00000000"
 
         If Game = 1 Then
@@ -128,7 +139,7 @@ D2000000 00000000"
         ElseIf Group = 0 And rC.Checked = True Then
             gSG.ForeColor = Color.Red
             prob = True
-        ElseIf rnd(0) = Nothing Then
+        ElseIf rnd(0) = Nothing And rC.Checked = False Then
             gRC.ForeColor = Color.Red
             prob = True
         Else
@@ -141,20 +152,18 @@ D2000000 00000000"
 
     'Picks IDs
     Private Sub pickID()
-        Dim name As String = TempPath & "/group.txt"
-        If File.Exists(name) Then
-            File.Delete(name)
-        End If
+        Dim name As String
         If Group = 1 Then
-            File.WriteAllText(name, My.Resources.Shiny_Group_1)
+            name = TempPath & "/Groups/SG1.txt"
         ElseIf Group = 2 Then
-            File.WriteAllText(name, My.Resources.Shiny_Group_2)
+            name = TempPath & "/Groups/SG2.txt"
         ElseIf Group = 3 Then
-            File.WriteAllText(name, My.Resources.Shiny_Group_3)
+            name = TempPath & "/Groups/SG3.txt"
         ElseIf Group = 4 Then
-            File.WriteAllText(name, My.Resources.Shiny_Group_4)
+            name = TempPath & "/Groups/SG4.txt"
+        Else
+            Exit Sub
         End If
-        Thread.Sleep(200)
         Dim list As String = File.ReadAllText(name)
         Dim sets() As String
         sets = list.Split("
@@ -165,12 +174,24 @@ D2000000 00000000"
         Dim sep As String() = sel.Split("/")
         IDs(0) = Convert.ToUInt32(sep(LBound(sep)))
         IDs(1) = Convert.ToUInt32(sep(UBound(sep)))
-        File.Delete(name)
-        Thread.Sleep(200)
+        vchk()
+        If prob = True Then
+            Exit Sub
+        End If
         TID.Text = "TID: " & IDs(0)
         SID.Text = "SID: " & IDs(1)
         TID.Show()
         SID.Show()
+    End Sub
+
+    'Verifies IDs
+    Private Sub vchk()
+        Dim result As Integer = ((IDs(0) Xor IDs(1)) >> 3)
+        If result = (Group - 1) Then
+            prob = False
+        Else
+            prob = True
+        End If
     End Sub
 
     'Executes AR code generation
@@ -190,9 +211,24 @@ D2000000 00000000"
         pickID()
         Thread.Sleep(300)
         hIDs(0) = Hex(IDs(0))
+
         hIDs(1) = Hex(IDs(1))
+        For i = 0 To 3 Step 1
+            If hIDs(0).Length < 4 Then
+                hIDs(0) = "0" & hIDs(0)
+            End If
+            If hIDs(1).Length < 4 Then
+                hIDs(1) = "0" & hIDs(1)
+            End If
+        Next i
         AR.Text = genAR()
         AR.Enabled = True
+    End Sub
+
+    'Copy AR Code to clipboard
+    Private Sub AR_Click(sender As Object, e As EventArgs) Handles AR.Click, AR.MouseClick, AR.DoubleClick, AR.MouseDoubleClick
+        Clipboard.Clear()
+        Clipboard.SetText(AR.Text, TextDataFormat.Text)
     End Sub
 
 #Region "Specific Shiny Group RadioButtons"

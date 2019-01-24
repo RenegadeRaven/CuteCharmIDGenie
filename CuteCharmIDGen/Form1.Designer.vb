@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.gG = New System.Windows.Forms.GroupBox()
         Me.rSS = New System.Windows.Forms.RadioButton()
         Me.rHG = New System.Windows.Forms.RadioButton()
@@ -46,6 +47,8 @@ Partial Class Form1
         Me.AR = New System.Windows.Forms.RichTextBox()
         Me.TID = New System.Windows.Forms.Label()
         Me.SID = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.gG.SuspendLayout()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -278,7 +281,7 @@ Partial Class Form1
         '
         'bGO
         '
-        Me.bGO.Location = New System.Drawing.Point(622, 293)
+        Me.bGO.Location = New System.Drawing.Point(622, 262)
         Me.bGO.Name = "bGO"
         Me.bGO.Size = New System.Drawing.Size(75, 23)
         Me.bGO.TabIndex = 7
@@ -287,12 +290,16 @@ Partial Class Form1
         '
         'AR
         '
-        Me.AR.Location = New System.Drawing.Point(552, 107)
+        Me.AR.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.AR.ImeMode = System.Windows.Forms.ImeMode.Off
+        Me.AR.Location = New System.Drawing.Point(586, 127)
         Me.AR.Name = "AR"
         Me.AR.ReadOnly = True
-        Me.AR.Size = New System.Drawing.Size(213, 173)
+        Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+        Me.AR.Size = New System.Drawing.Size(145, 87)
         Me.AR.TabIndex = 8
         Me.AR.Text = ""
+        Me.ToolTip1.SetToolTip(Me.AR, "Click to Copy to Clipboard")
         '
         'TID
         '
@@ -312,11 +319,21 @@ Partial Class Form1
         Me.SID.TabIndex = 10
         Me.SID.Text = "SID: "
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(586, 113)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(104, 13)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "Action Replay Code:"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(776, 330)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.SID)
         Me.Controls.Add(Me.TID)
         Me.Controls.Add(Me.AR)
@@ -367,4 +384,6 @@ Partial Class Form1
     Friend WithEvents AR As RichTextBox
     Friend WithEvents TID As Label
     Friend WithEvents SID As Label
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Label1 As Label
 End Class
