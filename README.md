@@ -42,4 +42,5 @@ Run all the code, selecting a set of IDs and creating the Action Replay Code.
 Puts my Handle on the app, like signing a work of art. The link takes the user to the Author's GitHub profile.
 
 ### PayPal Donate Button
-Gives the user the option to help support the developper through PayPal Donations. *Pretty Please* 
+Gives the user the option to help support the developper through PayPal Donations. *Pretty Please.* <br>
+[![button](https://i.imgur.com/4yHCJNa.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E) *Come on, I know you want to.*
