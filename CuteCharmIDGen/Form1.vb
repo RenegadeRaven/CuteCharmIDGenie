@@ -236,6 +236,7 @@ D2000000 00000000"
 
     'Calls the text changes on the PicBoxes
     Private Sub PicTXT() Handles LeadList.SelectedIndexChanged
+        My.Settings.DLead = LeadList.SelectedIndex
         Dim a(,) As String = {
         {"00 Hardy", "01 Lonely", "02 Brave", "03 Adamant", "04 Naughty", "05 Bold", "06 Docile", "07 Relaxed"},
         {"08 Impish", "09 Lax", "0A Timid", "0B Hasty", "0C Serious", "0D Jolly", "0E Naive", "0F Modest"},
