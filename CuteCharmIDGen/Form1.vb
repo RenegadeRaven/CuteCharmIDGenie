@@ -1,10 +1,10 @@
 ﻿Imports System.Threading
 Imports System.IO
-Imports System.IO.Compression
 Imports System.Drawing
 Public Class Form1
 #Region "Variables"
     Dim Game As SByte = 0 'Game Selection
+    Dim TSVt As Integer = 0 'Target Trainer Shiny Value
     Dim Group As SByte = 0 'Shiny Group Selection
     Dim rnd(1) As Boolean '{Is Shiny Group random?, With Quirky?}
     Dim IDs(1) As Integer '{TID, SID} as numbers
@@ -15,7 +15,7 @@ Public Class Form1
     Dim prob As Boolean = False 'Is there an Error?
 
     Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
-    Dim res As String = System.IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
+    Dim res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
 #End Region
 
@@ -24,13 +24,6 @@ Public Class Form1
         UpdateChk()
         rnd(0) = Nothing
         rnd(1) = Nothing
-        Dim name As String = TempPath & "/Groups"
-        If Directory.Exists(name) Then
-            Directory.Delete(name, True)
-        End If
-        Directory.CreateDirectory(name)
-        File.WriteAllBytes(name & "/ids.zip", My.Resources.Cute_Charm_Glitch_IDs)
-        ZipFile.ExtractToDirectory(name & "/ids.zip", name)
         LeadList.SelectedIndex = My.Settings.DLead
         PicTXT()
     End Sub
@@ -77,22 +70,17 @@ Public Class Form1
         Next i
     End Sub
 
-    'On Exit
-    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Directory.Delete(TempPath & "/Groups", True)
-    End Sub
-
     'Checks For Update
     Private Sub UpdateChk()
-        If System.IO.File.Exists(TempPath & "\vsn.txt") Then
-            System.IO.File.Delete(TempPath & "\vsn.txt")
+        If File.Exists(TempPath & "\vsn.txt") Then
+            File.Delete(TempPath & "\vsn.txt")
         End If
-        If System.IO.File.Exists(TempPath & "\dt.txt") Then
-            System.IO.File.Delete(TempPath & "\dt.txt")
+        If File.Exists(TempPath & "\dt.txt") Then
+            File.Delete(TempPath & "\dt.txt")
         End If
 #If DEBUG Then
-        System.IO.File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
-        System.IO.File.WriteAllText(apppath & "/version.json", "{
+        File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
+        File.WriteAllText(apppath & "/version.json", "{
 " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
 }")
         If My.Computer.Network.IsAvailable Then
@@ -100,22 +88,22 @@ Public Class Form1
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
-            System.IO.File.Delete(TempPath & "\vsn.txt")
+            File.Delete(TempPath & "\vsn.txt")
             If Application.ProductVersion <> v Then
-                System.IO.File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
+                File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
             End If
         End If
         LinkLabel1.Hide()
 #Else
-        System.IO.File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
-        Dim dat As String = System.IO.File.ReadAllText(TempPath & "\date.txt")
+        File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
+        Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
         Me.Text = "Cute Charm Glitch ID Generator (" & dat & ")"
         If My.Computer.Network.IsAvailable Then
             My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/CuteCharmIDGenie/master/CuteCharmIDGen/Resources/date.txt", TempPath & "\dt.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
             Dim dtt As String = Reader.ReadToEnd
             Reader.Close()
-            System.IO.File.Delete(TempPath & "\dt.txt")
+            File.Delete(TempPath & "\dt.txt")
             If dat <> dtt Then
                 LinkLabel1.Text = "New Update Available! " & dtt
                 LinkLabel1.Show()
@@ -125,7 +113,7 @@ Public Class Form1
         Else
             LinkLabel1.Hide()
         End If
-        System.IO.File.Delete(TempPath & "\date.txt")
+        File.Delete(TempPath & "\date.txt")
 #End If
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
@@ -231,8 +219,11 @@ D2000000 00000000"
 
     'Adds text onto the PictureBoxes
     Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point)
-        'Dim g As Graphics = pb.CreateGraphics
         Dim myfont As Font = New Font("Calibri", 12, FontStyle.Regular)
+        If txt.Contains("\") Then
+            txt = txt.Replace("\", "")
+            myfont = New Font("Calibri", 12, FontStyle.Italic)
+        End If
         Dim img As New Bitmap(pb.BackgroundImage)
         Using g = Graphics.FromImage(img)
             g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
@@ -253,8 +244,8 @@ D2000000 00000000"
         {"", "", "32 Hardy", "33 Lonely", "34 Brave", "35 Adamant", "36 Naughty", "37 Bold"},
         {"38 Docile", "39 Relaxed", "3A Impish", "3B Lax", "3C Timid", "3D Hasty", "3E Serious", "3F Jolly"},
         {"40 Naive", "41 Modest", "42 Mild", "43 Quiet", "44 Bashful", "45 Rash", "46 Calm", "47 Gentle"},
-        {"48 Sassy", "49 Careful", "4A Quirky", "", "", "", "", ""},
-        {"", "", "", "4B Hardy", "4C Lonely", "4D Brave", "4E Adamant", "4F Naughty"},
+        {"48 Sassy", "49 Careful", "4A Quirky", "\4B Hardy", "\4C Lonely", "\4D Brave", "\4E Adamant", "\4F Naughty"},
+        {"\48 Sassy", "\49 Careful", "\4A Quirky", "4B Hardy", "4C Lonely", "4D Brave", "4E Adamant", "4F Naughty"},
         {"50 Bold", "51 Docile", "52 Relaxed", "53 Impish", "54 Lax", "55 Timid", "56 Hasty", "57 Serious"},
         {"58 Jolly", "59 Naive", "5A Modest", "5B Mild", "5C Quiet", "5D Bashful", "5E Rash", "5F Calm"},
         {"60 Gentle", "61 Sassy", "62 Careful", "63 Quirky", "", "", "", ""},
@@ -301,6 +292,19 @@ D2000000 00000000"
         Next i
         If rC.Checked = True Then
             rC.PerformClick()
+            If sg1.Checked = True Then
+                sg4.PerformClick()
+                sg1.PerformClick()
+            ElseIf sg2.Checked = True Then
+                sg4.PerformClick()
+                sg2.PerformClick()
+            ElseIf sg3.Checked = True Then
+                sg4.PerformClick()
+                sg3.PerformClick()
+            ElseIf sg4.Checked = True Then
+                sg1.PerformClick()
+                sg4.PerformClick()
+            End If
         ElseIf rR.Checked = True Then
             rC.PerformClick()
             rR.PerformClick()
@@ -335,29 +339,26 @@ D2000000 00000000"
 
     'Picks IDs
     Private Sub PickID()
-        Dim name As String
-        If Group = 1 Then
-            name = TempPath & "/Groups/SG1.txt"
-        ElseIf Group = 2 Then
-            name = TempPath & "/Groups/SG2.txt"
-        ElseIf Group = 3 Then
-            name = TempPath & "/Groups/SG3.txt"
-        ElseIf Group = 4 Then
-            name = TempPath & "/Groups/SG4.txt"
-        Else
-            Exit Sub
-        End If
-        Dim list As String = File.ReadAllText(name)
-        Dim sets() As String
-        sets = list.Split("
-")
+        TSVt = 0
+        Select Case LeadList.SelectedIndex
+            Case 0
+                TSVt = 0
+            Case 1
+                TSVt = 6
+            Case 2
+                TSVt = 9
+            Case 3
+                TSVt = 18
+            Case 4
+                TSVt = 25
+        End Select
+        TSVt += Group
+
         Dim gen As New Random
-        Dim pick As Integer = gen.Next(1, UBound(sets))
-        Dim sel As String = sets(pick)
-        Dim sep As String() = sel.Split("/")
-        IDs(0) = Convert.ToUInt32(sep(LBound(sep)))
-        IDs(1) = Convert.ToUInt32(sep(UBound(sep)))
-        vchk()
+        IDs(0) = gen.Next(0, 65536)
+        Dim Diff As Integer = gen.Next(0, 8) + (TSVt << 3)
+        IDs(1) = IDs(0) Xor Diff
+        Vchk()
         If prob = True Then
             Exit Sub
         End If
@@ -370,7 +371,7 @@ D2000000 00000000"
     'Verifies IDs
     Private Sub Vchk()
         Dim result As Integer = ((IDs(0) Xor IDs(1)) >> 3)
-        If result = (Group - 1) Then
+        If result = TSVt Then
             prob = False
         Else
             prob = True
@@ -391,7 +392,7 @@ D2000000 00000000"
                 Group = gen.Next(1, 41) / 10
             End If
         End If
-        pickID()
+        PickID()
         Thread.Sleep(300)
         hIDs(0) = Hex(IDs(0))
 

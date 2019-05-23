@@ -671,9 +671,6 @@
   <data name="Y" xml:space="preserve">
     <value>F7FF</value>
   </data>
-  <data name="Cute_Charm_Glitch_IDs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cute Charm Glitch IDs.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="sg1" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIsAAADKCAYAAACVHbM2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO

@@ -120,9 +120,6 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -213,7 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Regnum.pfx" />
-    <None Include="Resources\Cute Charm Glitch IDs.zip" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ccidg.ico" />

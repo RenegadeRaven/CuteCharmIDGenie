@@ -88,16 +88,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property Cute_Charm_Glitch_IDs() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Cute_Charm_Glitch_IDs", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to FF7F.
         '''</summary>
         Friend ReadOnly Property Down() As String
