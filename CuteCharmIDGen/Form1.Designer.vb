@@ -66,6 +66,8 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LeadList = New System.Windows.Forms.ComboBox()
         Me.gG.SuspendLayout()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,9 +86,9 @@ Partial Class Form1
         Me.gG.Controls.Add(Me.rPt)
         Me.gG.Controls.Add(Me.rP)
         Me.gG.Controls.Add(Me.rD)
-        Me.gG.Location = New System.Drawing.Point(13, 22)
+        Me.gG.Location = New System.Drawing.Point(101, 24)
         Me.gG.Name = "gG"
-        Me.gG.Size = New System.Drawing.Size(373, 49)
+        Me.gG.Size = New System.Drawing.Size(365, 34)
         Me.gG.TabIndex = 0
         Me.gG.TabStop = False
         Me.gG.Text = "Game"
@@ -94,7 +96,7 @@ Partial Class Form1
         'rSS
         '
         Me.rSS.AutoSize = True
-        Me.rSS.Location = New System.Drawing.Point(290, 17)
+        Me.rSS.Location = New System.Drawing.Point(290, 12)
         Me.rSS.Name = "rSS"
         Me.rSS.Size = New System.Drawing.Size(72, 17)
         Me.rSS.TabIndex = 4
@@ -105,7 +107,7 @@ Partial Class Form1
         'rHG
         '
         Me.rHG.AutoSize = True
-        Me.rHG.Location = New System.Drawing.Point(211, 17)
+        Me.rHG.Location = New System.Drawing.Point(211, 12)
         Me.rHG.Name = "rHG"
         Me.rHG.Size = New System.Drawing.Size(73, 17)
         Me.rHG.TabIndex = 3
@@ -116,7 +118,7 @@ Partial Class Form1
         'rPt
         '
         Me.rPt.AutoSize = True
-        Me.rPt.Location = New System.Drawing.Point(140, 17)
+        Me.rPt.Location = New System.Drawing.Point(140, 12)
         Me.rPt.Name = "rPt"
         Me.rPt.Size = New System.Drawing.Size(65, 17)
         Me.rPt.TabIndex = 2
@@ -127,7 +129,7 @@ Partial Class Form1
         'rP
         '
         Me.rP.AutoSize = True
-        Me.rP.Location = New System.Drawing.Point(85, 17)
+        Me.rP.Location = New System.Drawing.Point(85, 12)
         Me.rP.Name = "rP"
         Me.rP.Size = New System.Drawing.Size(49, 17)
         Me.rP.TabIndex = 1
@@ -138,7 +140,7 @@ Partial Class Form1
         'rD
         '
         Me.rD.AutoSize = True
-        Me.rD.Location = New System.Drawing.Point(12, 17)
+        Me.rD.Location = New System.Drawing.Point(12, 12)
         Me.rD.Name = "rD"
         Me.rD.Size = New System.Drawing.Size(67, 17)
         Me.rD.TabIndex = 0
@@ -156,9 +158,9 @@ Partial Class Form1
         Me.gSG.Controls.Add(Me.pg3)
         Me.gSG.Controls.Add(Me.pg2)
         Me.gSG.Controls.Add(Me.pg1)
-        Me.gSG.Location = New System.Drawing.Point(13, 71)
+        Me.gSG.Location = New System.Drawing.Point(16, 59)
         Me.gSG.Name = "gSG"
-        Me.gSG.Size = New System.Drawing.Size(532, 245)
+        Me.gSG.Size = New System.Drawing.Size(572, 245)
         Me.gSG.TabIndex = 1
         Me.gSG.TabStop = False
         Me.gSG.Text = "Shiny Group"
@@ -166,7 +168,7 @@ Partial Class Form1
         'sg4
         '
         Me.sg4.AutoSize = True
-        Me.sg4.Location = New System.Drawing.Point(457, 17)
+        Me.sg4.Location = New System.Drawing.Point(483, 17)
         Me.sg4.Name = "sg4"
         Me.sg4.Size = New System.Drawing.Size(14, 13)
         Me.sg4.TabIndex = 8
@@ -176,7 +178,7 @@ Partial Class Form1
         'sg3
         '
         Me.sg3.AutoSize = True
-        Me.sg3.Location = New System.Drawing.Point(331, 17)
+        Me.sg3.Location = New System.Drawing.Point(345, 17)
         Me.sg3.Name = "sg3"
         Me.sg3.Size = New System.Drawing.Size(14, 13)
         Me.sg3.TabIndex = 7
@@ -186,7 +188,7 @@ Partial Class Form1
         'sg2
         '
         Me.sg2.AutoSize = True
-        Me.sg2.Location = New System.Drawing.Point(203, 17)
+        Me.sg2.Location = New System.Drawing.Point(207, 17)
         Me.sg2.Name = "sg2"
         Me.sg2.Size = New System.Drawing.Size(14, 13)
         Me.sg2.TabIndex = 6
@@ -205,37 +207,38 @@ Partial Class Form1
         '
         'pg4
         '
-        Me.pg4.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.g4
+        Me.pg4.BackgroundImage = CType(resources.GetObject("pg4.BackgroundImage"), System.Drawing.Image)
         Me.pg4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pg4.Location = New System.Drawing.Point(400, 36)
+        Me.pg4.Location = New System.Drawing.Point(422, 36)
         Me.pg4.Name = "pg4"
-        Me.pg4.Size = New System.Drawing.Size(124, 202)
+        Me.pg4.Size = New System.Drawing.Size(139, 202)
         Me.pg4.TabIndex = 3
         Me.pg4.TabStop = False
         '
         'pg3
         '
-        Me.pg3.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.g3
+        Me.pg3.BackgroundImage = CType(resources.GetObject("pg3.BackgroundImage"), System.Drawing.Image)
         Me.pg3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pg3.Location = New System.Drawing.Point(273, 36)
+        Me.pg3.Location = New System.Drawing.Point(284, 36)
         Me.pg3.Name = "pg3"
-        Me.pg3.Size = New System.Drawing.Size(128, 202)
+        Me.pg3.Size = New System.Drawing.Size(139, 202)
         Me.pg3.TabIndex = 2
         Me.pg3.TabStop = False
         '
         'pg2
         '
-        Me.pg2.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.g2
+        Me.pg2.BackgroundImage = CType(resources.GetObject("pg2.BackgroundImage"), System.Drawing.Image)
         Me.pg2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pg2.Location = New System.Drawing.Point(146, 36)
         Me.pg2.Name = "pg2"
-        Me.pg2.Size = New System.Drawing.Size(128, 202)
+        Me.pg2.Size = New System.Drawing.Size(139, 202)
         Me.pg2.TabIndex = 1
         Me.pg2.TabStop = False
         '
         'pg1
         '
-        Me.pg1.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.g1
+        Me.pg1.BackColor = System.Drawing.SystemColors.Control
+        Me.pg1.BackgroundImage = CType(resources.GetObject("pg1.BackgroundImage"), System.Drawing.Image)
         Me.pg1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pg1.Location = New System.Drawing.Point(8, 36)
         Me.pg1.Name = "pg1"
@@ -248,9 +251,9 @@ Partial Class Form1
         Me.gRC.Controls.Add(Me.rC)
         Me.gRC.Controls.Add(Me.rRQ)
         Me.gRC.Controls.Add(Me.rR)
-        Me.gRC.Location = New System.Drawing.Point(392, 22)
+        Me.gRC.Location = New System.Drawing.Point(472, 24)
         Me.gRC.Name = "gRC"
-        Me.gRC.Size = New System.Drawing.Size(373, 49)
+        Me.gRC.Size = New System.Drawing.Size(335, 34)
         Me.gRC.TabIndex = 5
         Me.gRC.TabStop = False
         Me.gRC.Text = "Shiny Group Selection"
@@ -258,7 +261,7 @@ Partial Class Form1
         'rC
         '
         Me.rC.AutoSize = True
-        Me.rC.Location = New System.Drawing.Point(306, 17)
+        Me.rC.Location = New System.Drawing.Point(270, 12)
         Me.rC.Name = "rC"
         Me.rC.Size = New System.Drawing.Size(61, 17)
         Me.rC.TabIndex = 2
@@ -269,7 +272,7 @@ Partial Class Form1
         'rRQ
         '
         Me.rRQ.AutoSize = True
-        Me.rRQ.Location = New System.Drawing.Point(157, 17)
+        Me.rRQ.Location = New System.Drawing.Point(144, 11)
         Me.rRQ.Name = "rRQ"
         Me.rRQ.Size = New System.Drawing.Size(120, 17)
         Me.rRQ.TabIndex = 1
@@ -280,7 +283,7 @@ Partial Class Form1
         'rR
         '
         Me.rR.AutoSize = True
-        Me.rR.Location = New System.Drawing.Point(12, 17)
+        Me.rR.Location = New System.Drawing.Point(12, 12)
         Me.rR.Name = "rR"
         Me.rR.Size = New System.Drawing.Size(126, 17)
         Me.rR.TabIndex = 0
@@ -300,7 +303,7 @@ Partial Class Form1
         '
         'bGO
         '
-        Me.bGO.Location = New System.Drawing.Point(622, 294)
+        Me.bGO.Location = New System.Drawing.Point(664, 282)
         Me.bGO.Name = "bGO"
         Me.bGO.Size = New System.Drawing.Size(75, 23)
         Me.bGO.TabIndex = 7
@@ -311,7 +314,7 @@ Partial Class Form1
         '
         Me.AR.Cursor = System.Windows.Forms.Cursors.Hand
         Me.AR.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.AR.Location = New System.Drawing.Point(586, 194)
+        Me.AR.Location = New System.Drawing.Point(628, 182)
         Me.AR.Name = "AR"
         Me.AR.ReadOnly = True
         Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
@@ -323,7 +326,7 @@ Partial Class Form1
         'TID
         '
         Me.TID.AutoSize = True
-        Me.TID.Location = New System.Drawing.Point(580, 160)
+        Me.TID.Location = New System.Drawing.Point(622, 148)
         Me.TID.Name = "TID"
         Me.TID.Size = New System.Drawing.Size(31, 13)
         Me.TID.TabIndex = 9
@@ -332,7 +335,7 @@ Partial Class Form1
         'SID
         '
         Me.SID.AutoSize = True
-        Me.SID.Location = New System.Drawing.Point(657, 160)
+        Me.SID.Location = New System.Drawing.Point(699, 148)
         Me.SID.Name = "SID"
         Me.SID.Size = New System.Drawing.Size(31, 13)
         Me.SID.TabIndex = 10
@@ -341,7 +344,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(586, 180)
+        Me.Label1.Location = New System.Drawing.Point(628, 168)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
         Me.Label1.TabIndex = 11
@@ -361,7 +364,7 @@ Partial Class Form1
         Me.gA.Controls.Add(Me.cA)
         Me.gA.Controls.Add(Me.cR)
         Me.gA.Controls.Add(Me.cL)
-        Me.gA.Location = New System.Drawing.Point(552, 71)
+        Me.gA.Location = New System.Drawing.Point(594, 59)
         Me.gA.Name = "gA"
         Me.gA.Size = New System.Drawing.Size(213, 86)
         Me.gA.TabIndex = 12
@@ -491,7 +494,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(-1, 315)
+        Me.Label3.Location = New System.Drawing.Point(2, 303)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(19, 13)
         Me.Label3.TabIndex = 15
@@ -500,7 +503,7 @@ Partial Class Form1
         'LinkLabel3
         '
         Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Location = New System.Drawing.Point(14, 315)
+        Me.LinkLabel3.Location = New System.Drawing.Point(17, 303)
         Me.LinkLabel3.Name = "LinkLabel3"
         Me.LinkLabel3.Size = New System.Drawing.Size(47, 13)
         Me.LinkLabel3.TabIndex = 16
@@ -513,17 +516,38 @@ Partial Class Form1
         Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Location = New System.Drawing.Point(684, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(733, 3)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(80, 22)
         Me.PictureBox1.TabIndex = 17
         Me.PictureBox1.TabStop = False
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(5, 23)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(34, 13)
+        Me.Label2.TabIndex = 18
+        Me.Label2.Text = "Lead:"
+        '
+        'LeadList
+        '
+        Me.LeadList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.LeadList.FormattingEnabled = True
+        Me.LeadList.Items.AddRange(New Object() {"Male (Any% ♀)", "Female (87.5% ♂)", "Female (75% ♂)", "Female (50% ♂)", "Female (25% ♂)"})
+        Me.LeadList.Location = New System.Drawing.Point(6, 36)
+        Me.LeadList.Name = "LeadList"
+        Me.LeadList.Size = New System.Drawing.Size(93, 21)
+        Me.LeadList.TabIndex = 19
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(776, 330)
+        Me.ClientSize = New System.Drawing.Size(816, 319)
+        Me.Controls.Add(Me.LeadList)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.gA)
         Me.Controls.Add(Me.Label1)
@@ -601,4 +625,6 @@ Partial Class Form1
     Friend WithEvents Label3 As Label
     Friend WithEvents LinkLabel3 As LinkLabel
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents LeadList As ComboBox
 End Class

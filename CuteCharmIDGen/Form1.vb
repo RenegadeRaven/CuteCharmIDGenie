@@ -1,6 +1,7 @@
 ﻿Imports System.Threading
 Imports System.IO
 Imports System.IO.Compression
+Imports System.Drawing
 Public Class Form1
 #Region "Variables"
     Dim Game As SByte = 0 'Game Selection
@@ -30,6 +31,8 @@ Public Class Form1
         Directory.CreateDirectory(name)
         File.WriteAllBytes(name & "/ids.zip", My.Resources.Cute_Charm_Glitch_IDs)
         ZipFile.ExtractToDirectory(name & "/ids.zip", name)
+        LeadList.SelectedIndex = My.Settings.DLead
+        PicTXT()
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         drawDE(pg1)
@@ -224,6 +227,87 @@ D2000000 00000000"
     Private Sub DrawDE(ByVal pb As PictureBox)
         pb.Enabled = False
         ControlPaint.DrawImageDisabled(pb.CreateGraphics, pb.BackgroundImage, 0, 0, Color.Gray)
+    End Sub
+
+    'Adds text onto the PictureBoxes
+    Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point)
+        'Dim g As Graphics = pb.CreateGraphics
+        Dim myfont As Font = New Font("Calibri", 12, FontStyle.Regular)
+        Dim img As New Bitmap(pb.BackgroundImage)
+        Using g = Graphics.FromImage(img)
+            g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+            g.DrawString(txt, myfont, Brushes.Black, New PointF(pnt.X, pnt.Y))
+        End Using
+        'Dispose the existing image if there is one.'
+        pb.BackgroundImage?.Dispose()
+        pb.BackgroundImage = img
+    End Sub
+
+    'Calls the text changes on the PicBoxes
+    Private Sub PicTXT() Handles LeadList.SelectedIndexChanged
+        Dim a(,) As String = {
+        {"00 Hardy", "01 Lonely", "02 Brave", "03 Adamant", "04 Naughty", "05 Bold", "06 Docile", "07 Relaxed"},
+        {"08 Impish", "09 Lax", "0A Timid", "0B Hasty", "0C Serious", "0D Jolly", "0E Naive", "0F Modest"},
+        {"10 Mild", "11 Quiet", "12 Bashful", "13 Rash", "14 Calm", "15 Gentle", "16 Sassy", "17 Careful"},
+        {"18 Quirky", "", "", "", "", "", "", ""},
+        {"", "", "32 Hardy", "33 Lonely", "34 Brave", "35 Adamant", "36 Naughty", "37 Bold"},
+        {"38 Docile", "39 Relaxed", "3A Impish", "3B Lax", "3C Timid", "3D Hasty", "3E Serious", "3F Jolly"},
+        {"40 Naive", "41 Modest", "42 Mild", "43 Quiet", "44 Bashful", "45 Rash", "46 Calm", "47 Gentle"},
+        {"48 Sassy", "49 Careful", "4A Quirky", "", "", "", "", ""},
+        {"", "", "", "4B Hardy", "4C Lonely", "4D Brave", "4E Adamant", "4F Naughty"},
+        {"50 Bold", "51 Docile", "52 Relaxed", "53 Impish", "54 Lax", "55 Timid", "56 Hasty", "57 Serious"},
+        {"58 Jolly", "59 Naive", "5A Modest", "5B Mild", "5C Quiet", "5D Bashful", "5E Rash", "5F Calm"},
+        {"60 Gentle", "61 Sassy", "62 Careful", "63 Quirky", "", "", "", ""},
+        {"", "", "", "", "", "", "96 Hardy", "97 Lonely"},
+        {"98 Brave", "99 Adamant", "9A Naughty", "9B Bold", "9C Docile", "9D Relaxed", "9E Impish", "9F Lax"},
+        {"A0 Timid", "A1 Hasty", "A2 Serious", "A3 Jolly", "A4 Naive", "A5 Modest", "A6 Mild", "A7 Quiet"},
+        {"A8 Bashful", "A9 Rash", "AA Calm", "AB Gentle", "AC Sassy", "AD Careful", "AE Quirky", ""},
+        {"C8 Hardy", "C9 Lonely", "CA Brave", "CB Adamant", "CC Naughty", "CD Bold", "CE Docile", "CF Relaxed"},
+        {"D0 Impish", "D1 Lax", "D2 Timid", "D3 Hasty", "D4 Serious", "D5 Jolly", "D6 Naive", "D7 Modest"},
+        {"D8 Mild", "D9 Quiet", "DA Bashful", "DB Rash", "DC Calm", "DD Gentle", "DE Sassy", "DF Careful"},
+        {"E0 Quirky", "", "", "", "", "", "", ""}
+        }
+        pg1.BackgroundImage = My.Resources.sg1
+        pg2.BackgroundImage = My.Resources.sg2
+        pg3.BackgroundImage = My.Resources.sg3
+        pg4.BackgroundImage = My.Resources.sg4
+        Dim v As Integer = LeadList.SelectedIndex
+        For i = 0 To 7 Step 1
+            Dim d As String
+            If a(0 + (4 * v), i) <> "" Then
+                d = "000000"
+            Else
+                d = ""
+            End If
+            DrawTXT(d & a(0 + (4 * v), i), pg1, New Point(4, 26 + (i * 22)))
+            If a(1 + (4 * v), i) <> "" Then
+                d = "000000"
+            Else
+                d = ""
+            End If
+            DrawTXT(d & a(1 + (4 * v), i), pg2, New Point(4, 26 + (i * 22)))
+            If a(2 + (4 * v), i) <> "" Then
+                d = "000000"
+            Else
+                d = ""
+            End If
+            DrawTXT(d & a(2 + (4 * v), i), pg3, New Point(4, 26 + (i * 22)))
+            If a(3 + (4 * v), i) <> "" Then
+                d = "000000"
+            Else
+                d = ""
+            End If
+            DrawTXT(d & a(3 + (4 * v), i), pg4, New Point(4, 26 + (i * 22)))
+        Next i
+        If rC.Checked = True Then
+            rC.PerformClick()
+        ElseIf rR.Checked = True Then
+            rC.PerformClick()
+            rR.PerformClick()
+        ElseIf rRQ.Checked = True Then
+            rC.PerformClick()
+            rRQ.PerformClick()
+        End If
     End Sub
 
     'Checks for empty options

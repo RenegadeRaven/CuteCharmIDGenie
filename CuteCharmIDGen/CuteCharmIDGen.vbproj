@@ -220,13 +220,13 @@
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
+    <None Include="Resources\sg4.png" />
+    <None Include="Resources\sg3.png" />
+    <None Include="Resources\sg2.png" />
+    <None Include="Resources\sg1.png" />
     <None Include="Resources\ppdbs.png" />
     <None Include="Resources\ppdb.png" />
     <None Include="Resources\date.txt" />
-    <None Include="Resources\g4.png" />
-    <None Include="Resources\g3.png" />
-    <None Include="Resources\g2.png" />
-    <None Include="Resources\g1.png" />
     <None Include="Resources\sg.png" />
   </ItemGroup>
   <ItemGroup>
