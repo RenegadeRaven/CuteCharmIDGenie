@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.Drawing
 Public Class Form1
 #Region "Variables"
-    Dim Game As SByte = 0 'Game Selection
+    Dim TIDchoose As Boolean = False 'Is TID random?
     Dim TSVt As Integer = 0 'Target Trainer Shiny Value
     Dim Group As SByte = 0 'Shiny Group Selection
     Dim rnd(1) As Boolean '{Is Shiny Group random?, With Quirky?}
@@ -25,16 +25,20 @@ Public Class Form1
         rnd(0) = Nothing
         rnd(1) = Nothing
         LeadList.SelectedIndex = My.Settings.DLead
+        If My.Settings.DGame <> Nothing Then
+            GameList.SelectedIndex = My.Settings.DGame
+        End If
         PicTXT()
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        drawDE(pg1)
-        drawDE(pg2)
+        sg1.Checked = False
+        DrawDE(pg1)
+        DrawDE(pg2)
         drawDE(pg3)
         drawDE(pg4)
         gSG.Enabled = False
-        rD.Checked = False
         rR.PerformClick()
+        rTR.PerformClick()
         TID.Visible = False
         SID.Visible = False
         AR.Enabled = False
@@ -190,20 +194,14 @@ B2111880 00000000
 00000084 " & hIDs(1) & hIDs(0) & "
 D2000000 00000000"
 
-        If Game = 1 Then
-            AR.BackColor = Color.PowderBlue
+        If GameList.SelectedIndex = 0 Then
+            lGame.Text = "DP"
             Return code(0)
-        ElseIf Game = 2 Then
-            AR.BackColor = Color.Pink
-            Return code(0)
-        ElseIf Game = 3 Then
-            AR.BackColor = Color.Tan
+        ElseIf GameList.SelectedIndex = 1 Then
+            lGame.Text = "Pt"
             Return code(1)
-        ElseIf Game = 4 Then
-            AR.BackColor = Color.Khaki
-            Return code(2)
-        ElseIf Game = 5 Then
-            AR.BackColor = Color.Silver
+        ElseIf GameList.SelectedIndex = 2 Then
+            lGame.Text = "HGSS"
             Return code(2)
         Else
             AR.BackColor = DefaultBackColor
@@ -317,8 +315,9 @@ D2000000 00000000"
 
     'Checks for empty options
     Private Sub Chks()
-        If Game = 0 Then
-            gG.ForeColor = Color.Red
+        If GameList.SelectedItem = "" Then
+            GameList.ForeColor = Color.Red
+            Label5.ForeColor = Color.Red
             prob = True
         ElseIf Group = 0 And rC.Checked = True Then
             gSG.ForeColor = Color.Red
@@ -330,7 +329,8 @@ D2000000 00000000"
             gA.ForeColor = Color.Red
             prob = True
         Else
-            gG.ForeColor = DefaultForeColor
+            GameList.ForeColor = DefaultForeColor
+            Label5.ForeColor = DefaultForeColor
             gRC.ForeColor = DefaultForeColor
             gSG.ForeColor = DefaultForeColor
             gA.ForeColor = DefaultForeColor
@@ -354,9 +354,15 @@ D2000000 00000000"
                 TSVt = 25
         End Select
         TSVt += Group
-
+        If rC.Checked = True Then
+            TSVt -= 1
+        End If
         Dim gen As New Random
-        IDs(0) = gen.Next(0, 65536)
+        If TIDchoose = True Then
+            IDs(0) = nTID.Value
+        Else
+            IDs(0) = gen.Next(0, 65536)
+        End If
         Dim Diff As Integer = gen.Next(0, 8) + (TSVt << 3)
         IDs(1) = IDs(0) Xor Diff
         Vchk()
@@ -381,7 +387,7 @@ D2000000 00000000"
 
     'Executes AR code generation
     Private Sub bGO_Click(sender As Object, e As EventArgs) Handles bGO.Click
-        chks()
+        Chks()
         If prob = True Then
             Exit Sub
         End If
@@ -406,8 +412,9 @@ D2000000 00000000"
                 hIDs(1) = "0" & hIDs(1)
             End If
         Next i
-        AR.Text = genAR()
+        AR.Text = GenAR()
         AR.Enabled = True
+        My.Settings.DGame = GameList.SelectedIndex
     End Sub
 
     'Copy AR Code to clipboard
@@ -421,9 +428,9 @@ D2000000 00000000"
     Private Sub sg1_CheckedChanged(sender As Object, e As EventArgs) Handles sg1.CheckedChanged
         If sg1.Checked = True Then
             Group = 1
-            drawDE(pg2)
-            drawDE(pg3)
-            drawDE(pg4)
+            DrawDE(pg2)
+            DrawDE(pg3)
+            DrawDE(pg4)
         Else
             Group = 0
             pg2.Enabled = True
@@ -436,9 +443,9 @@ D2000000 00000000"
     Private Sub sg2_CheckedChanged(sender As Object, e As EventArgs) Handles sg2.CheckedChanged
         If sg2.Checked = True Then
             Group = 2
-            drawDE(pg1)
-            drawDE(pg3)
-            drawDE(pg4)
+            DrawDE(pg1)
+            DrawDE(pg3)
+            DrawDE(pg4)
         Else
             Group = 0
             pg1.Enabled = True
@@ -451,9 +458,9 @@ D2000000 00000000"
     Private Sub sg3_CheckedChanged(sender As Object, e As EventArgs) Handles sg3.CheckedChanged
         If sg3.Checked = True Then
             Group = 3
-            drawDE(pg2)
-            drawDE(pg1)
-            drawDE(pg4)
+            DrawDE(pg2)
+            DrawDE(pg1)
+            DrawDE(pg4)
         Else
             Group = 0
             pg2.Enabled = True
@@ -466,9 +473,9 @@ D2000000 00000000"
     Private Sub sg4_CheckedChanged(sender As Object, e As EventArgs) Handles sg4.CheckedChanged
         If sg4.Checked = True Then
             Group = 4
-            drawDE(pg2)
-            drawDE(pg3)
-            drawDE(pg1)
+            DrawDE(pg2)
+            DrawDE(pg3)
+            DrawDE(pg1)
         Else
             Group = 0
             pg2.Enabled = True
@@ -490,10 +497,10 @@ D2000000 00000000"
         Else
             rnd(0) = Nothing
             gSG.Enabled = False
-            drawDE(pg1)
-            drawDE(pg2)
-            drawDE(pg3)
-            drawDE(pg4)
+            DrawDE(pg1)
+            DrawDE(pg2)
+            DrawDE(pg3)
+            DrawDE(pg4)
         End If
     End Sub
 
@@ -519,57 +526,11 @@ D2000000 00000000"
         End If
     End Sub
 #End Region
-#Region "Game Selection"
-    'Game is Diamond
-    Private Sub rD_CheckedChanged(sender As Object, e As EventArgs) Handles rD.CheckedChanged
-        If rD.Checked = True Then
-            Game = 1
-        Else
-            Game = 0
-        End If
-    End Sub
-
-    'Game is Pearl
-    Private Sub rP_CheckedChanged(sender As Object, e As EventArgs) Handles rP.CheckedChanged
-        If rP.Checked = True Then
-            Game = 2
-        Else
-            Game = 0
-        End If
-    End Sub
-
-    'Game is Platinum
-    Private Sub rPt_CheckedChanged(sender As Object, e As EventArgs) Handles rPt.CheckedChanged
-        If rPt.Checked = True Then
-            Game = 3
-        Else
-            Game = 0
-        End If
-    End Sub
-
-    'Game is HeartGold
-    Private Sub rHG_CheckedChanged(sender As Object, e As EventArgs) Handles rHG.CheckedChanged
-        If rHG.Checked = True Then
-            Game = 4
-        Else
-            Game = 0
-        End If
-    End Sub
-
-    'Game is SoulSilver
-    Private Sub rSS_CheckedChanged(sender As Object, e As EventArgs) Handles rSS.CheckedChanged
-        If rSS.Checked = True Then
-            Game = 5
-        Else
-            Game = 0
-        End If
-    End Sub
-#End Region
 #Region "Button Selection"
     'L Button
     Private Sub cL_CheckedChanged(sender As Object, e As EventArgs) Handles cL.CheckedChanged
         If cL.Checked = True Then
-            nButt = nButt & "7"
+            nButt &= "7"
         Else
             nButt = nButt.Replace("7", "")
         End If
@@ -578,7 +539,7 @@ D2000000 00000000"
     'R Button
     Private Sub cR_CheckedChanged(sender As Object, e As EventArgs) Handles cR.CheckedChanged
         If cR.Checked = True Then
-            nButt = nButt & "9"
+            nButt &= "9"
         Else
             nButt = nButt.Replace("9", "")
         End If
@@ -587,7 +548,7 @@ D2000000 00000000"
     'Start Button
     Private Sub cST_CheckedChanged(sender As Object, e As EventArgs) Handles cST.CheckedChanged
         If cST.Checked = True Then
-            nButt = nButt & "1"
+            nButt &= "1"
         Else
             nButt = nButt.Replace("1", "")
         End If
@@ -596,7 +557,7 @@ D2000000 00000000"
     'Select Button
     Private Sub cSL_CheckedChanged(sender As Object, e As EventArgs) Handles cSL.CheckedChanged
         If cSL.Checked = True Then
-            nButt = nButt & "3"
+            nButt &= "3"
         Else
             nButt = nButt.Replace("3", "")
         End If
@@ -605,7 +566,7 @@ D2000000 00000000"
     'A Button
     Private Sub cA_CheckedChanged(sender As Object, e As EventArgs) Handles cA.CheckedChanged
         If cA.Checked = True Then
-            nButt = nButt & "6"
+            nButt &= "6"
         Else
             nButt = nButt.Replace("6", "")
         End If
@@ -614,7 +575,7 @@ D2000000 00000000"
     'B Button
     Private Sub cB_CheckedChanged(sender As Object, e As EventArgs) Handles cB.CheckedChanged
         If cB.Checked = True Then
-            nButt = nButt & "2"
+            nButt &= "2"
         Else
             nButt = nButt.Replace("2", "")
         End If
@@ -623,7 +584,7 @@ D2000000 00000000"
     'X Button
     Private Sub cX_CheckedChanged(sender As Object, e As EventArgs) Handles cX.CheckedChanged
         If cX.Checked = True Then
-            nButt = nButt & "8"
+            nButt &= "8"
         Else
             nButt = nButt.Replace("8", "")
         End If
@@ -632,7 +593,7 @@ D2000000 00000000"
     'Y Button
     Private Sub cY_CheckedChanged(sender As Object, e As EventArgs) Handles cY.CheckedChanged
         If cY.Checked = True Then
-            nButt = nButt & "4"
+            nButt &= "4"
         Else
             nButt = nButt.Replace("4", "")
         End If
@@ -641,7 +602,7 @@ D2000000 00000000"
     'Up Button
     Private Sub cDU_CheckedChanged(sender As Object, e As EventArgs) Handles cDU.CheckedChanged
         If cDU.Checked = True Then
-            nButt = nButt & "W"
+            nButt &= "W"
             cDL.Enabled = False
             cDD.Enabled = False
             cDR.Enabled = False
@@ -656,7 +617,7 @@ D2000000 00000000"
     'Left Button
     Private Sub cDL_CheckedChanged(sender As Object, e As EventArgs) Handles cDL.CheckedChanged
         If cDL.Checked = True Then
-            nButt = nButt & "A"
+            nButt &= "A"
             cDU.Enabled = False
             cDD.Enabled = False
             cDR.Enabled = False
@@ -671,7 +632,7 @@ D2000000 00000000"
     'Down Button
     Private Sub cDD_CheckedChanged(sender As Object, e As EventArgs) Handles cDD.CheckedChanged
         If cDD.Checked = True Then
-            nButt = nButt & "S"
+            nButt &= "S"
             cDL.Enabled = False
             cDU.Enabled = False
             cDR.Enabled = False
@@ -686,7 +647,7 @@ D2000000 00000000"
     'Right Button
     Private Sub cDR_CheckedChanged(sender As Object, e As EventArgs) Handles cDR.CheckedChanged
         If cDR.Checked = True Then
-            nButt = nButt & "D"
+            nButt &= "D"
             cDL.Enabled = False
             cDD.Enabled = False
             cDU.Enabled = False
@@ -721,6 +682,19 @@ You can look me up later.", vbOKOnly, "Error 404")
     End Sub
     Private Sub PictureBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseUp
         PictureBox1.Image = Nothing
+    End Sub
+#End Region
+#Region "Specific TID"
+    'Sets to Random
+    Private Sub RTR_CheckedChanged(sender As Object, e As EventArgs) Handles rTR.CheckedChanged
+        nTID.Enabled = False
+        TIDchoose = False
+    End Sub
+
+    'User's Choice
+    Private Sub RTC_CheckedChanged(sender As Object, e As EventArgs) Handles rTC.CheckedChanged
+        nTID.Enabled = True
+        TIDchoose = True
     End Sub
 #End Region
 End Class

@@ -24,12 +24,6 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.gG = New System.Windows.Forms.GroupBox()
-        Me.rSS = New System.Windows.Forms.RadioButton()
-        Me.rHG = New System.Windows.Forms.RadioButton()
-        Me.rPt = New System.Windows.Forms.RadioButton()
-        Me.rP = New System.Windows.Forms.RadioButton()
-        Me.rD = New System.Windows.Forms.RadioButton()
         Me.gSG = New System.Windows.Forms.GroupBox()
         Me.sg4 = New System.Windows.Forms.RadioButton()
         Me.sg3 = New System.Windows.Forms.RadioButton()
@@ -68,7 +62,13 @@ Partial Class Form1
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LeadList = New System.Windows.Forms.ComboBox()
-        Me.gG.SuspendLayout()
+        Me.lGame = New System.Windows.Forms.Label()
+        Me.GameList = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.nTID = New System.Windows.Forms.NumericUpDown()
+        Me.rTC = New System.Windows.Forms.RadioButton()
+        Me.rTR = New System.Windows.Forms.RadioButton()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,76 +77,9 @@ Partial Class Form1
         Me.gRC.SuspendLayout()
         Me.gA.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.nTID, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'gG
-        '
-        Me.gG.Controls.Add(Me.rSS)
-        Me.gG.Controls.Add(Me.rHG)
-        Me.gG.Controls.Add(Me.rPt)
-        Me.gG.Controls.Add(Me.rP)
-        Me.gG.Controls.Add(Me.rD)
-        Me.gG.Location = New System.Drawing.Point(101, 24)
-        Me.gG.Name = "gG"
-        Me.gG.Size = New System.Drawing.Size(365, 34)
-        Me.gG.TabIndex = 0
-        Me.gG.TabStop = False
-        Me.gG.Text = "Game"
-        '
-        'rSS
-        '
-        Me.rSS.AutoSize = True
-        Me.rSS.Location = New System.Drawing.Point(290, 12)
-        Me.rSS.Name = "rSS"
-        Me.rSS.Size = New System.Drawing.Size(72, 17)
-        Me.rSS.TabIndex = 4
-        Me.rSS.TabStop = True
-        Me.rSS.Text = "SoulSilver"
-        Me.rSS.UseVisualStyleBackColor = True
-        '
-        'rHG
-        '
-        Me.rHG.AutoSize = True
-        Me.rHG.Location = New System.Drawing.Point(211, 12)
-        Me.rHG.Name = "rHG"
-        Me.rHG.Size = New System.Drawing.Size(73, 17)
-        Me.rHG.TabIndex = 3
-        Me.rHG.TabStop = True
-        Me.rHG.Text = "HeartGold"
-        Me.rHG.UseVisualStyleBackColor = True
-        '
-        'rPt
-        '
-        Me.rPt.AutoSize = True
-        Me.rPt.Location = New System.Drawing.Point(140, 12)
-        Me.rPt.Name = "rPt"
-        Me.rPt.Size = New System.Drawing.Size(65, 17)
-        Me.rPt.TabIndex = 2
-        Me.rPt.TabStop = True
-        Me.rPt.Text = "Platinum"
-        Me.rPt.UseVisualStyleBackColor = True
-        '
-        'rP
-        '
-        Me.rP.AutoSize = True
-        Me.rP.Location = New System.Drawing.Point(85, 12)
-        Me.rP.Name = "rP"
-        Me.rP.Size = New System.Drawing.Size(49, 17)
-        Me.rP.TabIndex = 1
-        Me.rP.TabStop = True
-        Me.rP.Text = "Pearl"
-        Me.rP.UseVisualStyleBackColor = True
-        '
-        'rD
-        '
-        Me.rD.AutoSize = True
-        Me.rD.Location = New System.Drawing.Point(12, 12)
-        Me.rD.Name = "rD"
-        Me.rD.Size = New System.Drawing.Size(67, 17)
-        Me.rD.TabIndex = 0
-        Me.rD.TabStop = True
-        Me.rD.Text = "Diamond"
-        Me.rD.UseVisualStyleBackColor = True
         '
         'gSG
         '
@@ -251,12 +184,13 @@ Partial Class Form1
         Me.gRC.Controls.Add(Me.rC)
         Me.gRC.Controls.Add(Me.rRQ)
         Me.gRC.Controls.Add(Me.rR)
-        Me.gRC.Location = New System.Drawing.Point(472, 24)
+        Me.gRC.Location = New System.Drawing.Point(275, 24)
         Me.gRC.Name = "gRC"
         Me.gRC.Size = New System.Drawing.Size(335, 34)
         Me.gRC.TabIndex = 5
         Me.gRC.TabStop = False
         Me.gRC.Text = "Shiny Group Selection"
+        Me.ToolTip1.SetToolTip(Me.gRC, "Choose how Shiny Group is chosen")
         '
         'rC
         '
@@ -272,7 +206,7 @@ Partial Class Form1
         'rRQ
         '
         Me.rRQ.AutoSize = True
-        Me.rRQ.Location = New System.Drawing.Point(144, 11)
+        Me.rRQ.Location = New System.Drawing.Point(144, 12)
         Me.rRQ.Name = "rRQ"
         Me.rRQ.Size = New System.Drawing.Size(120, 17)
         Me.rRQ.TabIndex = 1
@@ -300,25 +234,29 @@ Partial Class Form1
         Me.LinkLabel1.TabIndex = 6
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "New Update Available!"
+        Me.ToolTip1.SetToolTip(Me.LinkLabel1, "New Features! Download the new version")
         '
         'bGO
         '
-        Me.bGO.Location = New System.Drawing.Point(664, 282)
+        Me.bGO.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bGO.Location = New System.Drawing.Point(647, 263)
         Me.bGO.Name = "bGO"
-        Me.bGO.Size = New System.Drawing.Size(75, 23)
+        Me.bGO.Size = New System.Drawing.Size(102, 34)
         Me.bGO.TabIndex = 7
-        Me.bGO.Text = "Get IDs"
+        Me.bGO.Text = "Calculate"
+        Me.ToolTip1.SetToolTip(Me.bGO, "Calculates IDs and AR code")
         Me.bGO.UseVisualStyleBackColor = True
         '
         'AR
         '
+        Me.AR.BackColor = System.Drawing.SystemColors.Control
         Me.AR.Cursor = System.Windows.Forms.Cursors.Hand
         Me.AR.ImeMode = System.Windows.Forms.ImeMode.Off
         Me.AR.Location = New System.Drawing.Point(628, 182)
         Me.AR.Name = "AR"
         Me.AR.ReadOnly = True
         Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.AR.Size = New System.Drawing.Size(145, 87)
+        Me.AR.Size = New System.Drawing.Size(134, 59)
         Me.AR.TabIndex = 8
         Me.AR.Text = ""
         Me.ToolTip1.SetToolTip(Me.AR, "Click to Copy to Clipboard")
@@ -344,7 +282,8 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(628, 168)
+        Me.Label1.Location = New System.Drawing.Point(625, 168)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
         Me.Label1.TabIndex = 11
@@ -370,6 +309,7 @@ Partial Class Form1
         Me.gA.TabIndex = 12
         Me.gA.TabStop = False
         Me.gA.Text = "Activation Button"
+        Me.ToolTip1.SetToolTip(Me.gA, "Choose the Key combo that triggers the AR code")
         '
         'cSL
         '
@@ -525,7 +465,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(5, 23)
+        Me.Label2.Location = New System.Drawing.Point(14, 23)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(34, 13)
         Me.Label2.TabIndex = 18
@@ -536,16 +476,95 @@ Partial Class Form1
         Me.LeadList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.LeadList.FormattingEnabled = True
         Me.LeadList.Items.AddRange(New Object() {"Male (Any% ♀)", "Female (87.5% ♂)", "Female (75% ♂)", "Female (50% ♂)", "Female (25% ♂)"})
-        Me.LeadList.Location = New System.Drawing.Point(6, 36)
+        Me.LeadList.Location = New System.Drawing.Point(16, 36)
         Me.LeadList.Name = "LeadList"
-        Me.LeadList.Size = New System.Drawing.Size(93, 21)
+        Me.LeadList.Size = New System.Drawing.Size(108, 21)
         Me.LeadList.TabIndex = 19
+        Me.ToolTip1.SetToolTip(Me.LeadList, "Choose the gender of your Cute Charm Lead")
+        '
+        'lGame
+        '
+        Me.lGame.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lGame.Location = New System.Drawing.Point(721, 169)
+        Me.lGame.Name = "lGame"
+        Me.lGame.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.lGame.Size = New System.Drawing.Size(46, 13)
+        Me.lGame.TabIndex = 20
+        Me.lGame.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'GameList
+        '
+        Me.GameList.BackColor = System.Drawing.SystemColors.Window
+        Me.GameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.GameList.FormattingEnabled = True
+        Me.GameList.Items.AddRange(New Object() {"Diamond/Pearl", "Platinum", "HeartGold/SoulSilver"})
+        Me.GameList.Location = New System.Drawing.Point(130, 36)
+        Me.GameList.Name = "GameList"
+        Me.GameList.Size = New System.Drawing.Size(139, 21)
+        Me.GameList.TabIndex = 21
+        Me.ToolTip1.SetToolTip(Me.GameList, "Select the game you are going to use")
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(129, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(38, 13)
+        Me.Label5.TabIndex = 22
+        Me.Label5.Text = "Game:"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.nTID)
+        Me.GroupBox1.Controls.Add(Me.rTC)
+        Me.GroupBox1.Controls.Add(Me.rTR)
+        Me.GroupBox1.Location = New System.Drawing.Point(616, 24)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(191, 34)
+        Me.GroupBox1.TabIndex = 23
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Trainer ID"
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, "Choose a specific TID or not")
+        '
+        'nTID
+        '
+        Me.nTID.Location = New System.Drawing.Point(111, 10)
+        Me.nTID.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.nTID.Name = "nTID"
+        Me.nTID.Size = New System.Drawing.Size(56, 20)
+        Me.nTID.TabIndex = 2
+        '
+        'rTC
+        '
+        Me.rTC.AutoSize = True
+        Me.rTC.Location = New System.Drawing.Point(95, 12)
+        Me.rTC.Name = "rTC"
+        Me.rTC.Size = New System.Drawing.Size(28, 17)
+        Me.rTC.TabIndex = 1
+        Me.rTC.TabStop = True
+        Me.rTC.Text = " "
+        Me.rTC.UseVisualStyleBackColor = True
+        '
+        'rTR
+        '
+        Me.rTR.AutoSize = True
+        Me.rTR.Location = New System.Drawing.Point(17, 12)
+        Me.rTR.Name = "rTR"
+        Me.rTR.Size = New System.Drawing.Size(65, 17)
+        Me.rTR.TabIndex = 0
+        Me.rTR.TabStop = True
+        Me.rTR.Text = "Random"
+        Me.rTR.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(816, 319)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.GameList)
         Me.Controls.Add(Me.LeadList)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.PictureBox1)
@@ -556,17 +575,15 @@ Partial Class Form1
         Me.Controls.Add(Me.AR)
         Me.Controls.Add(Me.bGO)
         Me.Controls.Add(Me.LinkLabel1)
-        Me.Controls.Add(Me.gG)
         Me.Controls.Add(Me.gSG)
         Me.Controls.Add(Me.gRC)
         Me.Controls.Add(Me.LinkLabel3)
         Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lGame)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cute Charm Glitch ID Generator"
-        Me.gG.ResumeLayout(False)
-        Me.gG.PerformLayout()
         Me.gSG.ResumeLayout(False)
         Me.gSG.PerformLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -578,17 +595,13 @@ Partial Class Form1
         Me.gA.ResumeLayout(False)
         Me.gA.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.nTID, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents gG As GroupBox
-    Friend WithEvents rSS As RadioButton
-    Friend WithEvents rHG As RadioButton
-    Friend WithEvents rPt As RadioButton
-    Friend WithEvents rP As RadioButton
-    Friend WithEvents rD As RadioButton
     Friend WithEvents gSG As GroupBox
     Friend WithEvents pg2 As PictureBox
     Friend WithEvents pg1 As PictureBox
@@ -627,4 +640,11 @@ Partial Class Form1
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents LeadList As ComboBox
+    Friend WithEvents lGame As Label
+    Friend WithEvents GameList As ComboBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents nTID As NumericUpDown
+    Friend WithEvents rTC As RadioButton
+    Friend WithEvents rTR As RadioButton
 End Class
