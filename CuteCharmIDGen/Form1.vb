@@ -4,7 +4,7 @@ Imports System.Drawing
 Public Class Form1
 #Region "Variables"
     Dim TIDchoose As Boolean = False 'Is TID random?
-    Dim TSVt As Integer = 0 'Target Trainer Shiny Value
+    Dim TSVt As Short = 0 'Target Trainer Shiny Value
     Dim Group As SByte = 0 'Shiny Group Selection
     Dim rnd(1) As Boolean '{Is Shiny Group random?, With Quirky?}
     Dim IDs(1) As Integer '{TID, SID} as numbers
@@ -262,6 +262,13 @@ D2000000 00000000"
         pg3.BackgroundImage = My.Resources.sg3
         pg4.BackgroundImage = My.Resources.sg4
         Dim v As Integer = LeadList.SelectedIndex
+        If v = 0 Or v = 2 Or v = 4 Then
+            rR.Text = rR.Text.Replace("1", "4")
+            rRQ.Text = rRQ.Text.Replace("1", "4")
+        ElseIf v = 1 Or v = 3 Then
+            rR.Text = rR.Text.Replace("4", "1")
+            rRQ.Text = rRQ.Text.Replace("4", "1")
+        End If
         For i = 0 To 7 Step 1
             Dim d As String
             If a(0 + (4 * v), i) <> "" Then
@@ -394,15 +401,17 @@ D2000000 00000000"
         If rnd(0) = True Then
             Dim gen As New Random
             If rnd(1) = False Then
-                Group = gen.Next(1, 31) / 10
+                Group = Math.Floor((gen.Next(0, 30)) / 10)
+                If rR.Text.Contains("1") Then
+                    Group += 1
+                End If
             ElseIf rnd(1) = True Then
-                Group = gen.Next(1, 41) / 10
+                Group = Math.Floor((gen.Next(0, 40)) / 10)
             End If
         End If
         PickID()
         Thread.Sleep(300)
         hIDs(0) = Hex(IDs(0))
-
         hIDs(1) = Hex(IDs(1))
         For i = 0 To 3 Step 1
             If hIDs(0).Length < 4 Then

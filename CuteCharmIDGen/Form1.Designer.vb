@@ -57,18 +57,18 @@ Partial Class Form1
         Me.cA = New System.Windows.Forms.CheckBox()
         Me.cR = New System.Windows.Forms.CheckBox()
         Me.cL = New System.Windows.Forms.CheckBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.LeadList = New System.Windows.Forms.ComboBox()
-        Me.lGame = New System.Windows.Forms.Label()
         Me.GameList = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.nTID = New System.Windows.Forms.NumericUpDown()
         Me.rTC = New System.Windows.Forms.RadioButton()
         Me.rTR = New System.Windows.Forms.RadioButton()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lGame = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,9 +76,9 @@ Partial Class Form1
         CType(Me.pg1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gRC.SuspendLayout()
         Me.gA.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.nTID, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'gSG
@@ -195,7 +195,7 @@ Partial Class Form1
         'rC
         '
         Me.rC.AutoSize = True
-        Me.rC.Location = New System.Drawing.Point(270, 12)
+        Me.rC.Location = New System.Drawing.Point(273, 12)
         Me.rC.Name = "rC"
         Me.rC.Size = New System.Drawing.Size(61, 17)
         Me.rC.TabIndex = 2
@@ -206,23 +206,23 @@ Partial Class Form1
         'rRQ
         '
         Me.rRQ.AutoSize = True
-        Me.rRQ.Location = New System.Drawing.Point(144, 12)
+        Me.rRQ.Location = New System.Drawing.Point(145, 12)
         Me.rRQ.Name = "rRQ"
-        Me.rRQ.Size = New System.Drawing.Size(120, 17)
+        Me.rRQ.Size = New System.Drawing.Size(128, 17)
         Me.rRQ.TabIndex = 1
         Me.rRQ.TabStop = True
-        Me.rRQ.Text = "Random (w/ Quirky)"
+        Me.rRQ.Text = "Random (w/ Group 4)"
         Me.rRQ.UseVisualStyleBackColor = True
         '
         'rR
         '
         Me.rR.AutoSize = True
-        Me.rR.Location = New System.Drawing.Point(12, 12)
+        Me.rR.Location = New System.Drawing.Point(11, 12)
         Me.rR.Name = "rR"
-        Me.rR.Size = New System.Drawing.Size(126, 17)
+        Me.rR.Size = New System.Drawing.Size(134, 17)
         Me.rR.TabIndex = 0
         Me.rR.TabStop = True
-        Me.rR.Text = "Random (w/o Quirky)"
+        Me.rR.Text = "Random (w/o Group 4)"
         Me.rR.UseVisualStyleBackColor = True
         '
         'LinkLabel1
@@ -431,46 +431,6 @@ Partial Class Form1
         Me.cL.Text = "L"
         Me.cL.UseVisualStyleBackColor = True
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(2, 303)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(19, 13)
-        Me.Label3.TabIndex = 15
-        Me.Label3.Text = "By"
-        '
-        'LinkLabel3
-        '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Location = New System.Drawing.Point(17, 303)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(47, 13)
-        Me.LinkLabel3.TabIndex = 16
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "Regnum"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
-        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Location = New System.Drawing.Point(733, 3)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(80, 22)
-        Me.PictureBox1.TabIndex = 17
-        Me.PictureBox1.TabStop = False
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(14, 23)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(34, 13)
-        Me.Label2.TabIndex = 18
-        Me.Label2.Text = "Lead:"
-        '
         'LeadList
         '
         Me.LeadList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -481,17 +441,6 @@ Partial Class Form1
         Me.LeadList.Size = New System.Drawing.Size(108, 21)
         Me.LeadList.TabIndex = 19
         Me.ToolTip1.SetToolTip(Me.LeadList, "Choose the gender of your Cute Charm Lead")
-        '
-        'lGame
-        '
-        Me.lGame.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lGame.Location = New System.Drawing.Point(721, 169)
-        Me.lGame.Name = "lGame"
-        Me.lGame.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.lGame.Size = New System.Drawing.Size(46, 13)
-        Me.lGame.TabIndex = 20
-        Me.lGame.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'GameList
         '
@@ -504,15 +453,6 @@ Partial Class Form1
         Me.GameList.Size = New System.Drawing.Size(139, 21)
         Me.GameList.TabIndex = 21
         Me.ToolTip1.SetToolTip(Me.GameList, "Select the game you are going to use")
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(129, 23)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(38, 13)
-        Me.Label5.TabIndex = 22
-        Me.Label5.Text = "Game:"
         '
         'GroupBox1
         '
@@ -557,6 +497,66 @@ Partial Class Form1
         Me.rTR.Text = "Random"
         Me.rTR.UseVisualStyleBackColor = True
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(2, 303)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(19, 13)
+        Me.Label3.TabIndex = 15
+        Me.Label3.Text = "By"
+        '
+        'LinkLabel3
+        '
+        Me.LinkLabel3.AutoSize = True
+        Me.LinkLabel3.Location = New System.Drawing.Point(17, 303)
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.Size = New System.Drawing.Size(47, 13)
+        Me.LinkLabel3.TabIndex = 16
+        Me.LinkLabel3.TabStop = True
+        Me.LinkLabel3.Text = "Regnum"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Location = New System.Drawing.Point(733, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(80, 22)
+        Me.PictureBox1.TabIndex = 17
+        Me.PictureBox1.TabStop = False
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(14, 23)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(34, 13)
+        Me.Label2.TabIndex = 18
+        Me.Label2.Text = "Lead:"
+        '
+        'lGame
+        '
+        Me.lGame.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lGame.Location = New System.Drawing.Point(721, 169)
+        Me.lGame.Name = "lGame"
+        Me.lGame.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.lGame.Size = New System.Drawing.Size(46, 13)
+        Me.lGame.TabIndex = 20
+        Me.lGame.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(129, 23)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(38, 13)
+        Me.Label5.TabIndex = 22
+        Me.Label5.Text = "Game:"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -594,10 +594,10 @@ Partial Class Form1
         Me.gRC.PerformLayout()
         Me.gA.ResumeLayout(False)
         Me.gA.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.nTID, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
