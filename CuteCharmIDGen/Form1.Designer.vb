@@ -69,6 +69,10 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lGame = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,6 +95,7 @@ Partial Class Form1
         Me.GroupBox1.SuspendLayout()
         CType(Me.nTID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'gSG
@@ -251,7 +256,7 @@ Partial Class Form1
         'bGO
         '
         Me.bGO.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bGO.Location = New System.Drawing.Point(647, 263)
+        Me.bGO.Location = New System.Drawing.Point(647, 282)
         Me.bGO.Name = "bGO"
         Me.bGO.Size = New System.Drawing.Size(102, 34)
         Me.bGO.TabIndex = 7
@@ -264,10 +269,10 @@ Partial Class Form1
         Me.AR.BackColor = System.Drawing.SystemColors.Control
         Me.AR.Cursor = System.Windows.Forms.Cursors.Hand
         Me.AR.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.AR.Location = New System.Drawing.Point(628, 182)
+        Me.AR.Location = New System.Drawing.Point(628, 218)
         Me.AR.Name = "AR"
         Me.AR.ReadOnly = True
-        Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+        Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.AR.Size = New System.Drawing.Size(134, 59)
         Me.AR.TabIndex = 8
         Me.AR.Text = ""
@@ -276,7 +281,7 @@ Partial Class Form1
         'TID
         '
         Me.TID.AutoSize = True
-        Me.TID.Location = New System.Drawing.Point(622, 148)
+        Me.TID.Location = New System.Drawing.Point(622, 190)
         Me.TID.Name = "TID"
         Me.TID.Size = New System.Drawing.Size(31, 13)
         Me.TID.TabIndex = 9
@@ -285,7 +290,7 @@ Partial Class Form1
         'SID
         '
         Me.SID.AutoSize = True
-        Me.SID.Location = New System.Drawing.Point(699, 148)
+        Me.SID.Location = New System.Drawing.Point(698, 190)
         Me.SID.Name = "SID"
         Me.SID.Size = New System.Drawing.Size(31, 13)
         Me.SID.TabIndex = 10
@@ -294,7 +299,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(625, 168)
+        Me.Label1.Location = New System.Drawing.Point(625, 204)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
@@ -553,7 +558,7 @@ Partial Class Form1
         '
         Me.lGame.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lGame.Location = New System.Drawing.Point(721, 169)
+        Me.lGame.Location = New System.Drawing.Point(721, 205)
         Me.lGame.Name = "lGame"
         Me.lGame.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lGame.Size = New System.Drawing.Size(46, 13)
@@ -569,11 +574,52 @@ Partial Class Form1
         Me.Label5.TabIndex = 22
         Me.Label5.Text = "Game:"
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.ComboBox2)
+        Me.GroupBox2.Controls.Add(Me.ComboBox1)
+        Me.GroupBox2.Controls.Add(Me.CheckBox1)
+        Me.GroupBox2.Location = New System.Drawing.Point(594, 146)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(213, 41)
+        Me.GroupBox2.TabIndex = 24
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Cute Charm Pokémon"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(120, 15)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(87, 21)
+        Me.ComboBox2.TabIndex = 2
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(31, 15)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(87, 21)
+        Me.ComboBox1.TabIndex = 1
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(14, 17)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(29, 17)
+        Me.CheckBox1.TabIndex = 0
+        Me.CheckBox1.Text = " "
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(816, 319)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.GameList)
@@ -621,6 +667,8 @@ Partial Class Form1
         Me.GroupBox1.PerformLayout()
         CType(Me.nTID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -670,4 +718,8 @@ Partial Class Form1
     Friend WithEvents pX As PictureBox
     Friend WithEvents pB As PictureBox
     Friend WithEvents pStart As PictureBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

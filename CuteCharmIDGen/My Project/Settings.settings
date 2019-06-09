@@ -11,5 +11,11 @@
     <Setting Name="DGame" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="CCPoke" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PCspot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">18/30</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

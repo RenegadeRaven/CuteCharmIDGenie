@@ -43,6 +43,24 @@ Public Class Form1
         SID.Visible = False
         AR.Enabled = False
         ActDraw()
+        For i = 1 To 18 Step 1
+            ComboBox1.Items.Add("Box " & i)
+        Next i
+        For i = 1 To 30 Step 1
+            ComboBox2.Items.Add("Slot " & i)
+        Next i
+        Dim defaultSlot() As String = My.Settings.PCspot.Split("/")
+        ComboBox1.SelectedIndex = defaultSlot(LBound(defaultSlot)) - 1
+        ComboBox2.SelectedIndex = defaultSlot(UBound(defaultSlot)) - 1
+        If My.Settings.CCPoke = True Then
+            CheckBox1.Checked = True
+            ComboBox1.Enabled = True
+            ComboBox2.Enabled = True
+        ElseIf My.Settings.CCPoke = False Then
+            CheckBox1.Checked = False
+            ComboBox1.Enabled = False
+            ComboBox2.Enabled = False
+        End If
 
         Dim ind As Char() = My.Settings.SavedButt.ToCharArray
         For i = 0 To UBound(ind) Step 1
@@ -194,6 +212,15 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         DrawTXT("←", pLeft, New Point(0, 0))
     End Sub
 
+    'Adds needed zeros to hex string
+    Private Function Hex_Zeros(ByVal hex_value As String, ByVal length As Integer)
+        Dim Str As String = hex_value.ToUpper
+        Do While Str.Length < length
+            Str = "0" & Str
+        Loop
+        Return Str
+    End Function
+
     'Generate AR Code
     Private Function GenAR()
         ActButt()
@@ -202,19 +229,44 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         code(0) = "94000130 " & butt & "0000
 B2106FC0 00000000
 00000288 " & hIDs(1) & hIDs(0) & "
-D2000000 00000000"
+"
 
         'Platinum
         code(1) = "94000130 " & butt & "0000
 B2101D40 00000000
 0000008C " & hIDs(1) & hIDs(0) & "
-D2000000 00000000"
+"
 
         'HeartGold/SoulSilver
         code(2) = "94000130 " & butt & "0000
 B2111880 00000000
 00000084 " & hIDs(1) & hIDs(0) & "
-D2000000 00000000"
+"
+
+        For i = 0 To 2 Step 1
+            If My.Settings.CCPoke = True Then
+                Dim Spot As String = Nothing
+                Select Case GameList.SelectedIndex
+                    Case 0
+                        Spot = Hex_Zeros(Hex(&HC370 + (ComboBox1.SelectedIndex * &HFF0) + (ComboBox2.SelectedIndex * &H88)), 6)
+                    Case 1
+                        Spot = Hex_Zeros(Hex(&HCF44 + (ComboBox1.SelectedIndex * &HFF0) + (ComboBox2.SelectedIndex * &H88)), 6)
+                    Case 2
+                        Spot = Hex_Zeros(Hex(&HF710 + (ComboBox1.SelectedIndex * &H1000) + (ComboBox2.SelectedIndex * &H88)), 6)
+                End Select
+                If LeadList.SelectedIndex <= 0 Then
+                    File.WriteAllText(TempPath & "/lead.txt", My.Resources.MaleLead)
+                ElseIf LeadList.selectedindex >= 1 Then
+                    File.WriteAllText(TempPath & "/lead.txt", My.Resources.FemaleLead)
+                End If
+                Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
+                code(i) &= "B2101D40 00000000
+E0" & Spot & " 00000088
+" & Poke & "
+"
+            End If
+            code(i) &= "D2000000 00000000"
+        Next i
 
         If GameList.SelectedIndex = 0 Then
             lGame.Text = "DP"
@@ -743,6 +795,22 @@ You can look me up later.", vbOKOnly, "Error 404")
     Private Sub RTC_CheckedChanged(sender As Object, e As EventArgs) Handles rTC.CheckedChanged
         nTID.Enabled = True
         TIDchoose = True
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked = True Then
+            My.Settings.CCPoke = True
+            ComboBox1.Enabled = True
+            ComboBox2.Enabled = True
+        ElseIf CheckBox1.Checked = False Then
+            My.Settings.CCPoke = False
+            ComboBox1.Enabled = False
+            ComboBox2.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged, ComboBox2.SelectedIndexChanged
+        My.Settings.PCspot = (ComboBox1.SelectedIndex + 1) & "/" & (ComboBox2.SelectedIndex + 1)
     End Sub
 #End Region
 End Class

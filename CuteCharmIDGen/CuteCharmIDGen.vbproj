@@ -216,6 +216,10 @@
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
+    <None Include="Resources\MaleLead.txt" />
+    <None Include="Resources\FemaleLead.txt" />
+    <None Include="Resources\174 - MAGIC - C917F7D437DE.ek4" />
+    <None Include="Resources\174 - MAGIC - C9195E400116.ek4" />
     <None Include="Resources\shoulder.png" />
     <None Include="Resources\dpadinner.png" />
     <None Include="Resources\shoulderinner.png" />

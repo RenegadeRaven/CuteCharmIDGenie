@@ -89,6 +89,30 @@ Namespace My
                 Me("DGame") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CCPoke() As Boolean
+            Get
+                Return CType(Me("CCPoke"),Boolean)
+            End Get
+            Set
+                Me("CCPoke") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("18/30")>  _
+        Public Property PCspot() As String
+            Get
+                Return CType(Me("PCspot"),String)
+            End Get
+            Set
+                Me("PCspot") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

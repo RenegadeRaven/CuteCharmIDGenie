@@ -137,6 +137,31 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to 5E400116 C9190000
+        '''96781F5F 56244BDD
+        '''946332BA EAB78E29
+        '''8F2BE16F 889C7227
+        '''98D37471 984CD7EF
+        '''04162507 79907B4A
+        '''B522C464 D61FDEB7
+        '''676A6325 4B9C46B2
+        '''7CBBE136 E2DA7AEA
+        '''28A687A3 C4ED48BA
+        '''ED640B91 EB43A108
+        '''AE85AF77 AE6530BC
+        '''07D44AD7 47C72AE4
+        '''9B2B7C07 79E1FF5F
+        '''8B424CE5 6A2CC2C2
+        '''CF11FCEB 7F98E365
+        '''E5FBCA92 9300B00B.
+        '''</summary>
+        Friend ReadOnly Property FemaleLead() As String
+            Get
+                Return ResourceManager.GetString("FemaleLead", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to FDFF.
         '''</summary>
         Friend ReadOnly Property L() As String
@@ -151,6 +176,31 @@ Namespace My.Resources
         Friend ReadOnly Property Left() As String
             Get
                 Return ResourceManager.GetString("Left", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to F7D437DE C9170000
+        '''11B29CCB 72394AD8
+        '''ECAB5B77 4AFB47BE
+        '''B0F3C17B F835BC77
+        '''86D659B0 D96380EB
+        '''2B895E2A 3BCE2DC0
+        '''CE3C91D0 3CEFF2C9
+        '''D0D70518 9A4433AC
+        '''DFE60349 CC7E9517
+        '''1494B27E BE0CC71B
+        '''1C062BA4 43D79AF9
+        '''9415FD2D 5078C54A
+        '''C2E9785C 7AA68E3B
+        '''8ABF4327 D62DF1B7
+        '''9966D01A 5FDA88B8
+        '''77F70AD7 8375078A
+        '''0A36272A A700337E.
+        '''</summary>
+        Friend ReadOnly Property MaleLead() As String
+            Get
+                Return ResourceManager.GetString("MaleLead", resourceCulture)
             End Get
         End Property
         
