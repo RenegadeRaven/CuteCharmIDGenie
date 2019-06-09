@@ -184,8 +184,8 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         DrawTXT("B", pB, New Point(5, 1))
         DrawTXT("X", pX, New Point(5, 1))
         DrawTXT("Y", pY, New Point(6, 1))
-        DrawTXT("Select", pSel, New Point(10, 1))
-        DrawTXT("Start", pStart, New Point(14, 1))
+        DrawTXT("Select", pSel, New Point(4, 1), True, 9)
+        DrawTXT("Start", pStart, New Point(8, 1), True, 9)
         DrawTXT("L", pL, New Point(12, 1))
         DrawTXT("R", pR, New Point(11, 1))
         DrawTXT("↑", pUp, New Point(0, 0))
@@ -591,7 +591,7 @@ D2000000 00000000"
     Private Sub PStart_Click(sender As Object, e As EventArgs) Handles pStart.Click
         If pStart.Image Is Nothing Then
             pStart.Image = My.Resources.ovalbuttoninner
-            DrawTXT("Start", pStart, New Point(10, 1), False, 7.5)
+            DrawTXT("Start", pStart, New Point(8, 1), False, 9)
             nButt &= "1"
         Else
             pStart.Image = Nothing
@@ -601,7 +601,7 @@ D2000000 00000000"
     Private Sub PSel_Click(sender As Object, e As EventArgs) Handles pSel.Click
         If pSel.Image Is Nothing Then
             pSel.Image = My.Resources.ovalbuttoninner
-            DrawTXT("Select", pSel, New Point(8, 1), False, 7.5)
+            DrawTXT("Select", pSel, New Point(4, 1), False, 9)
             nButt &= "3"
         Else
             pSel.Image = Nothing

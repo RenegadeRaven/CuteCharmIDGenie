@@ -355,7 +355,7 @@ Partial Class Form1
         '
         'pStart
         '
-        Me.pStart.BackgroundImage = CType(resources.GetObject("pStart.BackgroundImage"), System.Drawing.Image)
+        Me.pStart.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.ovalbutton
         Me.pStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pStart.Location = New System.Drawing.Point(157, 66)
         Me.pStart.Name = "pStart"
@@ -365,7 +365,7 @@ Partial Class Form1
         '
         'pSel
         '
-        Me.pSel.BackgroundImage = CType(resources.GetObject("pSel.BackgroundImage"), System.Drawing.Image)
+        Me.pSel.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.ovalbutton
         Me.pSel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pSel.Location = New System.Drawing.Point(73, 66)
         Me.pSel.Name = "pSel"
@@ -405,7 +405,7 @@ Partial Class Form1
         '
         'pDown
         '
-        Me.pDown.BackgroundImage = CType(resources.GetObject("pDown.BackgroundImage"), System.Drawing.Image)
+        Me.pDown.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.dpad
         Me.pDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pDown.Location = New System.Drawing.Point(45, 56)
         Me.pDown.Name = "pDown"
@@ -415,7 +415,7 @@ Partial Class Form1
         '
         'pUp
         '
-        Me.pUp.BackgroundImage = CType(resources.GetObject("pUp.BackgroundImage"), System.Drawing.Image)
+        Me.pUp.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.dpad
         Me.pUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pUp.Location = New System.Drawing.Point(45, 22)
         Me.pUp.Name = "pUp"
@@ -425,7 +425,7 @@ Partial Class Form1
         '
         'pLeft
         '
-        Me.pLeft.BackgroundImage = CType(resources.GetObject("pLeft.BackgroundImage"), System.Drawing.Image)
+        Me.pLeft.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.dpad
         Me.pLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pLeft.Location = New System.Drawing.Point(26, 41)
         Me.pLeft.Name = "pLeft"
@@ -435,7 +435,7 @@ Partial Class Form1
         '
         'pRight
         '
-        Me.pRight.BackgroundImage = CType(resources.GetObject("pRight.BackgroundImage"), System.Drawing.Image)
+        Me.pRight.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.dpad
         Me.pRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pRight.Location = New System.Drawing.Point(60, 41)
         Me.pRight.Name = "pRight"
