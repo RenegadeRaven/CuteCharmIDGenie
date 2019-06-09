@@ -216,6 +216,14 @@
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
+    <None Include="Resources\shoulder.png" />
+    <None Include="Resources\dpadinner.png" />
+    <None Include="Resources\shoulderinner.png" />
+    <None Include="Resources\ovalbuttoninner.png" />
+    <None Include="Resources\buttoninner.png" />
+    <None Include="Resources\ovalbutton.png" />
+    <None Include="Resources\button.png" />
+    <None Include="Resources\dpad.png" />
     <None Include="Resources\sg4.png" />
     <None Include="Resources\sg3.png" />
     <None Include="Resources\sg2.png" />

@@ -42,34 +42,35 @@ Public Class Form1
         TID.Visible = False
         SID.Visible = False
         AR.Enabled = False
+        ActDraw()
 
         Dim ind As Char() = My.Settings.SavedButt.ToCharArray
         For i = 0 To UBound(ind) Step 1
             Select Case ind(i)
                 Case "7"
-                    cL.Checked = True
+                    PL_Click(sender, e)
                 Case "9"
-                    cR.Checked = True
+                    PR_Click(sender, e)
                 Case "1"
-                    cST.Checked = True
+                    PStart_Click(sender, e)
                 Case "3"
-                    cSL.Checked = True
+                    PSel_Click(sender, e)
                 Case "6"
-                    cA.Checked = True
+                    PA_Click(sender, e)
                 Case "2"
-                    cB.Checked = True
+                    PB_Click(sender, e)
                 Case "8"
-                    cX.Checked = True
+                    PX_Click(sender, e)
                 Case "4"
-                    cY.Checked = True
+                    PY_Click(sender, e)
                 Case "W"
-                    cDU.Checked = True
+                    PUp_Click(sender, e)
                 Case "A"
-                    cDL.Checked = True
+                    PLeft_Click(sender, e)
                 Case "S"
-                    cDD.Checked = True
+                    PDown_Click(sender, e)
                 Case "D"
-                    cDR.Checked = True
+                    PRight_Click(sender, e)
             End Select
         Next i
     End Sub
@@ -172,6 +173,27 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         butt = Convert.ToString(tbutt, 16).ToUpper
     End Sub
 
+    'Setup Activation Buttons Design
+    Private Sub ActDraw()
+        pDown.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY)
+        pLeft.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipX)
+        pLeft.Size = New Size(24, 20)
+        pRight.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
+        pRight.Size = New Size(24, 20)
+        DrawTXT("A", pA, New Point(4, 1))
+        DrawTXT("B", pB, New Point(5, 1))
+        DrawTXT("X", pX, New Point(5, 1))
+        DrawTXT("Y", pY, New Point(6, 1))
+        DrawTXT("Select", pSel, New Point(10, 1))
+        DrawTXT("Start", pStart, New Point(14, 1))
+        DrawTXT("L", pL, New Point(12, 1))
+        DrawTXT("R", pR, New Point(11, 1))
+        DrawTXT("↑", pUp, New Point(0, 0))
+        DrawTXT("↓", pDown, New Point(0, 2))
+        DrawTXT("→", pRight, New Point(4, 0))
+        DrawTXT("←", pLeft, New Point(0, 0))
+    End Sub
+
     'Generate AR Code
     Private Function GenAR()
         ActButt()
@@ -216,20 +238,30 @@ D2000000 00000000"
     End Sub
 
     'Adds text onto the PictureBoxes
-    Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point)
-        Dim myfont As Font = New Font("Calibri", 12, FontStyle.Regular)
+    Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point, Optional bg As Boolean = True, Optional fnts As Single = 12)
+        Dim myfont As Font = New Font("Calibri", fnts, FontStyle.Regular)
         If txt.Contains("\") Then
             txt = txt.Replace("\", "")
-            myfont = New Font("Calibri", 12, FontStyle.Italic)
+            myfont = New Font("Calibri", fnts, FontStyle.Italic)
         End If
-        Dim img As New Bitmap(pb.BackgroundImage)
+        Dim img As Bitmap
+        If bg = True Then
+            img = New Bitmap(pb.BackgroundImage)
+        Else
+            img = New Bitmap(pb.Image)
+        End If
         Using g = Graphics.FromImage(img)
             g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
             g.DrawString(txt, myfont, Brushes.Black, New PointF(pnt.X, pnt.Y))
         End Using
         'Dispose the existing image if there is one.'
-        pb.BackgroundImage?.Dispose()
-        pb.BackgroundImage = img
+        If bg = True Then
+            pb.BackgroundImage?.Dispose()
+            pb.BackgroundImage = img
+        Else
+            pb.Image?.Dispose()
+            pb.Image = img
+        End If
     End Sub
 
     'Calls the text changes on the PicBoxes
@@ -536,135 +568,142 @@ D2000000 00000000"
     End Sub
 #End Region
 #Region "Button Selection"
-    'L Button
-    Private Sub cL_CheckedChanged(sender As Object, e As EventArgs) Handles cL.CheckedChanged
-        If cL.Checked = True Then
+    Private Sub PL_Click(sender As Object, e As EventArgs) Handles pL.Click
+        If pL.Image Is Nothing Then
+            pL.Image = My.Resources.shoulderinner
+            DrawTXT("L", pL, New Point(12, 1), False)
             nButt &= "7"
         Else
+            pL.Image = Nothing
             nButt = nButt.Replace("7", "")
         End If
     End Sub
-
-    'R Button
-    Private Sub cR_CheckedChanged(sender As Object, e As EventArgs) Handles cR.CheckedChanged
-        If cR.Checked = True Then
+    Private Sub PR_Click(sender As Object, e As EventArgs) Handles pR.Click
+        If pR.Image Is Nothing Then
+            pR.Image = My.Resources.shoulderinner
+            DrawTXT("R", pR, New Point(11, 1), False)
             nButt &= "9"
         Else
+            pR.Image = Nothing
             nButt = nButt.Replace("9", "")
         End If
     End Sub
-
-    'Start Button
-    Private Sub cST_CheckedChanged(sender As Object, e As EventArgs) Handles cST.CheckedChanged
-        If cST.Checked = True Then
+    Private Sub PStart_Click(sender As Object, e As EventArgs) Handles pStart.Click
+        If pStart.Image Is Nothing Then
+            pStart.Image = My.Resources.ovalbuttoninner
+            DrawTXT("Start", pStart, New Point(10, 1), False, 7.5)
             nButt &= "1"
         Else
+            pStart.Image = Nothing
             nButt = nButt.Replace("1", "")
         End If
     End Sub
-
-    'Select Button
-    Private Sub cSL_CheckedChanged(sender As Object, e As EventArgs) Handles cSL.CheckedChanged
-        If cSL.Checked = True Then
+    Private Sub PSel_Click(sender As Object, e As EventArgs) Handles pSel.Click
+        If pSel.Image Is Nothing Then
+            pSel.Image = My.Resources.ovalbuttoninner
+            DrawTXT("Select", pSel, New Point(8, 1), False, 7.5)
             nButt &= "3"
         Else
+            pSel.Image = Nothing
             nButt = nButt.Replace("3", "")
         End If
     End Sub
-
-    'A Button
-    Private Sub cA_CheckedChanged(sender As Object, e As EventArgs) Handles cA.CheckedChanged
-        If cA.Checked = True Then
+    Private Sub PA_Click(sender As Object, e As EventArgs) Handles pA.Click
+        If pA.Image Is Nothing Then
+            pA.Image = My.Resources.buttoninner
+            DrawTXT("A", pA, New Point(4, 1), False)
             nButt &= "6"
         Else
+            pA.Image = Nothing
             nButt = nButt.Replace("6", "")
         End If
     End Sub
-
-    'B Button
-    Private Sub cB_CheckedChanged(sender As Object, e As EventArgs) Handles cB.CheckedChanged
-        If cB.Checked = True Then
+    Private Sub PB_Click(sender As Object, e As EventArgs) Handles pB.Click
+        If pB.Image Is Nothing Then
+            pB.Image = My.Resources.buttoninner
+            DrawTXT("B", pB, New Point(5, 1), False)
             nButt &= "2"
         Else
+            pB.Image = Nothing
             nButt = nButt.Replace("2", "")
         End If
     End Sub
-
-    'X Button
-    Private Sub cX_CheckedChanged(sender As Object, e As EventArgs) Handles cX.CheckedChanged
-        If cX.Checked = True Then
+    Private Sub PX_Click(sender As Object, e As EventArgs) Handles pX.Click
+        If pX.Image Is Nothing Then
+            pX.Image = My.Resources.buttoninner
+            DrawTXT("X", pX, New Point(5, 1), False)
             nButt &= "8"
         Else
+            pX.Image = Nothing
             nButt = nButt.Replace("8", "")
         End If
     End Sub
-
-    'Y Button
-    Private Sub cY_CheckedChanged(sender As Object, e As EventArgs) Handles cY.CheckedChanged
-        If cY.Checked = True Then
+    Private Sub PY_Click(sender As Object, e As EventArgs) Handles pY.Click
+        If pY.Image Is Nothing Then
+            pY.Image = My.Resources.buttoninner
+            DrawTXT("Y", pY, New Point(6, 1), False)
             nButt &= "4"
         Else
+            pY.Image = Nothing
             nButt = nButt.Replace("4", "")
         End If
     End Sub
-
-    'Up Button
-    Private Sub cDU_CheckedChanged(sender As Object, e As EventArgs) Handles cDU.CheckedChanged
-        If cDU.Checked = True Then
+    Private Sub PUp_Click(sender As Object, e As EventArgs) Handles pUp.Click
+        If pUp.Image Is Nothing Then
+            dpad(sender, e)
+            pUp.Image = My.Resources.dpadinner
+            DrawTXT("↑", pUp, New Point(0, 0), False)
             nButt &= "W"
-            cDL.Enabled = False
-            cDD.Enabled = False
-            cDR.Enabled = False
         Else
+            pUp.Image = Nothing
             nButt = nButt.Replace("W", "")
-            cDL.Enabled = True
-            cDD.Enabled = True
-            cDR.Enabled = True
         End If
     End Sub
-
-    'Left Button
-    Private Sub cDL_CheckedChanged(sender As Object, e As EventArgs) Handles cDL.CheckedChanged
-        If cDL.Checked = True Then
-            nButt &= "A"
-            cDU.Enabled = False
-            cDD.Enabled = False
-            cDR.Enabled = False
-        Else
-            nButt = nButt.Replace("A", "")
-            cDU.Enabled = True
-            cDD.Enabled = True
-            cDR.Enabled = True
-        End If
-    End Sub
-
-    'Down Button
-    Private Sub cDD_CheckedChanged(sender As Object, e As EventArgs) Handles cDD.CheckedChanged
-        If cDD.Checked = True Then
+    Private Sub PDown_Click(sender As Object, e As EventArgs) Handles pDown.Click
+        If pDown.Image Is Nothing Then
+            dpad(sender, e)
+            pDown.Image = My.Resources.dpadinner
+            pDown.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
+            DrawTXT("↓", pDown, New Point(0, 2), False)
             nButt &= "S"
-            cDL.Enabled = False
-            cDU.Enabled = False
-            cDR.Enabled = False
         Else
+            pDown.Image = Nothing
             nButt = nButt.Replace("S", "")
-            cDL.Enabled = True
-            cDU.Enabled = True
-            cDR.Enabled = True
         End If
     End Sub
-
-    'Right Button
-    Private Sub cDR_CheckedChanged(sender As Object, e As EventArgs) Handles cDR.CheckedChanged
-        If cDR.Checked = True Then
+    Private Sub PRight_Click(sender As Object, e As EventArgs) Handles pRight.Click
+        If pRight.Image Is Nothing Then
+            dpad(sender, e)
+            pRight.Image = My.Resources.dpadinner
+            pRight.Image.RotateFlip(RotateFlipType.Rotate90FlipNone)
+            DrawTXT("→", pRight, New Point(4, 0), False)
             nButt &= "D"
-            cDL.Enabled = False
-            cDD.Enabled = False
-            cDU.Enabled = False
         Else
+            pRight.Image = Nothing
             nButt = nButt.Replace("D", "")
-            cDL.Enabled = True
-            cDD.Enabled = True
-            cDU.Enabled = True
+        End If
+    End Sub
+    Private Sub PLeft_Click(sender As Object, e As EventArgs) Handles pLeft.Click
+        If pLeft.Image Is Nothing Then
+            dpad(sender, e)
+            pLeft.Image = My.Resources.dpadinner
+            pLeft.Image.RotateFlip(RotateFlipType.Rotate90FlipX)
+            DrawTXT("←", pLeft, New Point(0, 0), False)
+            nButt &= "A"
+        Else
+            pLeft.Image = Nothing
+            nButt = nButt.Replace("A", "")
+        End If
+    End Sub
+    Private Sub dpad(sender As Object, e As EventArgs)
+        If nButt.Contains("W") Then
+            PUp_Click(sender, e)
+        ElseIf nButt.Contains("A") Then
+            PLeft_Click(sender, e)
+        ElseIf nButt.Contains("S") Then
+            PDown_Click(sender, e)
+        ElseIf nButt.Contains("D") Then
+            PRight_Click(sender, e)
         End If
     End Sub
 #End Region
