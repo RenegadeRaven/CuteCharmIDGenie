@@ -137,46 +137,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property g1() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("g1", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property g2() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("g2", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property g3() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("g3", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property g4() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("g4", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to FDFF.
         '''</summary>
         Friend ReadOnly Property L() As String
@@ -258,16 +218,6 @@ Namespace My.Resources
         Friend ReadOnly Property SEL() As String
             Get
                 Return ResourceManager.GetString("SEL", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property sg() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("sg", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

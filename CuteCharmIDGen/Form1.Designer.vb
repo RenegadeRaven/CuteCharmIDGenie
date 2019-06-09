@@ -152,7 +152,7 @@ Partial Class Form1
         '
         'pg4
         '
-        Me.pg4.BackgroundImage = CType(resources.GetObject("pg4.BackgroundImage"), System.Drawing.Image)
+        Me.pg4.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg4
         Me.pg4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pg4.Location = New System.Drawing.Point(422, 36)
         Me.pg4.Name = "pg4"
@@ -162,7 +162,7 @@ Partial Class Form1
         '
         'pg3
         '
-        Me.pg3.BackgroundImage = CType(resources.GetObject("pg3.BackgroundImage"), System.Drawing.Image)
+        Me.pg3.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg3
         Me.pg3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pg3.Location = New System.Drawing.Point(284, 36)
         Me.pg3.Name = "pg3"
@@ -172,7 +172,7 @@ Partial Class Form1
         '
         'pg2
         '
-        Me.pg2.BackgroundImage = CType(resources.GetObject("pg2.BackgroundImage"), System.Drawing.Image)
+        Me.pg2.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg2
         Me.pg2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pg2.Location = New System.Drawing.Point(146, 36)
         Me.pg2.Name = "pg2"
@@ -183,7 +183,7 @@ Partial Class Form1
         'pg1
         '
         Me.pg1.BackColor = System.Drawing.SystemColors.Control
-        Me.pg1.BackgroundImage = CType(resources.GetObject("pg1.BackgroundImage"), System.Drawing.Image)
+        Me.pg1.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg1
         Me.pg1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pg1.Location = New System.Drawing.Point(8, 36)
         Me.pg1.Name = "pg1"
@@ -375,7 +375,7 @@ Partial Class Form1
         '
         'pR
         '
-        Me.pR.BackgroundImage = CType(resources.GetObject("pR.BackgroundImage"), System.Drawing.Image)
+        Me.pR.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.shoulder
         Me.pR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pR.Location = New System.Drawing.Point(171, 13)
         Me.pR.Name = "pR"
@@ -395,7 +395,7 @@ Partial Class Form1
         '
         'pL
         '
-        Me.pL.BackgroundImage = CType(resources.GetObject("pL.BackgroundImage"), System.Drawing.Image)
+        Me.pL.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.shoulder
         Me.pL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pL.Location = New System.Drawing.Point(6, 13)
         Me.pL.Name = "pL"
@@ -531,7 +531,7 @@ Partial Class Form1
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
+        Me.PictureBox1.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.ppdb
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.PictureBox1.Location = New System.Drawing.Point(733, 3)

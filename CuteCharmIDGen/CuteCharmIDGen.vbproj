@@ -231,7 +231,6 @@
     <None Include="Resources\ppdbs.png" />
     <None Include="Resources\ppdb.png" />
     <None Include="Resources\date.txt" />
-    <None Include="Resources\sg.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
