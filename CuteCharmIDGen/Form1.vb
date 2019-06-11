@@ -9,7 +9,6 @@ Public Class Form1
     Dim rnd(1) As Boolean '{Is Shiny Group random?, With Quirky?}
     Dim IDs(1) As Integer '{TID, SID} as numbers
     Dim hIDs(1) As String '{TID, SID} as hex
-    Dim code(2) As String 'AR Codes {D, P, Pt, HGSS}
     Dim butt As String 'Haha. It's Short for Button. The one that activates the AR code
     Dim nButt As String = Nothing 'List of buttons
     Dim prob As Boolean = False 'Is there an Error?
@@ -44,22 +43,22 @@ Public Class Form1
         AR.Enabled = False
         ActDraw()
         For i = 1 To 18 Step 1
-            ComboBox1.Items.Add("Box " & i)
+            BoxList.Items.Add("Box " & i)
         Next i
         For i = 1 To 30 Step 1
-            ComboBox2.Items.Add("Slot " & i)
+            SlotList.Items.Add("Slot " & i)
         Next i
         Dim defaultSlot() As String = My.Settings.PCspot.Split("/")
-        ComboBox1.SelectedIndex = defaultSlot(LBound(defaultSlot)) - 1
-        ComboBox2.SelectedIndex = defaultSlot(UBound(defaultSlot)) - 1
+        BoxList.SelectedIndex = defaultSlot(LBound(defaultSlot)) - 1
+        SlotList.SelectedIndex = defaultSlot(UBound(defaultSlot)) - 1
         If My.Settings.CCPoke = True Then
-            CheckBox1.Checked = True
-            ComboBox1.Enabled = True
-            ComboBox2.Enabled = True
+            cbLead.Checked = True
+            BoxList.Enabled = True
+            SlotList.Enabled = True
         ElseIf My.Settings.CCPoke = False Then
-            CheckBox1.Checked = False
-            ComboBox1.Enabled = False
-            ComboBox2.Enabled = False
+            cbLead.Checked = False
+            BoxList.Enabled = False
+            SlotList.Enabled = False
         End If
 
         Dim ind As Char() = My.Settings.SavedButt.ToCharArray
@@ -221,66 +220,45 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         Return Str
     End Function
 
-    'Generate AR Code
+    'Generates AR Code
     Private Function GenAR()
         ActButt()
-
-        'Diamond/Pearl
-        code(0) = "94000130 " & butt & "0000
-B2106FC0 00000000
+        Dim Spot As String = Nothing
+        Dim arc As String = "94000130 " & butt & "0000
+"
+        Select Case GameList.SelectedIndex
+            Case 0 'Diamond/Pearl
+                arc &= "B2106FC0 00000000
 00000288 " & hIDs(1) & hIDs(0) & "
 "
-
-        'Platinum
-        code(1) = "94000130 " & butt & "0000
-B2101D40 00000000
+                Spot = Hex_Zeros(Hex(&HC370 + (BoxList.SelectedIndex * &HFF0) + (SlotList.SelectedIndex * &H88)), 6)
+                lGame.Text = "DP"
+            Case 1 'Platinum
+                arc &= "B2101D40 00000000
 0000008C " & hIDs(1) & hIDs(0) & "
 "
-
-        'HeartGold/SoulSilver
-        code(2) = "94000130 " & butt & "0000
-B2111880 00000000
+                Spot = Hex_Zeros(Hex(&HCF44 + (BoxList.SelectedIndex * &HFF0) + (SlotList.SelectedIndex * &H88)), 6)
+                lGame.Text = "Pt"
+            Case 2 'HeartGold/SoulSilver
+                arc &= "B2111880 00000000
 00000084 " & hIDs(1) & hIDs(0) & "
 "
-
-        For i = 0 To 2 Step 1
-            If My.Settings.CCPoke = True Then
-                Dim Spot As String = Nothing
-                Select Case GameList.SelectedIndex
-                    Case 0
-                        Spot = Hex_Zeros(Hex(&HC370 + (ComboBox1.SelectedIndex * &HFF0) + (ComboBox2.SelectedIndex * &H88)), 6)
-                    Case 1
-                        Spot = Hex_Zeros(Hex(&HCF44 + (ComboBox1.SelectedIndex * &HFF0) + (ComboBox2.SelectedIndex * &H88)), 6)
-                    Case 2
-                        Spot = Hex_Zeros(Hex(&HF710 + (ComboBox1.SelectedIndex * &H1000) + (ComboBox2.SelectedIndex * &H88)), 6)
-                End Select
-                If LeadList.SelectedIndex <= 0 Then
-                    File.WriteAllText(TempPath & "/lead.txt", My.Resources.MaleLead)
-                ElseIf LeadList.selectedindex >= 1 Then
-                    File.WriteAllText(TempPath & "/lead.txt", My.Resources.FemaleLead)
-                End If
-                Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
-                code(i) &= "B2101D40 00000000
-E0" & Spot & " 00000088
+                Spot = Hex_Zeros(Hex(&HF710 + (BoxList.SelectedIndex * &H1000) + (SlotList.SelectedIndex * &H88)), 6)
+                lGame.Text = "HGSS"
+        End Select
+        If My.Settings.CCPoke = True Then
+            If LeadList.SelectedIndex <= 0 Then
+                File.WriteAllText(TempPath & "/lead.txt", My.Resources.MaleLead)
+            ElseIf LeadList.SelectedIndex >= 1 Then
+                File.WriteAllText(TempPath & "/lead.txt", My.Resources.FemaleLead)
+            End If
+            Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
+            arc &= "E0" & Spot & " 00000088
 " & Poke & "
 "
-            End If
-            code(i) &= "D2000000 00000000"
-        Next i
-
-        If GameList.SelectedIndex = 0 Then
-            lGame.Text = "DP"
-            Return code(0)
-        ElseIf GameList.SelectedIndex = 1 Then
-            lGame.Text = "Pt"
-            Return code(1)
-        ElseIf GameList.SelectedIndex = 2 Then
-            lGame.Text = "HGSS"
-            Return code(2)
-        Else
-            AR.BackColor = DefaultBackColor
-            Return "Error"
         End If
+        arc &= "D2000000 00000000"
+        Return arc
     End Function
 
     'Greys out PictureBoxes
@@ -418,6 +396,9 @@ E0" & Spot & " 00000088
             prob = True
         ElseIf nButt = Nothing Then
             gA.ForeColor = Color.Red
+            prob = True
+        ElseIf cbLead.Checked = True And (BoxList.SelectedItem = Nothing Or SlotList.SelectedItem = Nothing) Then
+            gCCL.ForeColor = Color.Red
             prob = True
         Else
             GameList.ForeColor = DefaultForeColor
@@ -784,7 +765,7 @@ You can look me up later.", vbOKOnly, "Error 404")
         PictureBox1.Image = Nothing
     End Sub
 #End Region
-#Region "Specific TID"
+#Region "Specific TID & Cute Charm Lead"
     'Sets to Random
     Private Sub RTR_CheckedChanged(sender As Object, e As EventArgs) Handles rTR.CheckedChanged
         nTID.Enabled = False
@@ -797,20 +778,22 @@ You can look me up later.", vbOKOnly, "Error 404")
         TIDchoose = True
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked = True Then
+    Private Sub CbLead_CheckedChanged(sender As Object, e As EventArgs) Handles cbLead.CheckedChanged
+        If cbLead.Checked = True Then
             My.Settings.CCPoke = True
-            ComboBox1.Enabled = True
-            ComboBox2.Enabled = True
-        ElseIf CheckBox1.Checked = False Then
+            BoxList.Enabled = True
+            SlotList.Enabled = True
+            cbLead.ForeColor = DefaultForeColor
+        ElseIf cbLead.Checked = False Then
             My.Settings.CCPoke = False
-            ComboBox1.Enabled = False
-            ComboBox2.Enabled = False
+            BoxList.Enabled = False
+            SlotList.Enabled = False
+            cbLead.ForeColor = Color.Gray
         End If
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged, ComboBox2.SelectedIndexChanged
-        My.Settings.PCspot = (ComboBox1.SelectedIndex + 1) & "/" & (ComboBox2.SelectedIndex + 1)
+    Private Sub SpotList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles BoxList.SelectedIndexChanged, SlotList.SelectedIndexChanged
+        My.Settings.PCspot = (BoxList.SelectedIndex + 1) & "/" & (SlotList.SelectedIndex + 1)
     End Sub
 #End Region
 End Class

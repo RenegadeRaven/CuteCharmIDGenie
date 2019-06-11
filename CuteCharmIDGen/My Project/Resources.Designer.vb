@@ -137,23 +137,23 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 5E400116 C9190000
-        '''96781F5F 56244BDD
-        '''946332BA EAB78E29
-        '''8F2BE16F 889C7227
-        '''98D37471 984CD7EF
-        '''04162507 79907B4A
-        '''B522C464 D61FDEB7
-        '''676A6325 4B9C46B2
-        '''7CBBE136 E2DA7AEA
-        '''28A687A3 C4ED48BA
-        '''ED640B91 EB43A108
-        '''AE85AF77 AE6530BC
-        '''07D44AD7 47C72AE4
-        '''9B2B7C07 79E1FF5F
-        '''8B424CE5 6A2CC2C2
-        '''CF11FCEB 7F98E365
-        '''E5FBCA92 9300B00B.
+        '''  Looks up a localized string similar to 5E400116 D8D90000
+        '''177F13EA AC5B8801
+        '''62CD5EEC CD3106FA
+        '''8DFC83DD AED33C0D
+        '''3D252382 03501856
+        '''5A13553D CFAB1754
+        '''04F3C3E0 369BCAF3
+        '''2E32084E E27C11DC
+        '''89837A1F F89DC126
+        '''93105F17 0A73E41E
+        '''3A4F1470 C10A2246
+        '''6320978A 10E8B2E2
+        '''3E6E8AE3 AF06DA25
+        '''91584343 028D8D68
+        '''B008EB1F DCFA12C1
+        '''AFA0A42C 07BE025C
+        '''16C35A1E 197683FB.
         '''</summary>
         Friend ReadOnly Property FemaleLead() As String
             Get
@@ -180,23 +180,23 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to F7D437DE C9170000
-        '''11B29CCB 72394AD8
-        '''ECAB5B77 4AFB47BE
-        '''B0F3C17B F835BC77
-        '''86D659B0 D96380EB
-        '''2B895E2A 3BCE2DC0
-        '''CE3C91D0 3CEFF2C9
-        '''D0D70518 9A4433AC
-        '''DFE60349 CC7E9517
-        '''1494B27E BE0CC71B
-        '''1C062BA4 43D79AF9
-        '''9415FD2D 5078C54A
-        '''C2E9785C 7AA68E3B
-        '''8ABF4327 D62DF1B7
-        '''9966D01A 5FDA88B8
-        '''77F70AD7 8375078A
-        '''0A36272A A700337E.
+        '''  Looks up a localized string similar to F7D437DE D8D70000
+        '''92B28F16 48688F7C
+        '''BB1487A9 2D753F65
+        '''AFC363E8 1E6C865D
+        '''2B2808C1 4467C152
+        '''829D8DC0 91EAC9CA
+        '''1E0EB16D 9D6ADF06
+        '''979FAA42 3123FED6
+        '''ECAE9C32 E231DB53
+        '''7F3A8BEA 05EA60BE
+        '''D12C34C5 6E1E1FAF
+        '''2A75E5A3 D5FE4920
+        '''F983B849 E1E43D7C
+        '''8068067C 63717F80
+        '''72316CEF ED27D8BF
+        '''5661B21E 1B9AF294
+        '''3AFDB6A7 2D75076E.
         '''</summary>
         Friend ReadOnly Property MaleLead() As String
             Get

@@ -59,7 +59,7 @@ Partial Class Form1
         Me.pRight = New System.Windows.Forms.PictureBox()
         Me.LeadList = New System.Windows.Forms.ComboBox()
         Me.GameList = New System.Windows.Forms.ComboBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gTID = New System.Windows.Forms.GroupBox()
         Me.nTID = New System.Windows.Forms.NumericUpDown()
         Me.rTC = New System.Windows.Forms.RadioButton()
         Me.rTR = New System.Windows.Forms.RadioButton()
@@ -69,10 +69,10 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lGame = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.gCCL = New System.Windows.Forms.GroupBox()
+        Me.SlotList = New System.Windows.Forms.ComboBox()
+        Me.BoxList = New System.Windows.Forms.ComboBox()
+        Me.cbLead = New System.Windows.Forms.CheckBox()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,10 +92,10 @@ Partial Class Form1
         CType(Me.pUp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pLeft, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pRight, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.gTID.SuspendLayout()
         CType(Me.nTID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
+        Me.gCCL.SuspendLayout()
         Me.SuspendLayout()
         '
         'gSG
@@ -256,7 +256,7 @@ Partial Class Form1
         'bGO
         '
         Me.bGO.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bGO.Location = New System.Drawing.Point(647, 282)
+        Me.bGO.Location = New System.Drawing.Point(650, 277)
         Me.bGO.Name = "bGO"
         Me.bGO.Size = New System.Drawing.Size(102, 34)
         Me.bGO.TabIndex = 7
@@ -269,7 +269,7 @@ Partial Class Form1
         Me.AR.BackColor = System.Drawing.SystemColors.Control
         Me.AR.Cursor = System.Windows.Forms.Cursors.Hand
         Me.AR.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.AR.Location = New System.Drawing.Point(628, 218)
+        Me.AR.Location = New System.Drawing.Point(634, 213)
         Me.AR.Name = "AR"
         Me.AR.ReadOnly = True
         Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
@@ -281,7 +281,7 @@ Partial Class Form1
         'TID
         '
         Me.TID.AutoSize = True
-        Me.TID.Location = New System.Drawing.Point(622, 190)
+        Me.TID.Location = New System.Drawing.Point(628, 187)
         Me.TID.Name = "TID"
         Me.TID.Size = New System.Drawing.Size(31, 13)
         Me.TID.TabIndex = 9
@@ -290,7 +290,7 @@ Partial Class Form1
         'SID
         '
         Me.SID.AutoSize = True
-        Me.SID.Location = New System.Drawing.Point(698, 190)
+        Me.SID.Location = New System.Drawing.Point(704, 187)
         Me.SID.Name = "SID"
         Me.SID.Size = New System.Drawing.Size(31, 13)
         Me.SID.TabIndex = 10
@@ -299,7 +299,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(625, 204)
+        Me.Label1.Location = New System.Drawing.Point(631, 199)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
@@ -471,18 +471,18 @@ Partial Class Form1
         Me.GameList.TabIndex = 21
         Me.ToolTip1.SetToolTip(Me.GameList, "Select the game you are going to use")
         '
-        'GroupBox1
+        'gTID
         '
-        Me.GroupBox1.Controls.Add(Me.nTID)
-        Me.GroupBox1.Controls.Add(Me.rTC)
-        Me.GroupBox1.Controls.Add(Me.rTR)
-        Me.GroupBox1.Location = New System.Drawing.Point(616, 24)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(191, 34)
-        Me.GroupBox1.TabIndex = 23
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Trainer ID"
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, "Choose a specific TID or not")
+        Me.gTID.Controls.Add(Me.nTID)
+        Me.gTID.Controls.Add(Me.rTC)
+        Me.gTID.Controls.Add(Me.rTR)
+        Me.gTID.Location = New System.Drawing.Point(616, 24)
+        Me.gTID.Name = "gTID"
+        Me.gTID.Size = New System.Drawing.Size(191, 34)
+        Me.gTID.TabIndex = 23
+        Me.gTID.TabStop = False
+        Me.gTID.Text = "Trainer ID"
+        Me.ToolTip1.SetToolTip(Me.gTID, "Choose a specific TID or not")
         '
         'nTID
         '
@@ -544,6 +544,7 @@ Partial Class Form1
         Me.PictureBox1.Size = New System.Drawing.Size(80, 22)
         Me.PictureBox1.TabIndex = 17
         Me.PictureBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Donate and help incentivise me to develop more")
         '
         'Label2
         '
@@ -558,7 +559,7 @@ Partial Class Form1
         '
         Me.lGame.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lGame.Location = New System.Drawing.Point(721, 205)
+        Me.lGame.Location = New System.Drawing.Point(727, 200)
         Me.lGame.Name = "lGame"
         Me.lGame.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lGame.Size = New System.Drawing.Size(46, 13)
@@ -574,53 +575,56 @@ Partial Class Form1
         Me.Label5.TabIndex = 22
         Me.Label5.Text = "Game:"
         '
-        'GroupBox2
+        'gCCL
         '
-        Me.GroupBox2.Controls.Add(Me.ComboBox2)
-        Me.GroupBox2.Controls.Add(Me.ComboBox1)
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(594, 146)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(213, 41)
-        Me.GroupBox2.TabIndex = 24
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Cute Charm Pokémon"
+        Me.gCCL.Controls.Add(Me.SlotList)
+        Me.gCCL.Controls.Add(Me.BoxList)
+        Me.gCCL.Controls.Add(Me.cbLead)
+        Me.gCCL.Location = New System.Drawing.Point(594, 146)
+        Me.gCCL.Name = "gCCL"
+        Me.gCCL.Size = New System.Drawing.Size(213, 41)
+        Me.gCCL.TabIndex = 24
+        Me.gCCL.TabStop = False
+        Me.gCCL.Text = "Cute Charm Pokémon"
+        Me.ToolTip1.SetToolTip(Me.gCCL, "Choose whether/where you want to hack in a Lead or not." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The Lead is a Igglybuff")
         '
-        'ComboBox2
+        'SlotList
         '
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(120, 15)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(87, 21)
-        Me.ComboBox2.TabIndex = 2
+        Me.SlotList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.SlotList.FormattingEnabled = True
+        Me.SlotList.Location = New System.Drawing.Point(149, 15)
+        Me.SlotList.Name = "SlotList"
+        Me.SlotList.Size = New System.Drawing.Size(60, 21)
+        Me.SlotList.TabIndex = 2
         '
-        'ComboBox1
+        'BoxList
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(31, 15)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(87, 21)
-        Me.ComboBox1.TabIndex = 1
+        Me.BoxList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.BoxList.FormattingEnabled = True
+        Me.BoxList.Location = New System.Drawing.Point(86, 15)
+        Me.BoxList.Name = "BoxList"
+        Me.BoxList.Size = New System.Drawing.Size(60, 21)
+        Me.BoxList.TabIndex = 1
         '
-        'CheckBox1
+        'cbLead
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(14, 17)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(29, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = " "
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.cbLead.AutoSize = True
+        Me.cbLead.Location = New System.Drawing.Point(6, 18)
+        Me.cbLead.Margin = New System.Windows.Forms.Padding(0)
+        Me.cbLead.Name = "cbLead"
+        Me.cbLead.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.cbLead.Size = New System.Drawing.Size(84, 17)
+        Me.cbLead.TabIndex = 0
+        Me.cbLead.Text = "Add Lead to"
+        Me.cbLead.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(816, 319)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.gCCL)
+        Me.Controls.Add(Me.gTID)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.GameList)
         Me.Controls.Add(Me.LeadList)
@@ -663,12 +667,12 @@ Partial Class Form1
         CType(Me.pUp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pLeft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pRight, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.gTID.ResumeLayout(False)
+        Me.gTID.PerformLayout()
         CType(Me.nTID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.gCCL.ResumeLayout(False)
+        Me.gCCL.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -702,7 +706,7 @@ Partial Class Form1
     Friend WithEvents lGame As Label
     Friend WithEvents GameList As ComboBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents gTID As GroupBox
     Friend WithEvents nTID As NumericUpDown
     Friend WithEvents rTC As RadioButton
     Friend WithEvents rTR As RadioButton
@@ -718,8 +722,8 @@ Partial Class Form1
     Friend WithEvents pX As PictureBox
     Friend WithEvents pB As PictureBox
     Friend WithEvents pStart As PictureBox
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents gCCL As GroupBox
+    Friend WithEvents SlotList As ComboBox
+    Friend WithEvents BoxList As ComboBox
+    Friend WithEvents cbLead As CheckBox
 End Class

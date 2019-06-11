@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>CuteCharmIDGen.My.MyApplication</StartupObject>
     <RootNamespace>CuteCharmIDGen</RootNamespace>
-    <AssemblyName>CuteCharmIDGen</AssemblyName>
+    <AssemblyName>CuteCharmIDGenie</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -40,7 +40,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>CuteCharmIDGen.xml</DocumentationFile>
+    <DocumentationFile>CuteCharmIDGenie.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -50,7 +50,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>CuteCharmIDGen.xml</DocumentationFile>
+    <DocumentationFile>CuteCharmIDGenie.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -218,8 +218,6 @@
     <Content Include="ILMergeOrder.txt" />
     <None Include="Resources\MaleLead.txt" />
     <None Include="Resources\FemaleLead.txt" />
-    <None Include="Resources\174 - MAGIC - C917F7D437DE.ek4" />
-    <None Include="Resources\174 - MAGIC - C9195E400116.ek4" />
     <None Include="Resources\shoulder.png" />
     <None Include="Resources\dpadinner.png" />
     <None Include="Resources\shoulderinner.png" />
