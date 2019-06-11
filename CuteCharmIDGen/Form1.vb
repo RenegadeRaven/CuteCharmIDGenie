@@ -253,11 +253,14 @@ You can not update at the moment.", vbOKOnly, "Error 404")
                 File.WriteAllText(TempPath & "/lead.txt", My.Resources.FemaleLead)
             End If
             Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
+            If File.Exists(TempPath & "/lead.txt") Then
+                File.Delete(TempPath & "/lead.txt")
+            End If
             arc &= "E0" & Spot & " 00000088
 " & Poke & "
 "
-        End If
-        arc &= "D2000000 00000000"
+            End If
+            arc &= "D2000000 00000000"
         Return arc
     End Function
 
