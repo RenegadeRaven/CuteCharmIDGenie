@@ -12,10 +12,12 @@ Public Class Form1
     Dim butt As String 'Haha. It's Short for Button. The one that activates the AR code
     Dim nButt As String = Nothing 'List of buttons
     Dim prob As Boolean = False 'Is there an Error?
+    Dim gender As String
 
     Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
     Dim res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
+    Dim Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\CuteCharmIDGenie"
 #End Region
 
     'Startup
@@ -27,19 +29,26 @@ Public Class Form1
         If My.Settings.DGame <> Nothing Then
             GameList.SelectedIndex = My.Settings.DGame
         End If
+        Do While Not Directory.Exists(Local)
+            Try
+                If Not Directory.Exists(Local) Then
+                    Directory.CreateDirectory(Local)
+                    Directory.CreateDirectory(Local & "\Male")
+                    Directory.CreateDirectory(Local & "\Female")
+                    File.WriteAllBytes(Local & "\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead)
+                    File.WriteAllBytes(Local & "\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+        Loop
         PicTXT()
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         sg1.Checked = False
-        DrawDE(pg1)
-        DrawDE(pg2)
-        drawDE(pg3)
-        drawDE(pg4)
         gSG.Enabled = False
         rR.PerformClick()
         rTR.PerformClick()
-        TID.Visible = False
-        SID.Visible = False
         AR.Enabled = False
         ActDraw()
         For i = 1 To 18 Step 1
@@ -90,6 +99,10 @@ Public Class Form1
                     PRight_Click(sender, e)
             End Select
         Next i
+        DrawDE(pg1)
+        DrawDE(pg2)
+        DrawDE(pg3)
+        DrawDE(pg4)
     End Sub
 
     'Checks For Update
@@ -116,6 +129,7 @@ Public Class Form1
             End If
         End If
         LinkLabel1.Hide()
+        MenuStrip1.Location = New Point(0, 0)
 #Else
         File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
         Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
@@ -128,9 +142,11 @@ Public Class Form1
             File.Delete(TempPath & "\dt.txt")
             If dat <> dtt Then
                 LinkLabel1.Text = "New Update Available! " & dtt
+                MenuStrip1.Location = New Point(113, 0)
                 LinkLabel1.Show()
             Else
                 LinkLabel1.Hide()
+                MenuStrip1.Location = New Point(0, 0)
             End If
         Else
             LinkLabel1.Hide()
@@ -220,6 +236,48 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         Return Str
     End Function
 
+    'Does Little Endian
+    Private Function LittleEndian(ByVal hex_value As String, ByVal length As Integer)
+        Dim s As String = Hex_Zeros(hex_value, length)
+        Dim s2 As String = Nothing
+        If length = 8 Then
+            s2 = s.Skip(6).ToArray() & s.Remove(6, 2).ToArray().Skip(4).ToArray() & s.Remove(4, 4).ToArray().Skip(2).ToArray() & s.Remove(2, 6).ToArray()
+        ElseIf length = 4 Then
+            s2 = s.Skip(2).ToArray() & s.Remove(2, 2).ToArray()
+        End If
+        Return s2
+    End Function
+
+    'Feeds into LittleEndian
+    Private Function toLE(ByVal hex_value As String)
+        hex_value = hex_value.Replace(" ", "")
+        Do While (hex_value.Length Mod 16) <> 0
+            hex_value &= "0"
+        Loop
+        Dim stringList As New List(Of String)
+        For i As Integer = 0 To hex_value.Length - 1 Step 8
+            stringList.Add(hex_value.Substring(i, 8))
+        Next i
+        Dim stringFragments As String() = stringList.ToArray
+        Dim stringFragments2(UBound(stringFragments)) As String
+        For n As Integer = 0 To UBound(stringFragments) Step 1
+            stringFragments2(n) = LittleEndian(stringFragments(n), 8)
+        Next n
+        Dim endString As String = Nothing
+        For c = 0 To UBound(stringFragments2) Step 1
+            endString &= stringFragments2(c)
+            Select Case (c Mod 2)
+                Case 0
+                    endString &= " "
+                Case 1
+                    endString &= "
+"
+            End Select
+        Next c
+
+        Return endString
+    End Function
+
     'Generates AR Code
     Private Function GenAR()
         ActButt()
@@ -247,35 +305,38 @@ You can not update at the moment.", vbOKOnly, "Error 404")
                 lGame.Text = "HGSS"
         End Select
         If My.Settings.CCPoke = True Then
-            If LeadList.SelectedIndex <= 0 Then
-                File.WriteAllText(TempPath & "/lead.txt", My.Resources.MaleLead)
-            ElseIf LeadList.SelectedIndex >= 1 Then
-                File.WriteAllText(TempPath & "/lead.txt", My.Resources.FemaleLead)
-            End If
+            EK4toAR(Local & gender & ComboBox1.Text & ".ek4")
             Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
             If File.Exists(TempPath & "/lead.txt") Then
                 File.Delete(TempPath & "/lead.txt")
             End If
             arc &= "E0" & Spot & " 00000088
-" & Poke & "
-"
-            End If
+" & Poke
+        End If
             arc &= "D2000000 00000000"
         Return arc
     End Function
 
     'Greys out PictureBoxes
     Private Sub DrawDE(ByVal pb As PictureBox)
-        pb.Enabled = False
-        ControlPaint.DrawImageDisabled(pb.CreateGraphics, pb.BackgroundImage, 0, 0, Color.Gray)
+        Try
+            pb.Enabled = False
+            ControlPaint.DrawImageDisabled(pb.CreateGraphics, pb.BackgroundImage, 0, 0, Color.Gray)
+        Catch
+        End Try
     End Sub
 
     'Adds text onto the PictureBoxes
     Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point, Optional bg As Boolean = True, Optional fnts As Single = 12)
         Dim myfont As Font = New Font("Calibri", fnts, FontStyle.Regular)
+        Dim myBrush As Brush = Brushes.Black
         If txt.Contains("\") Then
             txt = txt.Replace("\", "")
             myfont = New Font("Calibri", fnts, FontStyle.Italic)
+        ElseIf txt.Contains("*") Then
+            txt = txt.Replace("*", "")
+            myfont = New Font("Arial Black", fnts, FontStyle.Bold)
+            myBrush = Brushes.White
         End If
         Dim img As Bitmap
         If bg = True Then
@@ -285,7 +346,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         End If
         Using g = Graphics.FromImage(img)
             g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-            g.DrawString(txt, myfont, Brushes.Black, New PointF(pnt.X, pnt.Y))
+            g.DrawString(txt, myfont, myBrush, New PointF(pnt.X, pnt.Y))
         End Using
         'Dispose the existing image if there is one.'
         If bg = True Then
@@ -322,11 +383,20 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         {"D8 Mild", "D9 Quiet", "DA Bashful", "DB Rash", "DC Calm", "DD Gentle", "DE Sassy", "DF Careful"},
         {"E0 Quirky", "", "", "", "", "", "", ""}
         }
-        pg1.BackgroundImage = My.Resources.sg1
-        pg2.BackgroundImage = My.Resources.sg2
-        pg3.BackgroundImage = My.Resources.sg3
-        pg4.BackgroundImage = My.Resources.sg4
+        pg1.BackgroundImage = My.Resources.sg0
+        pg2.BackgroundImage = My.Resources.sg0
+        pg3.BackgroundImage = My.Resources.sg0
+        pg4.BackgroundImage = My.Resources.sg0
+        DrawTXT("*Shiny Group 1", pg1, New Point(21, 4),, 9)
+        DrawTXT("*Shiny Group 2", pg2, New Point(21, 4),, 9)
+        DrawTXT("*Shiny Group 3", pg3, New Point(21, 4),, 9)
+        DrawTXT("*Shiny Group 4", pg4, New Point(21, 4),, 9)
         Dim v As Integer = LeadList.SelectedIndex
+        If v = 0 Then
+            gender = "\Male\"
+        Else
+            gender = "\Female\"
+        End If
         If v = 0 Or v = 2 Or v = 4 Then
             rR.Text = rR.Text.Replace("1", "4")
             rRQ.Text = rRQ.Text.Replace("1", "4")
@@ -383,6 +453,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             rC.PerformClick()
             rRQ.PerformClick()
         End If
+        GetLeadList()
     End Sub
 
     'Checks for empty options
@@ -444,8 +515,8 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         If prob = True Then
             Exit Sub
         End If
-        TID.Text = "TID: " & IDs(0)
-        SID.Text = "SID: " & IDs(1)
+        TID.Text = IDs(0)
+        SID.Text = IDs(1)
         TID.Show()
         SID.Show()
     End Sub
@@ -797,6 +868,98 @@ You can look me up later.", vbOKOnly, "Error 404")
 
     Private Sub SpotList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles BoxList.SelectedIndexChanged, SlotList.SelectedIndexChanged
         My.Settings.PCspot = (BoxList.SelectedIndex + 1) & "/" & (SlotList.SelectedIndex + 1)
+    End Sub
+
+    'Converts EK4 to Action Replay Code compatible data
+    Private Sub EK4toAR(ByVal myFile As String)
+        Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
+        Dim txtTemp As New System.Text.StringBuilder()
+        For Each myByte As Byte In myBytes
+            txtTemp.Append(myByte.ToString("X2"))
+        Next
+        Dim EK4 As String = txtTemp.ToString()
+        EK4 = EK4.Remove(272, 472 - 272).ToArray()
+        Dim AR_EK4 As String = toLE(EK4)
+        File.WriteAllText(TempPath & "/lead.txt", AR_EK4)
+    End Sub
+
+    'Populates List of Lead Pokemon
+    Private Sub GetLeadList()
+        ComboBox1.Items.Clear()
+        Dim path As String = Local
+        If LeadList.SelectedIndex = 0 Then
+            path &= "\Male"
+        Else
+            path &= "\Female"
+        End If
+        Dim di As New IO.DirectoryInfo(path)
+        Dim aryFi As IO.FileInfo() = di.GetFiles("*.ek4")
+        Dim fi As IO.FileInfo
+        For Each fi In aryFi
+            ComboBox1.Items.Add(fi.Name.Replace(".ek4", ""))
+        Next
+    End Sub
+
+    'Import EK4
+    Private Sub Importek4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Importek4ToolStripMenuItem.Click
+        Try
+            Dim FileSelect As New OpenFileDialog With {.Filter = "Encrypted PK4 (*.ek4)|*.ek4|All files (*.*)|*.*"}
+            Dim res As DialogResult = FileSelect.ShowDialog()
+            If res = Windows.Forms.DialogResult.Cancel Then
+                Exit Sub
+            Else
+                Dim myFile As String = FileSelect.FileName
+                Dim FileP() As String = myFile.Split("\")
+                Dim Num As Integer = FileP(UBound(FileP)).Remove(3)
+                Dim nl As Integer = FileP(UBound(FileP)).Length
+                Dim PID As String = FileP(UBound(FileP)).Remove(nl - 4).ToArray().Skip(nl - 12).ToArray()
+                Dim g As Integer = Convert.ToInt32(PID.Skip(6).ToArray(), 16)
+                Dim a As Boolean = (Convert.ToString(Convert.ToInt32(PID, 16), 2)).EndsWith("0")
+                Dim pName As String
+                Dim pGR As Integer = 190
+                Debug.Print(PID)
+                Debug.Print(Num)
+                Select Case Num
+                    Case 35
+                        pName = "Clefairy"
+                    Case 36
+                        pName = "Clefable"
+                    Case 39
+                        pName = "Jigglypuff"
+                    Case 40
+                        pName = "Wigglytuff"
+                    Case 173
+                        pName = "Cleffa"
+                    Case 174
+                        pName = "Igglybuff"
+                    Case 300
+                        pName = "Skitty"
+                    Case 301
+                        pName = "Delcatty"
+                    Case 428
+                        pName = "Lopunny"
+                        pGR = 126
+                    Case Else
+                        MsgBox("File isn't named correctly or isn't a Cute Charm Pokémon", MsgBoxStyle.OkOnly, "Error: Invaild Pokémon")
+                        Exit Sub
+                End Select
+                If a = False Then
+                    MsgBox("The Pokémon's ability isn't Cute Charm", MsgBoxStyle.OkOnly, "Error")
+                    Exit Sub
+                End If
+                If g <= pGR Then
+                    pName &= " - Female"
+                    File.Copy(myFile, Local & "\Female\" & FileP(UBound(FileP)))
+                Else
+                    pName &= " - Male"
+                    File.Copy(myFile, Local & "\Male\" & FileP(UBound(FileP)))
+                End If
+                MsgBox(pName, MsgBoxStyle.OkOnly)
+                GetLeadList()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 #End Region
 End Class

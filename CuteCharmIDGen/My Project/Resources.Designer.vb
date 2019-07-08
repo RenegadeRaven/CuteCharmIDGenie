@@ -61,7 +61,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 2019/5/25.
+        '''  Looks up a localized string similar to 2019/6/11.
         '''</summary>
         Friend ReadOnly Property _date() As String
             Get
@@ -137,27 +137,12 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 5E400116 D8D90000
-        '''177F13EA AC5B8801
-        '''62CD5EEC CD3106FA
-        '''8DFC83DD AED33C0D
-        '''3D252382 03501856
-        '''5A13553D CFAB1754
-        '''04F3C3E0 369BCAF3
-        '''2E32084E E27C11DC
-        '''89837A1F F89DC126
-        '''93105F17 0A73E41E
-        '''3A4F1470 C10A2246
-        '''6320978A 10E8B2E2
-        '''3E6E8AE3 AF06DA25
-        '''91584343 028D8D68
-        '''B008EB1F DCFA12C1
-        '''AFA0A42C 07BE025C
-        '''16C35A1E 197683FB.
+        '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
-        Friend ReadOnly Property FemaleLead() As String
+        Friend ReadOnly Property FemaleLead() As Byte()
             Get
-                Return ResourceManager.GetString("FemaleLead", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("FemaleLead", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         
@@ -180,27 +165,12 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to F7D437DE D8D70000
-        '''92B28F16 48688F7C
-        '''BB1487A9 2D753F65
-        '''AFC363E8 1E6C865D
-        '''2B2808C1 4467C152
-        '''829D8DC0 91EAC9CA
-        '''1E0EB16D 9D6ADF06
-        '''979FAA42 3123FED6
-        '''ECAE9C32 E231DB53
-        '''7F3A8BEA 05EA60BE
-        '''D12C34C5 6E1E1FAF
-        '''2A75E5A3 D5FE4920
-        '''F983B849 E1E43D7C
-        '''8068067C 63717F80
-        '''72316CEF ED27D8BF
-        '''5661B21E 1B9AF294
-        '''3AFDB6A7 2D75076E.
+        '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
-        Friend ReadOnly Property MaleLead() As String
+        Friend ReadOnly Property MaleLead() As Byte()
             Get
-                Return ResourceManager.GetString("MaleLead", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("MaleLead", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         
@@ -274,39 +244,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property sg1() As System.Drawing.Bitmap
+        Friend ReadOnly Property sg0() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("sg1", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property sg2() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("sg2", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property sg3() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("sg3", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property sg4() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("sg4", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("sg0", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
