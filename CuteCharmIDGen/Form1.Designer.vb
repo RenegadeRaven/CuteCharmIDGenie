@@ -65,7 +65,12 @@ Partial Class Form1
         Me.rTR = New System.Windows.Forms.RadioButton()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.gCCL = New System.Windows.Forms.GroupBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gStorage = New System.Windows.Forms.GroupBox()
+        Me.bStorage = New System.Windows.Forms.Button()
+        Me.bImport = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.EK4List = New System.Windows.Forms.ComboBox()
+        Me.gPC = New System.Windows.Forms.GroupBox()
         Me.BoxList = New System.Windows.Forms.ComboBox()
         Me.SlotList = New System.Windows.Forms.ComboBox()
         Me.cbLead = New System.Windows.Forms.CheckBox()
@@ -76,7 +81,6 @@ Partial Class Form1
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TID = New System.Windows.Forms.Label()
         Me.SID = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.Importek4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -103,7 +107,8 @@ Partial Class Form1
         CType(Me.nTID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gCCL.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.gStorage.SuspendLayout()
+        Me.gPC.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -117,9 +122,9 @@ Partial Class Form1
         Me.gSG.Controls.Add(Me.pg3)
         Me.gSG.Controls.Add(Me.pg2)
         Me.gSG.Controls.Add(Me.pg1)
-        Me.gSG.Location = New System.Drawing.Point(16, 59)
+        Me.gSG.Location = New System.Drawing.Point(16, 96)
         Me.gSG.Name = "gSG"
-        Me.gSG.Size = New System.Drawing.Size(572, 245)
+        Me.gSG.Size = New System.Drawing.Size(453, 206)
         Me.gSG.TabIndex = 1
         Me.gSG.TabStop = False
         Me.gSG.Text = "Shiny Group"
@@ -127,7 +132,7 @@ Partial Class Form1
         'sg4
         '
         Me.sg4.AutoSize = True
-        Me.sg4.Location = New System.Drawing.Point(483, 17)
+        Me.sg4.Location = New System.Drawing.Point(384, 17)
         Me.sg4.Name = "sg4"
         Me.sg4.Size = New System.Drawing.Size(14, 13)
         Me.sg4.TabIndex = 8
@@ -136,7 +141,7 @@ Partial Class Form1
         'sg3
         '
         Me.sg3.AutoSize = True
-        Me.sg3.Location = New System.Drawing.Point(345, 17)
+        Me.sg3.Location = New System.Drawing.Point(274, 17)
         Me.sg3.Name = "sg3"
         Me.sg3.Size = New System.Drawing.Size(14, 13)
         Me.sg3.TabIndex = 7
@@ -145,7 +150,7 @@ Partial Class Form1
         'sg2
         '
         Me.sg2.AutoSize = True
-        Me.sg2.Location = New System.Drawing.Point(207, 17)
+        Me.sg2.Location = New System.Drawing.Point(164, 17)
         Me.sg2.Name = "sg2"
         Me.sg2.Size = New System.Drawing.Size(14, 13)
         Me.sg2.TabIndex = 6
@@ -155,7 +160,7 @@ Partial Class Form1
         '
         Me.sg1.AutoSize = True
         Me.sg1.Checked = True
-        Me.sg1.Location = New System.Drawing.Point(70, 17)
+        Me.sg1.Location = New System.Drawing.Point(54, 17)
         Me.sg1.Name = "sg1"
         Me.sg1.Size = New System.Drawing.Size(14, 13)
         Me.sg1.TabIndex = 5
@@ -164,42 +169,42 @@ Partial Class Form1
         '
         'pg4
         '
-        Me.pg4.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg0
+        Me.pg4.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg
         Me.pg4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pg4.Location = New System.Drawing.Point(422, 36)
+        Me.pg4.Location = New System.Drawing.Point(336, 36)
         Me.pg4.Name = "pg4"
-        Me.pg4.Size = New System.Drawing.Size(139, 202)
+        Me.pg4.Size = New System.Drawing.Size(111, 162)
         Me.pg4.TabIndex = 3
         Me.pg4.TabStop = False
         '
         'pg3
         '
-        Me.pg3.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg0
+        Me.pg3.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg
         Me.pg3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pg3.Location = New System.Drawing.Point(284, 36)
+        Me.pg3.Location = New System.Drawing.Point(226, 36)
         Me.pg3.Name = "pg3"
-        Me.pg3.Size = New System.Drawing.Size(139, 202)
+        Me.pg3.Size = New System.Drawing.Size(111, 162)
         Me.pg3.TabIndex = 2
         Me.pg3.TabStop = False
         '
         'pg2
         '
-        Me.pg2.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg0
+        Me.pg2.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg
         Me.pg2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pg2.Location = New System.Drawing.Point(146, 36)
+        Me.pg2.Location = New System.Drawing.Point(116, 36)
         Me.pg2.Name = "pg2"
-        Me.pg2.Size = New System.Drawing.Size(139, 202)
+        Me.pg2.Size = New System.Drawing.Size(111, 162)
         Me.pg2.TabIndex = 1
         Me.pg2.TabStop = False
         '
         'pg1
         '
         Me.pg1.BackColor = System.Drawing.SystemColors.Control
-        Me.pg1.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg0
+        Me.pg1.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.sg
         Me.pg1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pg1.Location = New System.Drawing.Point(8, 36)
+        Me.pg1.Location = New System.Drawing.Point(6, 36)
         Me.pg1.Name = "pg1"
-        Me.pg1.Size = New System.Drawing.Size(139, 202)
+        Me.pg1.Size = New System.Drawing.Size(111, 162)
         Me.pg1.TabIndex = 0
         Me.pg1.TabStop = False
         '
@@ -208,9 +213,9 @@ Partial Class Form1
         Me.gRC.Controls.Add(Me.rC)
         Me.gRC.Controls.Add(Me.rRQ)
         Me.gRC.Controls.Add(Me.rR)
-        Me.gRC.Location = New System.Drawing.Point(275, 24)
+        Me.gRC.Location = New System.Drawing.Point(16, 61)
         Me.gRC.Name = "gRC"
-        Me.gRC.Size = New System.Drawing.Size(335, 34)
+        Me.gRC.Size = New System.Drawing.Size(453, 34)
         Me.gRC.TabIndex = 5
         Me.gRC.TabStop = False
         Me.gRC.Text = "Shiny Group Selection"
@@ -219,7 +224,7 @@ Partial Class Form1
         'rC
         '
         Me.rC.AutoSize = True
-        Me.rC.Location = New System.Drawing.Point(273, 12)
+        Me.rC.Location = New System.Drawing.Point(369, 12)
         Me.rC.Name = "rC"
         Me.rC.Size = New System.Drawing.Size(61, 17)
         Me.rC.TabIndex = 2
@@ -230,7 +235,7 @@ Partial Class Form1
         'rRQ
         '
         Me.rRQ.AutoSize = True
-        Me.rRQ.Location = New System.Drawing.Point(145, 12)
+        Me.rRQ.Location = New System.Drawing.Point(181, 12)
         Me.rRQ.Name = "rRQ"
         Me.rRQ.Size = New System.Drawing.Size(128, 17)
         Me.rRQ.TabIndex = 1
@@ -263,9 +268,9 @@ Partial Class Form1
         'bGO
         '
         Me.bGO.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bGO.Location = New System.Drawing.Point(650, 287)
+        Me.bGO.Location = New System.Drawing.Point(520, 264)
         Me.bGO.Name = "bGO"
-        Me.bGO.Size = New System.Drawing.Size(102, 25)
+        Me.bGO.Size = New System.Drawing.Size(103, 33)
         Me.bGO.TabIndex = 7
         Me.bGO.Text = "Calculate"
         Me.ToolTip1.SetToolTip(Me.bGO, "Calculates IDs and AR code")
@@ -276,11 +281,11 @@ Partial Class Form1
         Me.AR.BackColor = System.Drawing.SystemColors.Control
         Me.AR.Cursor = System.Windows.Forms.Cursors.Hand
         Me.AR.ImeMode = System.Windows.Forms.ImeMode.Off
-        Me.AR.Location = New System.Drawing.Point(601, 221)
+        Me.AR.Location = New System.Drawing.Point(690, 127)
         Me.AR.Name = "AR"
         Me.AR.ReadOnly = True
         Me.AR.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
-        Me.AR.Size = New System.Drawing.Size(141, 59)
+        Me.AR.Size = New System.Drawing.Size(141, 189)
         Me.AR.TabIndex = 8
         Me.AR.Text = ""
         Me.ToolTip1.SetToolTip(Me.AR, "Click to Copy to Clipboard")
@@ -288,25 +293,27 @@ Partial Class Form1
         'lbl_TID
         '
         Me.lbl_TID.AutoSize = True
-        Me.lbl_TID.Location = New System.Drawing.Point(743, 211)
+        Me.lbl_TID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_TID.Location = New System.Drawing.Point(493, 204)
         Me.lbl_TID.Name = "lbl_TID"
-        Me.lbl_TID.Size = New System.Drawing.Size(31, 13)
+        Me.lbl_TID.Size = New System.Drawing.Size(39, 18)
         Me.lbl_TID.TabIndex = 9
         Me.lbl_TID.Text = "TID: "
         '
         'lbl_SID
         '
         Me.lbl_SID.AutoSize = True
-        Me.lbl_SID.Location = New System.Drawing.Point(743, 252)
+        Me.lbl_SID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_SID.Location = New System.Drawing.Point(595, 204)
         Me.lbl_SID.Name = "lbl_SID"
-        Me.lbl_SID.Size = New System.Drawing.Size(31, 13)
+        Me.lbl_SID.Size = New System.Drawing.Size(40, 18)
         Me.lbl_SID.TabIndex = 10
         Me.lbl_SID.Text = "SID: "
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(598, 207)
+        Me.Label1.Location = New System.Drawing.Point(687, 113)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 13)
@@ -327,7 +334,7 @@ Partial Class Form1
         Me.gA.Controls.Add(Me.pUp)
         Me.gA.Controls.Add(Me.pLeft)
         Me.gA.Controls.Add(Me.pRight)
-        Me.gA.Location = New System.Drawing.Point(594, 59)
+        Me.gA.Location = New System.Drawing.Point(474, 110)
         Me.gA.Name = "gA"
         Me.gA.Size = New System.Drawing.Size(213, 86)
         Me.gA.TabIndex = 12
@@ -472,7 +479,7 @@ Partial Class Form1
         Me.GameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.GameList.FormattingEnabled = True
         Me.GameList.Items.AddRange(New Object() {"Diamond/Pearl", "Platinum", "HeartGold/SoulSilver"})
-        Me.GameList.Location = New System.Drawing.Point(130, 36)
+        Me.GameList.Location = New System.Drawing.Point(133, 36)
         Me.GameList.Name = "GameList"
         Me.GameList.Size = New System.Drawing.Size(139, 21)
         Me.GameList.TabIndex = 21
@@ -483,9 +490,9 @@ Partial Class Form1
         Me.gTID.Controls.Add(Me.nTID)
         Me.gTID.Controls.Add(Me.rTC)
         Me.gTID.Controls.Add(Me.rTR)
-        Me.gTID.Location = New System.Drawing.Point(616, 24)
+        Me.gTID.Location = New System.Drawing.Point(280, 28)
         Me.gTID.Name = "gTID"
-        Me.gTID.Size = New System.Drawing.Size(191, 34)
+        Me.gTID.Size = New System.Drawing.Size(189, 34)
         Me.gTID.TabIndex = 23
         Me.gTID.TabStop = False
         Me.gTID.Text = "Trainer ID"
@@ -527,7 +534,7 @@ Partial Class Form1
         Me.PictureBox1.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.ppdb
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Location = New System.Drawing.Point(734, 2)
+        Me.PictureBox1.Location = New System.Drawing.Point(752, 2)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(80, 22)
         Me.PictureBox1.TabIndex = 17
@@ -536,26 +543,76 @@ Partial Class Form1
         '
         'gCCL
         '
-        Me.gCCL.Controls.Add(Me.GroupBox1)
+        Me.gCCL.Controls.Add(Me.gStorage)
+        Me.gCCL.Controls.Add(Me.Label4)
+        Me.gCCL.Controls.Add(Me.EK4List)
+        Me.gCCL.Controls.Add(Me.gPC)
         Me.gCCL.Controls.Add(Me.cbLead)
-        Me.gCCL.Location = New System.Drawing.Point(594, 146)
+        Me.gCCL.Location = New System.Drawing.Point(474, 28)
         Me.gCCL.Name = "gCCL"
-        Me.gCCL.Size = New System.Drawing.Size(213, 58)
+        Me.gCCL.Size = New System.Drawing.Size(357, 82)
         Me.gCCL.TabIndex = 24
         Me.gCCL.TabStop = False
         Me.gCCL.Text = "Cute Charm Pokémon"
         Me.ToolTip1.SetToolTip(Me.gCCL, "Choose whether/where you want to hack in a Lead or not." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The Lead is a Igglybuff")
         '
-        'GroupBox1
+        'gStorage
         '
-        Me.GroupBox1.Controls.Add(Me.BoxList)
-        Me.GroupBox1.Controls.Add(Me.SlotList)
-        Me.GroupBox1.Location = New System.Drawing.Point(77, 11)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(133, 40)
-        Me.GroupBox1.TabIndex = 3
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Location in the PC"
+        Me.gStorage.Controls.Add(Me.bStorage)
+        Me.gStorage.Controls.Add(Me.bImport)
+        Me.gStorage.Location = New System.Drawing.Point(6, 38)
+        Me.gStorage.Name = "gStorage"
+        Me.gStorage.Size = New System.Drawing.Size(208, 40)
+        Me.gStorage.TabIndex = 30
+        Me.gStorage.TabStop = False
+        Me.gStorage.Text = "Manage Leads"
+        '
+        'bStorage
+        '
+        Me.bStorage.Location = New System.Drawing.Point(115, 13)
+        Me.bStorage.Name = "bStorage"
+        Me.bStorage.Size = New System.Drawing.Size(75, 23)
+        Me.bStorage.TabIndex = 1
+        Me.bStorage.Text = "Storage"
+        Me.bStorage.UseVisualStyleBackColor = True
+        '
+        'bImport
+        '
+        Me.bImport.Location = New System.Drawing.Point(19, 13)
+        Me.bImport.Name = "bImport"
+        Me.bImport.Size = New System.Drawing.Size(75, 23)
+        Me.bImport.TabIndex = 0
+        Me.bImport.Text = "Import"
+        Me.bImport.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(90, 18)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(34, 13)
+        Me.Label4.TabIndex = 29
+        Me.Label4.Text = "Lead:"
+        '
+        'EK4List
+        '
+        Me.EK4List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.EK4List.FormattingEnabled = True
+        Me.EK4List.Location = New System.Drawing.Point(124, 14)
+        Me.EK4List.Name = "EK4List"
+        Me.EK4List.Size = New System.Drawing.Size(229, 21)
+        Me.EK4List.TabIndex = 28
+        '
+        'gPC
+        '
+        Me.gPC.Controls.Add(Me.BoxList)
+        Me.gPC.Controls.Add(Me.SlotList)
+        Me.gPC.Location = New System.Drawing.Point(219, 38)
+        Me.gPC.Name = "gPC"
+        Me.gPC.Size = New System.Drawing.Size(133, 40)
+        Me.gPC.TabIndex = 3
+        Me.gPC.TabStop = False
+        Me.gPC.Text = "Location in the PC"
         '
         'BoxList
         '
@@ -578,12 +635,13 @@ Partial Class Form1
         'cbLead
         '
         Me.cbLead.AutoSize = True
-        Me.cbLead.Location = New System.Drawing.Point(7, 27)
+        Me.cbLead.Location = New System.Drawing.Point(16, 17)
         Me.cbLead.Margin = New System.Windows.Forms.Padding(0)
         Me.cbLead.Name = "cbLead"
         Me.cbLead.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cbLead.Size = New System.Drawing.Size(15, 14)
+        Me.cbLead.Size = New System.Drawing.Size(67, 17)
         Me.cbLead.TabIndex = 0
+        Me.cbLead.Text = "Disabled"
         Me.cbLead.UseVisualStyleBackColor = True
         '
         'Label3
@@ -618,7 +676,7 @@ Partial Class Form1
         '
         Me.lGame.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lGame.Location = New System.Drawing.Point(694, 208)
+        Me.lGame.Location = New System.Drawing.Point(784, 114)
         Me.lGame.Name = "lGame"
         Me.lGame.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lGame.Size = New System.Drawing.Size(46, 13)
@@ -628,7 +686,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(129, 23)
+        Me.Label5.Location = New System.Drawing.Point(132, 23)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(38, 13)
         Me.Label5.TabIndex = 22
@@ -637,29 +695,20 @@ Partial Class Form1
         'TID
         '
         Me.TID.AutoSize = True
-        Me.TID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TID.Location = New System.Drawing.Point(748, 225)
+        Me.TID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TID.Location = New System.Drawing.Point(498, 224)
         Me.TID.Name = "TID"
-        Me.TID.Size = New System.Drawing.Size(0, 17)
+        Me.TID.Size = New System.Drawing.Size(0, 18)
         Me.TID.TabIndex = 25
         '
         'SID
         '
         Me.SID.AutoSize = True
-        Me.SID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SID.Location = New System.Drawing.Point(748, 266)
+        Me.SID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SID.Location = New System.Drawing.Point(600, 224)
         Me.SID.Name = "SID"
-        Me.SID.Size = New System.Drawing.Size(0, 17)
+        Me.SID.Size = New System.Drawing.Size(0, 18)
         Me.SID.TabIndex = 26
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(408, 4)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(217, 21)
-        Me.ComboBox1.TabIndex = 28
         '
         'MenuStrip1
         '
@@ -696,8 +745,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(816, 319)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.ClientSize = New System.Drawing.Size(834, 319)
         Me.Controls.Add(Me.SID)
         Me.Controls.Add(Me.TID)
         Me.Controls.Add(Me.gCCL)
@@ -752,7 +800,8 @@ Partial Class Form1
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gCCL.ResumeLayout(False)
         Me.gCCL.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
+        Me.gStorage.ResumeLayout(False)
+        Me.gPC.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -810,9 +859,13 @@ Partial Class Form1
     Friend WithEvents cbLead As CheckBox
     Friend WithEvents TID As Label
     Friend WithEvents SID As Label
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents EK4List As ComboBox
+    Friend WithEvents gPC As GroupBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents Importek4ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents gStorage As GroupBox
+    Friend WithEvents bImport As Button
+    Friend WithEvents Label4 As Label
+    Friend WithEvents bStorage As Button
 End Class

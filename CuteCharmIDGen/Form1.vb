@@ -1,6 +1,8 @@
 ﻿Imports System.Threading
 Imports System.IO
 Imports System.Drawing
+
+
 Public Class Form1
 #Region "Variables"
     Dim TIDchoose As Boolean = False 'Is TID random?
@@ -62,12 +64,10 @@ Public Class Form1
         SlotList.SelectedIndex = defaultSlot(UBound(defaultSlot)) - 1
         If My.Settings.CCPoke = True Then
             cbLead.Checked = True
-            BoxList.Enabled = True
-            SlotList.Enabled = True
+            CbLead_CheckedChanged(sender, e)
         ElseIf My.Settings.CCPoke = False Then
             cbLead.Checked = False
-            BoxList.Enabled = False
-            SlotList.Enabled = False
+            CbLead_CheckedChanged(sender, e)
         End If
 
         Dim ind As Char() = My.Settings.SavedButt.ToCharArray
@@ -213,18 +213,18 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         pLeft.Size = New Size(24, 20)
         pRight.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
         pRight.Size = New Size(24, 20)
-        DrawTXT("A", pA, New Point(4, 1))
-        DrawTXT("B", pB, New Point(5, 1))
-        DrawTXT("X", pX, New Point(5, 1))
-        DrawTXT("Y", pY, New Point(6, 1))
+        DrawTXT("A", pA, New Point(4, 1),, 12)
+        DrawTXT("B", pB, New Point(5, 1),, 12)
+        DrawTXT("X", pX, New Point(5, 1),, 12)
+        DrawTXT("Y", pY, New Point(6, 1),, 12)
         DrawTXT("Select", pSel, New Point(4, 1), True, 9)
         DrawTXT("Start", pStart, New Point(8, 1), True, 9)
-        DrawTXT("L", pL, New Point(12, 1))
-        DrawTXT("R", pR, New Point(11, 1))
-        DrawTXT("↑", pUp, New Point(0, 0))
-        DrawTXT("↓", pDown, New Point(0, 2))
-        DrawTXT("→", pRight, New Point(4, 0))
-        DrawTXT("←", pLeft, New Point(0, 0))
+        DrawTXT("L", pL, New Point(12, 1),, 12)
+        DrawTXT("R", pR, New Point(11, 1),, 12)
+        DrawTXT("↑", pUp, New Point(0, 0),, 12)
+        DrawTXT("↓", pDown, New Point(0, 2),, 12)
+        DrawTXT("→", pRight, New Point(4, 0),, 12)
+        DrawTXT("←", pLeft, New Point(0, 0),, 12)
     End Sub
 
     'Adds needed zeros to hex string
@@ -305,7 +305,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
                 lGame.Text = "HGSS"
         End Select
         If My.Settings.CCPoke = True Then
-            EK4toAR(Local & gender & ComboBox1.Text & ".ek4")
+            EK4toAR(Local & gender & EK4List.Text & ".ek4")
             Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
             If File.Exists(TempPath & "/lead.txt") Then
                 File.Delete(TempPath & "/lead.txt")
@@ -313,7 +313,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             arc &= "E0" & Spot & " 00000088
 " & Poke
         End If
-            arc &= "D2000000 00000000"
+        arc &= "D2000000 00000000"
         Return arc
     End Function
 
@@ -327,7 +327,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     End Sub
 
     'Adds text onto the PictureBoxes
-    Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point, Optional bg As Boolean = True, Optional fnts As Single = 12)
+    Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point, Optional bg As Boolean = True, Optional fnts As Single = 9)
         Dim myfont As Font = New Font("Calibri", fnts, FontStyle.Regular)
         Dim myBrush As Brush = Brushes.Black
         If txt.Contains("\") Then
@@ -383,14 +383,14 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         {"D8 Mild", "D9 Quiet", "DA Bashful", "DB Rash", "DC Calm", "DD Gentle", "DE Sassy", "DF Careful"},
         {"E0 Quirky", "", "", "", "", "", "", ""}
         }
-        pg1.BackgroundImage = My.Resources.sg0
-        pg2.BackgroundImage = My.Resources.sg0
-        pg3.BackgroundImage = My.Resources.sg0
-        pg4.BackgroundImage = My.Resources.sg0
-        DrawTXT("*Shiny Group 1", pg1, New Point(21, 4),, 9)
-        DrawTXT("*Shiny Group 2", pg2, New Point(21, 4),, 9)
-        DrawTXT("*Shiny Group 3", pg3, New Point(21, 4),, 9)
-        DrawTXT("*Shiny Group 4", pg4, New Point(21, 4),, 9)
+        pg1.BackgroundImage = My.Resources.sg
+        pg2.BackgroundImage = My.Resources.sg
+        pg3.BackgroundImage = My.Resources.sg
+        pg4.BackgroundImage = My.Resources.sg
+        DrawTXT("*Shiny Group 1", pg1, New Point(11, 2),, 8)
+        DrawTXT("*Shiny Group 2", pg2, New Point(11, 2),, 8)
+        DrawTXT("*Shiny Group 3", pg3, New Point(11, 2),, 8)
+        DrawTXT("*Shiny Group 4", pg4, New Point(11, 2),, 8)
         Dim v As Integer = LeadList.SelectedIndex
         If v = 0 Then
             gender = "\Male\"
@@ -411,25 +411,25 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             Else
                 d = ""
             End If
-            DrawTXT(d & a(0 + (4 * v), i), pg1, New Point(4, 26 + (i * 22)))
+            DrawTXT(d & a(0 + (4 * v), i), pg1, New Point(3, 22 + (i * 17.5)))
             If a(1 + (4 * v), i) <> "" Then
                 d = "000000"
             Else
                 d = ""
             End If
-            DrawTXT(d & a(1 + (4 * v), i), pg2, New Point(4, 26 + (i * 22)))
+            DrawTXT(d & a(1 + (4 * v), i), pg2, New Point(3, 22 + (i * 17.5)))
             If a(2 + (4 * v), i) <> "" Then
                 d = "000000"
             Else
                 d = ""
             End If
-            DrawTXT(d & a(2 + (4 * v), i), pg3, New Point(4, 26 + (i * 22)))
+            DrawTXT(d & a(2 + (4 * v), i), pg3, New Point(3, 22 + (i * 17.5)))
             If a(3 + (4 * v), i) <> "" Then
                 d = "000000"
             Else
                 d = ""
             End If
-            DrawTXT(d & a(3 + (4 * v), i), pg4, New Point(4, 26 + (i * 22)))
+            DrawTXT(d & a(3 + (4 * v), i), pg4, New Point(3, 22 + (i * 17.5)))
         Next i
         If rC.Checked = True Then
             rC.PerformClick()
@@ -472,7 +472,10 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             gA.ForeColor = Color.Red
             prob = True
         ElseIf cbLead.Checked = True And (BoxList.SelectedItem = Nothing Or SlotList.SelectedItem = Nothing) Then
-            gCCL.ForeColor = Color.Red
+            gPC.ForeColor = Color.Red
+            prob = True
+        ElseIf cbLead.Checked = True And (EK4List.SelectedItem = Nothing) Then
+            Label4.ForeColor = Color.Red
             prob = True
         Else
             GameList.ForeColor = DefaultForeColor
@@ -480,6 +483,8 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             gRC.ForeColor = DefaultForeColor
             gSG.ForeColor = DefaultForeColor
             gA.ForeColor = DefaultForeColor
+            gPC.ForeColor = DefaultForeColor
+            Label4.ForeColor = DefaultForeColor
             prob = False
         End If
     End Sub
@@ -573,7 +578,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
 
 #Region "Specific Shiny Group RadioButtons"
     'Shiny Group 1
-    Private Sub sg1_CheckedChanged(sender As Object, e As EventArgs) Handles sg1.CheckedChanged
+    Private Sub sg1_CheckedChanged(sender As Object, e As EventArgs) Handles pg1.Click, sg1.CheckedChanged
         If sg1.Checked = True Then
             Group = 1
             DrawDE(pg2)
@@ -588,7 +593,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     End Sub
 
     'Shiny Group 2
-    Private Sub sg2_CheckedChanged(sender As Object, e As EventArgs) Handles sg2.CheckedChanged
+    Private Sub sg2_CheckedChanged(sender As Object, e As EventArgs) Handles pg2.Click, sg2.CheckedChanged
         If sg2.Checked = True Then
             Group = 2
             DrawDE(pg1)
@@ -603,7 +608,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     End Sub
 
     'Shiny Group 3
-    Private Sub sg3_CheckedChanged(sender As Object, e As EventArgs) Handles sg3.CheckedChanged
+    Private Sub sg3_CheckedChanged(sender As Object, e As EventArgs) Handles pg3.Click, sg3.CheckedChanged
         If sg3.Checked = True Then
             Group = 3
             DrawDE(pg2)
@@ -618,7 +623,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     End Sub
 
     'Shiny Group 4
-    Private Sub sg4_CheckedChanged(sender As Object, e As EventArgs) Handles sg4.CheckedChanged
+    Private Sub sg4_CheckedChanged(sender As Object, e As EventArgs) Handles pg4.Click, sg4.CheckedChanged
         If sg4.Checked = True Then
             Group = 4
             DrawDE(pg2)
@@ -852,20 +857,36 @@ You can look me up later.", vbOKOnly, "Error 404")
         TIDchoose = True
     End Sub
 
+    'Is Lead Enabled?
     Private Sub CbLead_CheckedChanged(sender As Object, e As EventArgs) Handles cbLead.CheckedChanged
         If cbLead.Checked = True Then
+            cbLead.Text = "Enabled"
             My.Settings.CCPoke = True
             BoxList.Enabled = True
             SlotList.Enabled = True
+            gPC.Enabled = True
+            EK4List.Enabled = True
+            Label4.Enabled = True
+            bImport.Enabled = True
+            bStorage.Enabled = True
+            gStorage.Enabled = True
             cbLead.ForeColor = DefaultForeColor
         ElseIf cbLead.Checked = False Then
+            cbLead.Text = "Disabled"
             My.Settings.CCPoke = False
             BoxList.Enabled = False
             SlotList.Enabled = False
+            gPC.Enabled = False
+            EK4List.Enabled = False
+            Label4.Enabled = False
+            bImport.Enabled = False
+            bStorage.Enabled = False
+            gStorage.Enabled = False
             cbLead.ForeColor = Color.Gray
         End If
     End Sub
 
+    'PC Slot
     Private Sub SpotList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles BoxList.SelectedIndexChanged, SlotList.SelectedIndexChanged
         My.Settings.PCspot = (BoxList.SelectedIndex + 1) & "/" & (SlotList.SelectedIndex + 1)
     End Sub
@@ -885,7 +906,7 @@ You can look me up later.", vbOKOnly, "Error 404")
 
     'Populates List of Lead Pokemon
     Private Sub GetLeadList()
-        ComboBox1.Items.Clear()
+        EK4List.Items.Clear()
         Dim path As String = Local
         If LeadList.SelectedIndex = 0 Then
             path &= "\Male"
@@ -896,12 +917,12 @@ You can look me up later.", vbOKOnly, "Error 404")
         Dim aryFi As IO.FileInfo() = di.GetFiles("*.ek4")
         Dim fi As IO.FileInfo
         For Each fi In aryFi
-            ComboBox1.Items.Add(fi.Name.Replace(".ek4", ""))
+            EK4List.Items.Add(fi.Name.Replace(".ek4", ""))
         Next
     End Sub
 
     'Import EK4
-    Private Sub Importek4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Importek4ToolStripMenuItem.Click
+    Private Sub Importek4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Importek4ToolStripMenuItem.Click, bImport.Click
         Try
             Dim FileSelect As New OpenFileDialog With {.Filter = "Encrypted PK4 (*.ek4)|*.ek4|All files (*.*)|*.*"}
             Dim res As DialogResult = FileSelect.ShowDialog()
@@ -960,6 +981,11 @@ You can look me up later.", vbOKOnly, "Error 404")
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    'Opens Local Folder where Leads are stored
+    Private Sub BStorage_Click(sender As Object, e As EventArgs) Handles bStorage.Click
+        Process.Start(Local)
     End Sub
 #End Region
 End Class

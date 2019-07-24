@@ -216,6 +216,7 @@
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
+    <None Include="Resources\sg.png" />
     <None Include="Resources\174 - MAGIC - D8D7F7D437DE.ek4" />
     <None Include="Resources\174 - MAGIC - D8D95E400116.ek4" />
     <None Include="Resources\sg0.png" />
