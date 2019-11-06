@@ -1,8 +1,6 @@
 ﻿Imports System.Threading
 Imports System.IO
 Imports System.Drawing
-
-
 Public Class Form1
 #Region "Variables"
     Dim TIDchoose As Boolean = False 'Is TID random?
@@ -31,19 +29,32 @@ Public Class Form1
         If My.Settings.DGame <> Nothing Then
             GameList.SelectedIndex = My.Settings.DGame
         End If
-        Do While Not Directory.Exists(Local)
-            Try
+        Try
+            Do While Not Directory.Exists(Local)
                 If Not Directory.Exists(Local) Then
                     Directory.CreateDirectory(Local)
+                End If
+            Loop
+            Do While Not Directory.Exists(Local & "\Male")
+                If Not Directory.Exists(Local & "\Male") Then
                     Directory.CreateDirectory(Local & "\Male")
-                    Directory.CreateDirectory(Local & "\Female")
                     File.WriteAllBytes(Local & "\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead)
+                End If
+            Loop
+            Do While Not Directory.Exists(Local & "\Female")
+                If Not Directory.Exists(Local & "\Female") Then
+                    Directory.CreateDirectory(Local & "\Female")
                     File.WriteAllBytes(Local & "\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead)
                 End If
-            Catch ex As Exception
-                MessageBox.Show(ex.Message)
-            End Try
-        Loop
+            Loop
+            Do While Not Directory.Exists(Local & "\Other")
+                If Not Directory.Exists(Local & "\Other") Then
+                    Directory.CreateDirectory(Local & "\Other")
+                End If
+            Loop
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
         PicTXT()
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -274,7 +285,6 @@ You can not update at the moment.", vbOKOnly, "Error 404")
 "
             End Select
         Next c
-
         Return endString
     End Function
 
@@ -305,15 +315,19 @@ You can not update at the moment.", vbOKOnly, "Error 404")
                 lGame.Text = "HGSS"
         End Select
         If My.Settings.CCPoke = True Then
-            EK4toAR(Local & gender & EK4List.Text & ".ek4")
-            Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
-            If File.Exists(TempPath & "/lead.txt") Then
-                File.Delete(TempPath & "/lead.txt")
+            If EK4List.Text.Contains("『") Or EK4List.Text.Contains("』") Then
+                EK4toAR(Local & "\Other\" & EK4List.Text.Replace("『", "").Replace("』", "") & ".ek4")
+            Else
+                EK4toAR(Local & gender & EK4List.Text & ".ek4")
             End If
-            arc &= "E0" & Spot & " 00000088
+            Dim Poke As String = File.ReadAllText(TempPath & "/lead.txt")
+                If File.Exists(TempPath & "/lead.txt") Then
+                    File.Delete(TempPath & "/lead.txt")
+                End If
+                arc &= "E0" & Spot & " 00000088
 " & Poke
-        End If
-        arc &= "D2000000 00000000"
+            End If
+            arc &= "D2000000 00000000"
         Return arc
     End Function
 
@@ -919,6 +933,11 @@ You can look me up later.", vbOKOnly, "Error 404")
         For Each fi In aryFi
             EK4List.Items.Add(fi.Name.Replace(".ek4", ""))
         Next
+        Dim di2 As New IO.DirectoryInfo(Local & "\Other")
+        aryFi = di2.GetFiles("*.ek4")
+        For Each fi In aryFi
+            EK4List.Items.Add("『" & fi.Name.Replace(".ek4", "") & "』")
+        Next
     End Sub
 
     'Import EK4
@@ -929,17 +948,34 @@ You can look me up later.", vbOKOnly, "Error 404")
             If res = Windows.Forms.DialogResult.Cancel Then
                 Exit Sub
             Else
+                Dim m As Boolean() = {False, False, False, False} '{Message?, Not CC?, Not CC PKM?, Gender?}
                 Dim myFile As String = FileSelect.FileName
                 Dim FileP() As String = myFile.Split("\")
-                Dim Num As Integer = FileP(UBound(FileP)).Remove(3)
-                Dim nl As Integer = FileP(UBound(FileP)).Length
-                Dim PID As String = FileP(UBound(FileP)).Remove(nl - 4).ToArray().Skip(nl - 12).ToArray()
-                Dim g As Integer = Convert.ToInt32(PID.Skip(6).ToArray(), 16)
-                Dim a As Boolean = (Convert.ToString(Convert.ToInt32(PID, 16), 2)).EndsWith("0")
-                Dim pName As String
+                Dim Num As Integer
+                Dim g As Integer
+                Dim a As Boolean
+                Try
+                    Num = FileP(UBound(FileP)).Remove(3) 'Dex Number
+                Catch ex As Exception
+                    Num = 0
+                    m(0) = True
+                    m(2) = True
+                End Try
+                Try
+                    Dim nl As Integer = FileP(UBound(FileP)).Length
+                    Dim PID As String = FileP(UBound(FileP)).Remove(nl - 4).ToArray().Skip(nl - 12).ToArray()
+                    g = Convert.ToInt32(PID.Skip(6).ToArray(), 16) 'Gender
+                    a = (Convert.ToString(Convert.ToInt32(PID, 16), 2)).EndsWith("0") 'Ability
+                Catch ex As Exception
+                    g = -1
+                    a = False
+                    m(0) = True
+                    m(1) = True
+                    m(3) = True
+                End Try
+                Dim pName As String = Nothing
                 Dim pGR As Integer = 190
-                Debug.Print(PID)
-                Debug.Print(Num)
+
                 Select Case Num
                     Case 35
                         pName = "Clefairy"
@@ -961,21 +997,47 @@ You can look me up later.", vbOKOnly, "Error 404")
                         pName = "Lopunny"
                         pGR = 126
                     Case Else
-                        MsgBox("File isn't named correctly or isn't a Cute Charm Pokémon", MsgBoxStyle.OkOnly, "Error: Invaild Pokémon")
-                        Exit Sub
+                        m(0) = True
+                        m(2) = True
                 End Select
                 If a = False Then
-                    MsgBox("The Pokémon's ability isn't Cute Charm", MsgBoxStyle.OkOnly, "Error")
-                    Exit Sub
+                    m(0) = True
+                    m(1) = True
                 End If
-                If g <= pGR Then
-                    pName &= " - Female"
-                    File.Copy(myFile, Local & "\Female\" & FileP(UBound(FileP)))
+                If g = -1 Then
+                    m(0) = True
+                    m(3) = True
+                    If m(0) = True Then
+                        Dim message As String = "Couldn't determine "
+                        If m(2) = True Then
+                            message += "Species, "
+                        End If
+                        If m(3) = True Then
+                            message += "Gender, "
+                        End If
+                        If m(1) = True Then
+                            message += "Ability. "
+                        End If
+                        message += "Do you still want to import this Pokémon?"
+                        Dim ans = MsgBox(message, MsgBoxStyle.YesNo, "Error")
+                        Select Case ans
+                            Case 6
+                                File.Copy(myFile, Local & "\Other\" & FileP(UBound(FileP)))
+                                MsgBox("Pokémon was put in the 'Other' folder.", vbOKOnly)
+                            Case 7
+                                Exit Sub
+                        End Select
+                    End If
                 Else
-                    pName &= " - Male"
-                    File.Copy(myFile, Local & "\Male\" & FileP(UBound(FileP)))
+                    If g <= pGR Then
+                        pName &= " - Female"
+                        File.Copy(myFile, Local & "\Female\" & FileP(UBound(FileP)))
+                    Else
+                        pName &= " - Male"
+                        File.Copy(myFile, Local & "\Male\" & FileP(UBound(FileP)))
+                    End If
+                    MsgBox(pName, MsgBoxStyle.OkOnly)
                 End If
-                MsgBox(pName, MsgBoxStyle.OkOnly)
                 GetLeadList()
             End If
         Catch ex As Exception
