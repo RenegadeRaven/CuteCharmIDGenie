@@ -84,6 +84,8 @@ Partial Class Form1
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.Importek4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.gSG.SuspendLayout()
         CType(Me.pg4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pg3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -717,14 +719,14 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(113, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(69, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(189, 24)
         Me.MenuStrip1.Stretch = False
         Me.MenuStrip1.TabIndex = 29
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'ToolStripMenuItem1
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Importek4ToolStripMenuItem})
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Importek4ToolStripMenuItem, Me.ToolStripSeparator1, Me.ToolStripMenuItem2})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(61, 20)
         Me.ToolStripMenuItem1.Text = "Options"
@@ -740,6 +742,22 @@ Partial Class Form1
             Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
         Me.Importek4ToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
         Me.Importek4ToolStripMenuItem.Text = "Import .ek4"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(208, 6)
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.ppdb
+        Me.ToolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ToolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(211, 22)
+        Me.ToolStripMenuItem2.Text = "                  Donate"
+        Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'Form1
         '
@@ -868,4 +886,6 @@ Partial Class Form1
     Friend WithEvents bImport As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents bStorage As Button
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
 End Class

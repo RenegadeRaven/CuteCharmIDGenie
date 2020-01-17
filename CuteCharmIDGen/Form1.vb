@@ -25,36 +25,27 @@ Public Class Form1
         UpdateChk()
         rnd(0) = Nothing
         rnd(1) = Nothing
+        Try
+            Dim locals As String() = {Local, Local & "\Male", Local & "\Female", Local & "\Other"}
+            For i = 0 To 3 Step 1
+                Do While Not Directory.Exists(locals(i))
+                    If Not Directory.Exists(locals(i)) Then
+                        Directory.CreateDirectory(locals(i))
+                        If locals(i).Contains("\Male") Then
+                            File.WriteAllBytes(Local & "\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead)
+                        ElseIf locals(i).Contains("\Female") Then
+                            File.WriteAllBytes(Local & "\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead)
+                        End If
+                    End If
+                Loop
+            Next i
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
         LeadList.SelectedIndex = My.Settings.DLead
         If My.Settings.DGame <> Nothing Then
             GameList.SelectedIndex = My.Settings.DGame
         End If
-        Try
-            Do While Not Directory.Exists(Local)
-                If Not Directory.Exists(Local) Then
-                    Directory.CreateDirectory(Local)
-                End If
-            Loop
-            Do While Not Directory.Exists(Local & "\Male")
-                If Not Directory.Exists(Local & "\Male") Then
-                    Directory.CreateDirectory(Local & "\Male")
-                    File.WriteAllBytes(Local & "\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead)
-                End If
-            Loop
-            Do While Not Directory.Exists(Local & "\Female")
-                If Not Directory.Exists(Local & "\Female") Then
-                    Directory.CreateDirectory(Local & "\Female")
-                    File.WriteAllBytes(Local & "\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead)
-                End If
-            Loop
-            Do While Not Directory.Exists(Local & "\Other")
-                If Not Directory.Exists(Local & "\Other") Then
-                    Directory.CreateDirectory(Local & "\Other")
-                End If
-            Loop
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
         PicTXT()
     End Sub
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -153,7 +144,7 @@ Public Class Form1
             File.Delete(TempPath & "\dt.txt")
             If dat <> dtt Then
                 LinkLabel1.Text = "New Update Available! " & dtt
-                MenuStrip1.Location = New Point(113, 0)
+                MenuStrip1.Location = New Point(170, 0)
                 LinkLabel1.Show()
             Else
                 LinkLabel1.Hide()
@@ -697,7 +688,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub PL_Click(sender As Object, e As EventArgs) Handles pL.Click
         If pL.Image Is Nothing Then
             pL.Image = My.Resources.shoulderinner
-            DrawTXT("L", pL, New Point(12, 1), False)
+            DrawTXT("L", pL, New Point(12, 1), False, 12)
             nButt &= "7"
         Else
             pL.Image = Nothing
@@ -707,7 +698,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub PR_Click(sender As Object, e As EventArgs) Handles pR.Click
         If pR.Image Is Nothing Then
             pR.Image = My.Resources.shoulderinner
-            DrawTXT("R", pR, New Point(11, 1), False)
+            DrawTXT("R", pR, New Point(11, 1), False, 12)
             nButt &= "9"
         Else
             pR.Image = Nothing
@@ -737,7 +728,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub PA_Click(sender As Object, e As EventArgs) Handles pA.Click
         If pA.Image Is Nothing Then
             pA.Image = My.Resources.buttoninner
-            DrawTXT("A", pA, New Point(4, 1), False)
+            DrawTXT("A", pA, New Point(4, 1), False, 12)
             nButt &= "6"
         Else
             pA.Image = Nothing
@@ -747,7 +738,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub PB_Click(sender As Object, e As EventArgs) Handles pB.Click
         If pB.Image Is Nothing Then
             pB.Image = My.Resources.buttoninner
-            DrawTXT("B", pB, New Point(5, 1), False)
+            DrawTXT("B", pB, New Point(5, 1), False, 12)
             nButt &= "2"
         Else
             pB.Image = Nothing
@@ -757,7 +748,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub PX_Click(sender As Object, e As EventArgs) Handles pX.Click
         If pX.Image Is Nothing Then
             pX.Image = My.Resources.buttoninner
-            DrawTXT("X", pX, New Point(5, 1), False)
+            DrawTXT("X", pX, New Point(5, 1), False, 12)
             nButt &= "8"
         Else
             pX.Image = Nothing
@@ -767,7 +758,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub PY_Click(sender As Object, e As EventArgs) Handles pY.Click
         If pY.Image Is Nothing Then
             pY.Image = My.Resources.buttoninner
-            DrawTXT("Y", pY, New Point(6, 1), False)
+            DrawTXT("Y", pY, New Point(6, 1), False, 12)
             nButt &= "4"
         Else
             pY.Image = Nothing
@@ -778,7 +769,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         If pUp.Image Is Nothing Then
             dpad(sender, e)
             pUp.Image = My.Resources.dpadinner
-            DrawTXT("↑", pUp, New Point(0, 0), False)
+            DrawTXT("↑", pUp, New Point(0, 0), False, 12)
             nButt &= "W"
         Else
             pUp.Image = Nothing
@@ -790,7 +781,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             dpad(sender, e)
             pDown.Image = My.Resources.dpadinner
             pDown.Image.RotateFlip(RotateFlipType.RotateNoneFlipY)
-            DrawTXT("↓", pDown, New Point(0, 2), False)
+            DrawTXT("↓", pDown, New Point(0, 2), False, 12)
             nButt &= "S"
         Else
             pDown.Image = Nothing
@@ -802,7 +793,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             dpad(sender, e)
             pRight.Image = My.Resources.dpadinner
             pRight.Image.RotateFlip(RotateFlipType.Rotate90FlipNone)
-            DrawTXT("→", pRight, New Point(4, 0), False)
+            DrawTXT("→", pRight, New Point(4, 0), False, 12)
             nButt &= "D"
         Else
             pRight.Image = Nothing
@@ -814,7 +805,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             dpad(sender, e)
             pLeft.Image = My.Resources.dpadinner
             pLeft.Image.RotateFlip(RotateFlipType.Rotate90FlipX)
-            DrawTXT("←", pLeft, New Point(0, 0), False)
+            DrawTXT("←", pLeft, New Point(0, 0), False, 12)
             nButt &= "A"
         Else
             pLeft.Image = Nothing
@@ -842,7 +833,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
 You can look me up later.", vbOKOnly, "Error 404")
         End If
     End Sub
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click, ToolStripMenuItem2.Click
         Thread.Sleep(200)
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
@@ -1048,6 +1039,14 @@ You can look me up later.", vbOKOnly, "Error 404")
     'Opens Local Folder where Leads are stored
     Private Sub BStorage_Click(sender As Object, e As EventArgs) Handles bStorage.Click
         Process.Start(Local)
+    End Sub
+
+    'Donate within the Options tab
+    Private Sub ToolStripMenuItem2_MouseHover(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.MouseHover
+        ToolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+    End Sub
+    Private Sub ToolStripMenuItem2_MouseLeave(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.MouseLeave
+        ToolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.Image
     End Sub
 #End Region
 End Class
