@@ -2,7 +2,7 @@
 Generates TID/SID for Cute Charm Glitch with Action Replay Code
 
 ## Map
-![Imgur](https://i.imgur.com/dfwDtKk.png)
+![Imgur](https://i.imgur.com/bzumeap.png)
 
 ### Title
 Name of the application.
@@ -13,16 +13,16 @@ Version is the date the release was compiled.
 ### Update Notification
 Notifies the user if a newer version is available.
 
-### Lead Selection
-Select whether your Cute Charm Lead is Male or Female.
+### Type of Lead
+Select whether your Cute Charm Lead is Male or Female, and target's gender ratio.
 
-### Game Selection
+### Game
 Select which Cute Charm Glitch compatible game to generate Action Replay code for.
 
-### Group Selection
+### Shiny Group Table
 Allows user to specify a Shiny Group if Group Selection Mode is set to Choose.
 
-### Group Selection Mode
+### Group Selection
 User can choose one of the following:
  - Random (w/o Group _)
 	- Group is choosen randomly. This excludes the group with the least natures.
@@ -31,10 +31,10 @@ User can choose one of the following:
  - Choose
 	- User can select a specific group from Group Selection
 
-### Specific Trainer ID Search
+### Trainer ID Search
 This allow you to choose the Trainer ID and have a Secret ID generated that works for the Cute Charm Glitch.
 
-### Activation Button Selection
+### Activation Buttons
 User can pick the key combo that excutes the Action Replay Code.
 
 ### Action Replay Code Output
@@ -43,6 +43,12 @@ their system's clipboard. The Bold Letters in the top right corner will change d
 
 ### Generate Button
 Run all the code, selecting a set of IDs and creating the Action Replay Code.
+
+### Lead Section
+Choose to include a lead in the Action Replay Code, what Pokémon to add, and where.
+
+### Options Menu
+Where any options would be added.
 
 ### Author Details
 Puts my Handle on the app, like signing a work of art. The link takes the user to the Author's GitHub profile.
