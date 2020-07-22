@@ -2,19 +2,19 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="SavedButt" Type="System.String" Scope="User">
-      <Value Profile="(Default)">79</Value>
+    <Setting Name="AR_Activation" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">64767</Value>
     </Setting>
-    <Setting Name="DLead" Type="System.Int32" Scope="User">
+    <Setting Name="Default_Lead" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="DGame" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Default_Game" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="CCPoke" Type="System.Boolean" Scope="User">
+    <Setting Name="CuteCharmLead" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="PCspot" Type="System.String" Scope="User">
+    <Setting Name="BoxLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">18/30</Value>
     </Setting>
   </Settings>

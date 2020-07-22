@@ -133,15 +133,6 @@
         SUVORK5CYII=
 </value>
   </data>
-  <data name="SEL" xml:space="preserve">
-    <value>FFFB</value>
-  </data>
-  <data name="L" xml:space="preserve">
-    <value>FDFF</value>
-  </data>
-  <data name="Y" xml:space="preserve">
-    <value>F7FF</value>
-  </data>
   <data name="ppdbs" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAFAAAAAWCAYAAABXEBvcAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -160,9 +151,6 @@
         QLUEqJb/BvnqaA8oczlvHrvbS1EL6Pq4OEhXWF0nj6ZtORnDt2zgBYgovVvqOGZIIgevTKX2GXS2nXbv
         z78cL0ObyRiAJxrnFJjxP020AAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="Start" xml:space="preserve">
-    <value>FFF7</value>
   </data>
   <data name="ppdb" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -198,9 +186,6 @@
         jo5bd2OoMCiEc+Xl6++ivOVylGawDYMbq8Lyn8Zx/wCJ2xrGBkXjxAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="B" xml:space="preserve">
-    <value>FFFD</value>
-  </data>
   <data name="ovalbuttoninner" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAC0AAAAQCAYAAACC/vbpAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -221,21 +206,6 @@
         MilK85HgCHdFE+sEZ5HHL8Y9M0N+C+pPM4Me677UPNA/wNbIJ6oppPWhF/X4ZRqD6EFrhWRRdDormO4U
         8QozBJ+A/cXMuQ8bwkIQcfRlgAAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="X" xml:space="preserve">
-    <value>FBFF</value>
-  </data>
-  <data name="Up" xml:space="preserve">
-    <value>FFBF</value>
-  </data>
-  <data name="A" xml:space="preserve">
-    <value>FFFE</value>
-  </data>
-  <data name="R" xml:space="preserve">
-    <value>FEFF</value>
-  </data>
-  <data name="Right" xml:space="preserve">
-    <value>FFDF</value>
   </data>
   <data name="shoulderinner" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -260,9 +230,6 @@
   <data name="_date" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\date.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Down" xml:space="preserve">
-    <value>FF7F</value>
-  </data>
   <data name="dpadinner" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -271,9 +238,6 @@
         ZRWO/KWQt1b5U0SWIrBRzSt+wM4aTSRF4kbnNlLYG0M70tXZNIG5NQUlSb6o1fp3eKKjIRplA3dam0ck
         Or/LcNLnOgLQP4Ui6/X6NzxwyNHjonHuASpaqG0x0XfpAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="Left" xml:space="preserve">
-    <value>FFEF</value>
   </data>
   <data name="ovalbutton" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

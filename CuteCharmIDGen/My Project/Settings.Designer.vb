@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -56,61 +56,61 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("79")>  _
-        Public Property SavedButt() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("64767")>  _
+        Public Property AR_Activation() As UShort
             Get
-                Return CType(Me("SavedButt"),String)
+                Return CType(Me("AR_Activation"),UShort)
             End Get
             Set
-                Me("SavedButt") = value
+                Me("AR_Activation") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property DLead() As Integer
+        Public Property Default_Lead() As Integer
             Get
-                Return CType(Me("DLead"),Integer)
+                Return CType(Me("Default_Lead"),Integer)
             End Get
             Set
-                Me("DLead") = value
+                Me("Default_Lead") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property DGame() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property Default_Game() As Byte
             Get
-                Return CType(Me("DGame"),String)
+                Return CType(Me("Default_Game"),Byte)
             End Get
             Set
-                Me("DGame") = value
+                Me("Default_Game") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CCPoke() As Boolean
+        Public Property CuteCharmLead() As Boolean
             Get
-                Return CType(Me("CCPoke"),Boolean)
+                Return CType(Me("CuteCharmLead"),Boolean)
             End Get
             Set
-                Me("CCPoke") = value
+                Me("CuteCharmLead") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("18/30")>  _
-        Public Property PCspot() As String
+        Public Property BoxLocation() As String
             Get
-                Return CType(Me("PCspot"),String)
+                Return CType(Me("BoxLocation"),String)
             End Get
             Set
-                Me("PCspot") = value
+                Me("BoxLocation") = value
             End Set
         End Property
     End Class

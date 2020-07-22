@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CuteCharmIDGen", "CuteCharmIDGen\CuteCharmIDGen.vbproj", "{6EFA6A37-929E-40B3-9B17-E18AEB66BB23}"
 EndProject

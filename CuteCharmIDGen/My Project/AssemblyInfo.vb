@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Generates IDs for the Cute Charm Glitch")>
 <Assembly: AssemblyCompany("Regnum")>
 <Assembly: AssemblyProduct("CuteCharmIDGenie")>
-<Assembly: AssemblyCopyright("Copyright © Regnum 2019")>
+<Assembly: AssemblyCopyright("Copyright © Regnum 2019-2020")>
 <Assembly: AssemblyTrademark("Regnum")>
 
 <Assembly: ComVisible(False)>
