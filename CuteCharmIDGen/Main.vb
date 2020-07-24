@@ -1,6 +1,7 @@
 ﻿Imports System.Threading
 Imports System.IO
 Imports System.Drawing
+
 Public Class Main
 #Region "Variables"
     Public Shared ReadOnly apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
@@ -11,20 +12,15 @@ Public Class Main
         "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"} 'List of Natures
     Public mySettings As New IniFile 'Settings.ini File
     Public AR_Code As New AR 'AR Code Class
-    Dim doneLoad As Boolean = False
+    Dim doneLoad As Boolean = False 'Is it done loading?
 
-    '*
-    Dim gender As String
-    Dim rnd(1) As Boolean '{Is Shiny Group random?, With Quirky?}
-    Dim TIDchoose As Boolean = False 'Is TID random?
+    '* means potential future improvement
     Dim TSVt As Short = 0 'Target Trainer Shiny Value
     Dim Group As SByte = 0 'Shiny Group Selection
 #End Region
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
         UpdateCheck()
-        rnd(0) = Nothing
-        rnd(1) = Nothing
         cb_LeadList.SelectedIndex = My.Settings.Default_Lead
         If My.Settings.Default_Game <> Nothing Then cb_GameList.SelectedIndex = My.Settings.Default_Game
         PicTXT()
@@ -36,6 +32,8 @@ Public Class Main
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         WriteIni()
     End Sub
+
+    'Move old Local to new Local
     Private Sub LocalMove() 'Moves to the new Local folder
         Dim oldLocal As String = Local.Replace("\Regnum", "")
         If Not Directory.Exists(oldLocal) Then Exit Sub
@@ -102,6 +100,8 @@ Public Class Main
         File.Delete(TempPath & "\date.txt")
 #End If
     End Sub
+
+    'Update Link
     Private Sub Lklb_Update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice/CuteCharmIDGenie/releases/latest")
@@ -110,6 +110,8 @@ Public Class Main
 You can not update at the moment.", vbOKOnly, "Error 404")
         End If
     End Sub
+
+    'Author Link
     Private Sub Lklb_Author_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Author.LinkClicked
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice")
@@ -118,6 +120,8 @@ You can not update at the moment.", vbOKOnly, "Error 404")
 You can look me up later.", vbOKOnly, "Error 404")
         End If
     End Sub
+
+    'Donate Button
     Private Sub Pb_Donate_Click(sender As Object, e As EventArgs) Handles pb_Donate.Click, ToolStripMenuItem2.Click
         Thread.Sleep(200)
         If My.Computer.Network.IsAvailable Then
@@ -135,6 +139,7 @@ You can look me up later.", vbOKOnly, "Error 404")
     End Sub
 #End Region
 #Region "Startup"
+    'Creates Local Files and Folders
     Private Sub CreateFolders(ByVal dirs As String())
         Try
             For i = 0 To UBound(dirs) Step 1
@@ -183,27 +188,6 @@ You can look me up later.", vbOKOnly, "Error 404")
             WriteIni()
         End If
         ReadIni()
-    End Sub
-
-    'Setup Activation Buttons Design
-    Private Sub ActDraw() '*
-        pb_Down.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY)
-        pb_Left.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipX)
-        pb_Left.Size = New Size(24, 20)
-        pb_Right.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        pb_Right.Size = New Size(24, 20)
-        DrawTXT("A", pb_A, New Point(4, 1),, 12)
-        DrawTXT("B", pb_B, New Point(5, 1),, 12)
-        DrawTXT("X", pb_X, New Point(5, 1),, 12)
-        DrawTXT("Y", pb_Y, New Point(6, 1),, 12)
-        DrawTXT("Select", pb_Select, New Point(4, 1), True, 9)
-        DrawTXT("Start", pb_Start, New Point(8, 1), True, 9)
-        DrawTXT("L", pb_L, New Point(12, 1),, 12)
-        DrawTXT("R", pb_R, New Point(11, 1),, 12)
-        DrawTXT("↑", pb_Up, New Point(0, 0),, 12)
-        DrawTXT("↓", pb_Down, New Point(0, 2),, 12)
-        DrawTXT("→", pb_Right, New Point(4, 0),, 12)
-        DrawTXT("←", pb_Left, New Point(0, 0),, 12)
     End Sub
 
     'Adds text onto the PictureBoxes
@@ -259,7 +243,6 @@ You can look me up later.", vbOKOnly, "Error 404")
         Next
         Select Case cb_LeadList.SelectedIndex
             Case 0
-                gender = "\Male\"
                 rb_RandomFixed.Text = rb_RandomFixed.Text.Replace("1", "4")
                 rb_RandomPure.Text = rb_RandomPure.Text.Replace("1", "4")
             Case Else
@@ -271,7 +254,6 @@ You can look me up later.", vbOKOnly, "Error 404")
                         rb_RandomFixed.Text = rb_RandomFixed.Text.Replace("4", "1")
                         rb_RandomPure.Text = rb_RandomPure.Text.Replace("4", "1")
                 End Select
-                gender = "\Female\"
         End Select
         index = 0
         Dim buffers(,) As Byte = {{0, 7, 0}, {2, 0, &H30}, {0, 4, &H48}, {6, 1, &H90}, {0, 7, &HC8}}
@@ -314,6 +296,8 @@ You can look me up later.", vbOKOnly, "Error 404")
         End If
         GetLeadList()
     End Sub
+
+    'Sets up the default Form, etc. on load
     Private Sub Default_Form() '*
         rb_ShinyGroup1.Checked = False
         gb_ShinyGroups.Enabled = False
@@ -321,7 +305,11 @@ You can look me up later.", vbOKOnly, "Error 404")
         rb_RandomTID.PerformClick()
         rtb_ARCodeOutput.Enabled = False
 
-        ActDraw()
+        pb_Down.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY)
+        pb_Left.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipX)
+        pb_Left.Size = New Size(24, 20)
+        pb_Right.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
+        pb_Right.Size = New Size(24, 20)
 
         For i = 1 To 18 Step 1
             cb_BoxList.Items.Add("Box " & i)
@@ -356,76 +344,94 @@ You can look me up later.", vbOKOnly, "Error 404")
         cb_GameList.SelectedIndex = My.Settings.Default_Game
         cb_LeadList.SelectedIndex = My.Settings.Default_Lead
     End Sub
-    Private Sub ClickButton(btn As PictureBox) ', text As String, x As Byte, y As Byte, fill_Img As Bitmap, btn_Bool As Boolean)
+
+    'Activation Button filling
+    Private Sub ClickButton(btn As PictureBox, Optional bg As Boolean = False)
         Dim text As String = Nothing
         Dim xy(1) As Byte
         Dim fill_Img As Bitmap = Nothing
+        Dim empty_Img As Bitmap = Nothing
         Dim Btn_Bool As Boolean
         Dim Size As Byte = 12
         If btn Is pb_Y Then
             text = "Y"
             xy = {6, 1}
             fill_Img = My.Resources.buttoninner
+            empty_Img = My.Resources.button
             Btn_Bool = AR_Code.Button_Y
         ElseIf btn Is pb_X Then
             text = "X"
             xy = {5, 1}
             fill_Img = My.Resources.buttoninner
+            empty_Img = My.Resources.button
             Btn_Bool = AR_Code.Button_X
         ElseIf btn Is pb_L Then
             text = "L"
             xy = {12, 1}
             fill_Img = My.Resources.shoulderinner
+            empty_Img = My.Resources.shoulder
             Btn_Bool = AR_Code.Button_L
         ElseIf btn Is pb_R Then
             text = "R"
             xy = {11, 1}
             fill_Img = My.Resources.shoulderinner
+            empty_Img = My.Resources.shoulder
             Btn_Bool = AR_Code.Button_R
         ElseIf btn Is pb_Down Then
             text = "↓"
             xy = {0, 2}
             fill_Img = My.Resources.dpadinner
             fill_Img.RotateFlip(RotateFlipType.RotateNoneFlipY)
+            empty_Img = My.Resources.dpad
+            empty_Img.RotateFlip(RotateFlipType.RotateNoneFlipY)
             Btn_Bool = AR_Code.Button_Down
         ElseIf btn Is pb_Up Then
             text = "↑"
             xy = {0, 0}
             fill_Img = My.Resources.dpadinner
+            empty_Img = My.Resources.dpad
             Btn_Bool = AR_Code.Button_Up
         ElseIf btn Is pb_Right Then
             text = "→"
             xy = {4, 0}
             fill_Img = My.Resources.dpadinner
             fill_Img.RotateFlip(RotateFlipType.Rotate90FlipNone)
+            empty_Img = My.Resources.dpad
+            empty_Img.RotateFlip(RotateFlipType.Rotate90FlipNone)
             Btn_Bool = AR_Code.Button_Right
         ElseIf btn Is pb_Left Then
             text = "←"
             xy = {0, 0}
             fill_Img = My.Resources.dpadinner
             fill_Img.RotateFlip(RotateFlipType.Rotate90FlipX)
+            empty_Img = My.Resources.dpad
+            empty_Img.RotateFlip(RotateFlipType.Rotate90FlipX)
             Btn_Bool = AR_Code.Button_Left
         ElseIf btn Is pb_Start Then
             text = "Start"
             xy = {8, 1}
             Size = 9
             fill_Img = My.Resources.ovalbuttoninner
+            empty_Img = My.Resources.ovalbutton
             Btn_Bool = AR_Code.Button_Start
         ElseIf btn Is pb_Select Then
             text = "Select"
             xy = {4, 1}
             Size = 9
             fill_Img = My.Resources.ovalbuttoninner
+            empty_Img = My.Resources.ovalbutton
             Btn_Bool = AR_Code.Button_Select
         ElseIf btn Is pb_B Then
             text = "B"
             xy = {5, 1}
             fill_Img = My.Resources.buttoninner
+            empty_Img = My.Resources.button
             Btn_Bool = AR_Code.Button_B
         ElseIf btn Is pb_A Then
             text = "A"
             xy = {4, 1}
             fill_Img = My.Resources.buttoninner
+            empty_Img = My.Resources.button
             Btn_Bool = AR_Code.Button_A
         End If
         My.Settings.AR_Activation = AR_Code.ActivateButtons
@@ -433,19 +439,15 @@ You can look me up later.", vbOKOnly, "Error 404")
             btn.Image = fill_Img
             DrawTXT(text, btn, New Point(xy(0), xy(1)), False, Size)
         Else
-            btn.Image = Nothing
+            btn.Image = empty_Img
+            DrawTXT(text, btn, New Point(xy(0), xy(1)), bg, Size)
         End If
     End Sub
+
     'Populates List of Lead Pokemon
-    Private Sub GetLeadList() '*
+    Private Sub GetLeadList()
         cb_EK4List.Items.Clear()
-        Dim path As String = Local
-        If cb_LeadList.SelectedIndex = 0 Then
-            path &= "\Male"
-        Else
-            path &= "\Female"
-        End If
-        Dim di As New IO.DirectoryInfo(path)
+        Dim di As New IO.DirectoryInfo(Local & If(cb_LeadList.SelectedIndex = 0, "\Male", "\Female"))
         Dim aryFi As IO.FileInfo() = di.GetFiles("*.ek4")
         For Each fi As IO.FileInfo In aryFi
             cb_EK4List.Items.Add(fi.Name.Replace(".ek4", ""))
@@ -495,7 +497,12 @@ You can look me up later.", vbOKOnly, "Error 404")
             If cb_EK4List.Text.Contains("『") Or cb_EK4List.Text.Contains("』") Then
                 EK4toAR(Local & "\Other\" & cb_EK4List.Text.Replace("『", "").Replace("』", "") & ".ek4")
             Else
-                EK4toAR(Local & gender & cb_EK4List.Text & ".ek4")
+                Select Case cb_LeadList.SelectedIndex
+                    Case 0
+                        EK4toAR(Local & "\Male\" & cb_EK4List.Text & ".ek4")
+                    Case Else
+                        EK4toAR(Local & "\Female\" & cb_EK4List.Text & ".ek4")
+                End Select
             End If
         End If
         Return AR_Code.Build(My.Settings.CuteCharmLead)
@@ -509,6 +516,7 @@ You can look me up later.", vbOKOnly, "Error 404")
         AR_Code.Lead_EK4 = HexStringToByteArray(ToLE(EK4))
     End Sub
 
+    'Formats string into AR Code
     Private Function SpacingAR(hexstring As String)
         Dim newline As Boolean = False
         Dim tempStr As String = Nothing
@@ -524,131 +532,16 @@ You can look me up later.", vbOKOnly, "Error 404")
         Return tempStr
     End Function
 
-    'Import EK4
-    Private Sub Importek4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Importek4ToolStripMenuItem.Click, bt_Import.Click '*
-        Try
-            Dim FileSelect As New OpenFileDialog With {.Filter = "Encrypted PK4 (*.ek4)|*.ek4|All files (*.*)|*.*"}
-            Dim res As DialogResult = FileSelect.ShowDialog()
-            If res = Windows.Forms.DialogResult.Cancel Then
-                Exit Sub
-            Else
-                Dim m As Boolean() = {False, False, False, False} '{Message?, Not CC?, Not CC PKM?, Gender?}
-                Dim myFile As String = FileSelect.FileName
-                Dim FileP() As String = myFile.Split("\")
-                Dim Num As Integer
-                Dim g As Integer
-                Dim a As Boolean
-                Try
-                    Num = FileP(UBound(FileP)).Remove(3) 'Dex Number
-                Catch ex As Exception
-                    Num = 0
-                    m(0) = True
-                    m(2) = True
-                End Try
-                Try
-                    Dim nl As Integer = FileP(UBound(FileP)).Length
-                    Dim PID As String = FileP(UBound(FileP)).Remove(nl - 4).ToArray().Skip(nl - 12).ToArray()
-                    g = Convert.ToInt32(PID.Skip(6).ToArray(), 16) 'Gender
-                    a = (Convert.ToString(Convert.ToInt32(PID, 16), 2)).EndsWith("0") 'Ability
-                Catch ex As Exception
-                    g = -1
-                    a = False
-                    m(0) = True
-                    m(1) = True
-                    m(3) = True
-                End Try
-                Dim pName As String = Nothing
-                Dim pGR As Integer = 190
-
-                Select Case Num
-                    Case 35
-                        pName = "Clefairy"
-                    Case 36
-                        pName = "Clefable"
-                    Case 39
-                        pName = "Jigglypuff"
-                    Case 40
-                        pName = "Wigglytuff"
-                    Case 173
-                        pName = "Cleffa"
-                    Case 174
-                        pName = "Igglybuff"
-                    Case 300
-                        pName = "Skitty"
-                    Case 301
-                        pName = "Delcatty"
-                    Case 428
-                        pName = "Lopunny"
-                        pGR = 126
-                    Case Else
-                        m(0) = True
-                        m(2) = True
-                End Select
-                If a = False Then
-                    m(0) = True
-                    m(1) = True
-                End If
-                If g = -1 Then
-                    m(0) = True
-                    m(3) = True
-                    If m(0) = True Then
-                        Dim message As String = "Couldn't determine "
-                        If m(2) = True Then message += "Species, "
-                        If m(3) = True Then message += "Gender, "
-                        If m(1) = True Then message += "Ability. "
-                        message += "Do you still want to import this Pokémon?"
-                        Dim ans = MsgB(message, 2, "Yes", "No",, "Error")
-                        Select Case ans
-                            Case 6
-                                File.Copy(myFile, Local & "\Other\" & FileP(UBound(FileP)))
-                                MsgB("Pokémon was put in the 'Other' folder.")
-                            Case 7
-                                Exit Sub
-                        End Select
-                    End If
-                Else
-                    If g <= pGR Then
-                        pName &= " - Female"
-                        File.Copy(myFile, Local & "\Female\" & FileP(UBound(FileP)))
-                    Else
-                        pName &= " - Male"
-                        File.Copy(myFile, Local & "\Male\" & FileP(UBound(FileP)))
-                    End If
-                    MsgB(pName)
-                End If
-                GetLeadList()
-            End If
-        Catch ex As Exception
-            MsgB(ex.Message)
-        End Try
-    End Sub
 #End Region
 #Region "Pick ID"
     'Picks IDs
-    Private Sub PickID() '*
-        TSVt = 0
-        Select Case cb_LeadList.SelectedIndex
-            Case 0
-                TSVt = 0
-            Case 1
-                TSVt = 6
-            Case 2
-                TSVt = 9
-            Case 3
-                TSVt = 18
-            Case 4
-                TSVt = 25
-        End Select
-        TSVt += Group
-        If rb_Choose.Checked = True Then TSVt -= 1
+    Private Sub PickID()
+        TSVt = Math.Floor(-0.708 * cb_LeadList.SelectedIndex ^ 4 + 5.75 * cb_LeadList.SelectedIndex ^ 3 + -13.792 * cb_LeadList.SelectedIndex ^ 2 + 14.75 * cb_LeadList.SelectedIndex)
+        'TSVt = Math.Floor(-0.70834335 * cb_LeadList.SelectedIndex ^ 4 + 5.7501018 * cb_LeadList.SelectedIndex ^ 3 + -13.791902 * cb_LeadList.SelectedIndex ^ 2 + 14.7501436 * cb_LeadList.SelectedIndex)
+        TSVt += If(rb_Choose.Checked = True, Group - 1, Group)
         Dim gen As New Random
-        If TIDchoose = True Then
-            AR_Code.TrainerID = nud_TrainerID.Value
-        Else
-            AR_Code.TrainerID = gen.Next(0, 65536)
-        End If
-        Dim Diff As Integer = gen.Next(0, 8) + (TSVt << 3)
-        AR_Code.SecretID = AR_Code.TrainerID Xor Diff
+        AR_Code.TrainerID = If(rb_ChooseTID.Checked = True, nud_TrainerID.Value, gen.Next(0, 65536))
+        AR_Code.SecretID = AR_Code.TrainerID Xor (gen.Next(0, 8) + (TSVt << 3))
         If ValueCheck() Then Exit Sub
         lb_TIDValue.Text = AR_Code.TrainerID
         lb_SIDValue.Text = AR_Code.SecretID
@@ -666,16 +559,25 @@ You can look me up later.", vbOKOnly, "Error 404")
         End If
     End Function
 
+    'Picks Group
+    Private Sub PickGroup()
+        Dim gen As New Random
+        If rb_RandomFixed.Checked = True Then
+            Group = Math.Floor((gen.Next(0, 30)) / 10)
+            If rb_RandomFixed.Text.Contains("1") Then Group += 1
+        ElseIf rb_RandomPure.Checked = True Then
+            Group = Math.Floor((gen.Next(0, 40)) / 10)
+        End If
+    End Sub
+
     'Sets to Random
     Private Sub Rb_RandomTID_CheckedChanged(sender As Object, e As EventArgs) Handles rb_RandomTID.CheckedChanged
         nud_TrainerID.Enabled = False
-        TIDchoose = False
     End Sub
 
     'User's Choice
     Private Sub Rb_ChooseTID_CheckedChanged(sender As Object, e As EventArgs) Handles rb_ChooseTID.CheckedChanged
         nud_TrainerID.Enabled = True
-        TIDchoose = True
     End Sub
 #End Region
 #Region "Controls"
@@ -684,39 +586,16 @@ You can look me up later.", vbOKOnly, "Error 404")
     Private Sub Rb_Choose_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Choose.CheckedChanged
         Dim table As New List(Of PictureBox)({pb_ShinyGroup1, pb_ShinyGroup2, pb_ShinyGroup3, pb_ShinyGroup4})
         If rb_Choose.Checked = True Then
-            rnd(0) = False
             gb_ShinyGroups.Enabled = True
             ListEnable(table)
         Else
-            rnd(0) = Nothing
             gb_ShinyGroups.Enabled = False
             ListDE(table)
         End If
     End Sub
-
-    'Shiny Group is random without Group 4
-    Private Sub Rb_RandomFixed_CheckedChanged(sender As Object, e As EventArgs) Handles rb_RandomFixed.CheckedChanged
-        If rb_RandomFixed.Checked = True Then
-            rnd(0) = True
-            rnd(1) = False
-        Else
-            rnd(0) = Nothing
-            rnd(1) = Nothing
-        End If
-    End Sub
-
-    'Shiny Group is random with Group 4
-    Private Sub Rb_RandomPure_CheckedChanged(sender As Object, e As EventArgs) Handles rb_RandomPure.CheckedChanged
-        If rb_RandomPure.Checked = True Then
-            rnd(0) = True
-            rnd(1) = True
-        Else
-            rnd(0) = Nothing
-            rnd(1) = Nothing
-        End If
-    End Sub
 #End Region
 #Region "Specific Shiny Group RadioButtons"
+    'Enable or disable table columns
     Private Sub ListDE(table As List(Of PictureBox))
         For Each i As PictureBox In table
             If doneLoad Then DrawDE(i)
@@ -727,6 +606,7 @@ You can look me up later.", vbOKOnly, "Error 404")
             i.Enabled = True
         Next
     End Sub
+
     'Shiny Group 1
     Private Sub Rb_ShinyGroup1_CheckedChanged(sender As Object, e As EventArgs) Handles pb_ShinyGroup1.Click, rb_ShinyGroup1.CheckedChanged
         Dim table As New List(Of PictureBox)({pb_ShinyGroup2, pb_ShinyGroup3, pb_ShinyGroup4})
@@ -829,6 +709,7 @@ You can look me up later.", vbOKOnly, "Error 404")
         ClickButton(pb_A)
     End Sub
 
+    'Only one dpad button for you!
     Private Sub Dpad(sender As Object, e As EventArgs)
         If AR_Code.Button_Down Then
             Pb_Down_Click(sender, e)
@@ -875,6 +756,150 @@ You can look me up later.", vbOKOnly, "Error 404")
     Private Sub Cb_SpotList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_BoxList.SelectedIndexChanged, cb_SlotList.SelectedIndexChanged
         My.Settings.BoxLocation = (cb_BoxList.SelectedIndex + 1) & "/" & (cb_SlotList.SelectedIndex + 1)
     End Sub
+
+    'Import Error Message Class
+    Private Class ImportMessage
+        Public NotCCAbility As Boolean = False
+        Public NotCCpkm As Boolean = False
+        Public UnknownGender As Boolean = False
+        Public Function NeedMsg(im As ImportMessage)
+            If im.NotCCAbility Then Return True
+            If im.NotCCpkm Then Return True
+            If im.UnknownGender Then Return True
+            Return False
+        End Function
+
+        Public Function Message(im As ImportMessage)
+            If NeedMsg(im) Then
+                Dim msg As String = "Couldn't determine "
+                If im.NotCCpkm = True Then msg += "Species, "
+                If im.UnknownGender = True Then msg += "Gender, "
+                If im.NotCCAbility = True Then msg += "Ability. "
+                msg += "Do you still want to import this Pokémon?"
+                Return msg
+            Else
+                Return Nothing
+            End If
+        End Function
+    End Class
+
+    'List of Cute Charm Pokemon
+    Public Class Pokemon
+        Public Property ID As Integer
+        Public Property Name As String
+        Public Function Pokemons() As List(Of Pokemon)
+            Return New List(Of Pokemon) From {
+               New Pokemon With {.ID = 35, .Name = “Clefairy”},
+               New Pokemon With {.ID = 36, .Name = "Clefable"},
+               New Pokemon With {.ID = 39, .Name = "Jigglypuff"},
+               New Pokemon With {.ID = 40, .Name = "Wigglytuff"},
+               New Pokemon With {.ID = 173, .Name = "Cleffa"},
+               New Pokemon With {.ID = 174, .Name = "Igglybuff"},
+               New Pokemon With {.ID = 300, .Name = "Skitty"},
+               New Pokemon With {.ID = 301, .Name = "Delcatty"},
+               New Pokemon With {.ID = 428, .Name = "Lopunny"},
+               New Pokemon With {.ID = -1, .Name = "???"}
+               }
+        End Function
+        Public Function GetPokeName(Dex As Integer)
+            Dim list As List(Of Pokemon) = Pokemons()
+            For Each i As Pokemon In list
+                If i.ID = Dex Then
+                    Return i.Name
+                End If
+            Next
+            Return Nothing
+        End Function
+    End Class
+
+    'To Encrypt, or to decrypt?
+    Private Function Crypto(filePath As String)
+        Dim b As Byte() = File.ReadAllBytes(filePath)
+        If filePath.EndsWith(".ek4") Then
+            Return DecryptIfEncrypted45(b)
+        ElseIf filePath.EndsWith(".pk4") Then
+            Return EncryptIfDecrypted45(b)
+        End If
+        Return b
+    End Function
+
+    'Import PK4/EK4
+    Private Sub Importek4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Importek4ToolStripMenuItem.Click, bt_Import.Click
+        Try
+            Dim FileSelect As New OpenFileDialog With {.Filter = "PKM File (*.pk4;*.ek4)|*.pk4;*.ek4|All files (*.*)|*.*"}
+            Dim res As DialogResult = FileSelect.ShowDialog()
+            If res = Windows.Forms.DialogResult.Cancel Then
+                Exit Sub
+            Else
+                Dim pkm As New PK4
+                Dim ekm As Byte() = Nothing
+                Dim crypt As Boolean
+                If FileSelect.FileName.EndsWith(".ek4") Then
+                    crypt = True
+                    pkm.Data = Crypto(FileSelect.FileName)
+                ElseIf FileSelect.FileName.EndsWith(".pk4") Then
+                    crypt = False
+                    pkm.Data = File.ReadAllBytes(FileSelect.FileName)
+                    ekm = EncryptIfDecrypted45(pkm.Data)
+                End If
+                Dim t As New Pokemon With {.ID = pkm.Dex}
+                Dim im As New ImportMessage
+                With pkm
+                    Dim CPoke As Boolean = t.Pokemons().Any(Function(x) x.ID = pkm.Dex)
+                    Dim Species As String = t.GetPokeName(If(CPoke = True, pkm.Dex, -1))
+                    Dim GenderRatio As Short = If(pkm.Dex = 428, 126, If(CPoke = True, 190, -1))
+                    Dim Ability As Boolean = (Convert.ToString(.PID, 2)).EndsWith("0")
+                    Dim Gender As UInteger = .PID Mod 256
+                    If Ability = False Then im.NotCCAbility = True
+                    If GenderRatio = -1 Then im.UnknownGender = True
+                    If Species = "???" Then im.NotCCpkm = True
+                    If im.NeedMsg(im) Then
+                        Dim ans = MsgB(im.Message(im), 2, "Yes", "No",, "Error")
+                        Select Case ans
+                            Case 6
+                                If Not File.Exists(Local & "\Other\" & FileSelect.SafeFileName) Then
+                                    Select Case crypt
+                                        Case True
+                                            File.Copy(FileSelect.FileName, Local & "\Other\" & FileSelect.SafeFileName)
+                                        Case False
+                                            File.WriteAllBytes(Local & "\Other\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
+                                    End Select
+                                End If
+                                MsgB("Pokémon was put in the 'Other' folder.")
+                            Case 7
+                                Exit Sub
+                        End Select
+                    Else
+                        If Gender <= GenderRatio Then
+                            Species &= " - Female"
+                            If Not File.Exists(Local & "\Female\" & FileSelect.SafeFileName) Then
+                                Select Case crypt
+                                    Case True
+                                        File.Copy(FileSelect.FileName, Local & "\Female\" & FileSelect.SafeFileName)
+                                    Case False
+                                        File.WriteAllBytes(Local & "\Female\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
+                                End Select
+                            End If
+                        Else
+                            Species &= " - Male"
+                            If Not File.Exists(Local & "\Male\" & FileSelect.SafeFileName) Then
+                                Select Case crypt
+                                    Case True
+                                        File.Copy(FileSelect.FileName, Local & "\Male\" & FileSelect.SafeFileName)
+                                    Case False
+                                        File.WriteAllBytes(Local & "\Male\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
+                                End Select
+                            End If
+                        End If
+                        MsgB(Species)
+                    End If
+                End With
+                GetLeadList()
+            End If
+        Catch ex As Exception
+            MsgB(ex.Message)
+        End Try
+    End Sub
 #End Region
 
     'Copy AR Code to clipboard
@@ -892,7 +917,7 @@ You can look me up later.", vbOKOnly, "Error 404")
         ElseIf Group = 0 And rb_Choose.Checked = True Then
             gb_ShinyGroups.ForeColor = Color.Red
             Return True
-        ElseIf rnd(0) = Nothing And rb_Choose.Checked = False Then
+        ElseIf rb_RandomFixed.Checked = False And rb_Randompure.Checked = False And rb_Choose.Checked = False Then
             gb_RandomChoice.ForeColor = Color.Red
             Return True
         ElseIf AR_Code.ActivateButtons = 0 Then
@@ -919,15 +944,7 @@ You can look me up later.", vbOKOnly, "Error 404")
     'Executes AR code generation
     Private Sub Bt_Calculate_Click(sender As Object, e As EventArgs) Handles bt_Calculate.Click
         If Checks() Then Exit Sub
-        If rnd(0) = True Then
-            Dim gen As New Random
-            If rnd(1) = False Then
-                Group = Math.Floor((gen.Next(0, 30)) / 10)
-                If rb_RandomFixed.Text.Contains("1") Then Group += 1
-            ElseIf rnd(1) = True Then
-                Group = Math.Floor((gen.Next(0, 40)) / 10)
-            End If
-        End If
+        PickGroup()
         PickID()
         Thread.Sleep(300)
         rtb_ARCodeOutput.Text = SpacingAR(ByteArrayToHexString(GenAR()))

@@ -1,4 +1,5 @@
-﻿Module Common
+﻿Imports System.Text
+Module Common
     'Custom MsgBox
     Public Function MsgB(ByVal mes As String, Optional ByVal numB As Integer = 1, Optional ByVal but1 As String = "OK", Optional ByVal but2 As String = "Cancel", Optional ByVal but3 As String = "", Optional ByVal head As String = "")
         Dim msg As New CustomMessageBox(mes, numB, but1, but2, but3, head)
@@ -20,6 +21,18 @@
             Form.ActiveForm.Close()
         End If
         Return Ans
+    End Function
+    Public Function GetString(data As Byte(), offset As Byte, count As UShort)
+        Return Encoding.Unicode.GetString(data, offset, count).Replace(ChrW(&HFFFF), "").Replace(ChrW(&H0), "").Replace(ChrW(&HFFFE), vbLf)
+    End Function
+    Public Function SetString(ByVal value As String, ByVal maxLength As Integer)
+        ' value = value.Replace(vbLf, ChrW(&HFFFE))
+        If value.Length > maxLength Then value = value.Substring(0, maxLength)
+        Do While value.Length < maxLength
+            value &= ChrW(&HFFFF)
+        Loop
+        Dim temp As String = value & ChrW(&HFFFF)
+        Return Encoding.Unicode.GetBytes(temp)
     End Function
     Public Sub ReadIni()
         With Main.mySettings

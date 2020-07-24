@@ -740,13 +740,13 @@ Partial Class Main
         Me.Importek4ToolStripMenuItem.ShortcutKeyDisplayString = "(Ctrl+Shift+I)"
         Me.Importek4ToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
-        Me.Importek4ToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
-        Me.Importek4ToolStripMenuItem.Text = "Import .ek4"
+        Me.Importek4ToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.Importek4ToolStripMenuItem.Text = "Import PKM"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(208, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(212, 6)
         '
         'ToolStripMenuItem2
         '
@@ -755,7 +755,7 @@ Partial Class Main
         Me.ToolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(211, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(215, 22)
         Me.ToolStripMenuItem2.Text = "                  Donate"
         Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '

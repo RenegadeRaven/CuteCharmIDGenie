@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="AR.vb" />
     <Compile Include="Common.vb" />
+    <Compile Include="Cryption.vb" />
     <Compile Include="CustomMessageBox.Designer.vb">
       <DependentUpon>CustomMessageBox.vb</DependentUpon>
     </Compile>
@@ -179,6 +180,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PK4.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomMessageBox.resx">
