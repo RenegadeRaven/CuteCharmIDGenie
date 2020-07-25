@@ -52,18 +52,18 @@ Public Class Main
         Next
         Directory.Delete(oldLocal, True)
     End Sub
-#Region "Esentials"
+#Region "Essentials"
     'Checks For Update
     Private Sub UpdateCheck()
         If File.Exists(TempPath & "\vsn.txt") Then File.Delete(TempPath & "\vsn.txt")
         If File.Exists(TempPath & "\dt.txt") Then File.Delete(TempPath & "\dt.txt")
 #If DEBUG Then
-        File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
-        File.WriteAllText(apppath & "/version.json", "{
+        File.WriteAllText(apppath & "..\..\..\version.txt", My.Application.Info.Version.ToString)
+        File.WriteAllText(apppath & "..\..\..\version.json", "{
 " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
 }")
         If My.Computer.Network.IsAvailable Then
-            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/CuteCharmIDGenie/master/CuteCharmIDGen/bin/Debug/version.txt", TempPath & "\vsn.txt")
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/CuteCharmIDGenie/master/CuteCharmIDGen/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
@@ -101,7 +101,7 @@ Public Class Main
 #End If
     End Sub
 
-    'Update Link
+    'Link to Update version
     Private Sub Lklb_Update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice/CuteCharmIDGenie/releases/latest")
@@ -111,7 +111,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         End If
     End Sub
 
-    'Author Link
+    'Link the Author's, yours truly, Github Page
     Private Sub Lklb_Author_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Author.LinkClicked
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice")
@@ -121,7 +121,7 @@ You can look me up later.", vbOKOnly, "Error 404")
         End If
     End Sub
 
-    'Donate Button
+    'PayPal Donate Button
     Private Sub Pb_Donate_Click(sender As Object, e As EventArgs) Handles pb_Donate.Click, ToolStripMenuItem2.Click
         Thread.Sleep(200)
         If My.Computer.Network.IsAvailable Then
