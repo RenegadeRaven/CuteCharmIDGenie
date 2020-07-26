@@ -152,7 +152,7 @@ You can look me up later.", vbOKOnly, "Error 404")
                 Loop
             Next i
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MsgBox(ex.Message)
         End Try
     End Sub
     Private Sub CreateFiles(ByVal files(,))
@@ -173,7 +173,7 @@ You can look me up later.", vbOKOnly, "Error 404")
                 Loop
             Next i
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -673,22 +673,22 @@ You can look me up later.", vbOKOnly, "Error 404")
         ClickButton(pb_R)
     End Sub
     Private Sub Pb_Down_Click(sender As Object, e As EventArgs) Handles pb_Down.Click
-        If AR_Code.Button_Down = False Then Dpad(sender, e)
+        If AR_Code.Button_Down = False Then Dpad()
         AR_Code.Button_Down = Not AR_Code.Button_Down
         ClickButton(pb_Down)
     End Sub
     Private Sub Pb_Up_Click(sender As Object, e As EventArgs) Handles pb_Up.Click
-        If AR_Code.Button_Up = False Then Dpad(sender, e)
+        If AR_Code.Button_Up = False Then Dpad()
         AR_Code.Button_Up = Not AR_Code.Button_Up
         ClickButton(pb_Up)
     End Sub
     Private Sub Pb_Right_Click(sender As Object, e As EventArgs) Handles pb_Right.Click
-        If AR_Code.Button_Right = False Then Dpad(sender, e)
+        If AR_Code.Button_Right = False Then Dpad()
         AR_Code.Button_Right = Not AR_Code.Button_Right
         ClickButton(pb_Right)
     End Sub
     Private Sub Pb_Left_Click(sender As Object, e As EventArgs) Handles pb_Left.Click
-        If AR_Code.Button_Left = False Then Dpad(sender, e)
+        If AR_Code.Button_Left = False Then Dpad()
         AR_Code.Button_Left = Not AR_Code.Button_Left
         ClickButton(pb_Left)
     End Sub
@@ -710,15 +710,15 @@ You can look me up later.", vbOKOnly, "Error 404")
     End Sub
 
     'Only one dpad button for you!
-    Private Sub Dpad(sender As Object, e As EventArgs)
+    Private Sub Dpad()
         If AR_Code.Button_Down Then
-            Pb_Down_Click(sender, e)
+            Pb_Down_Click(0, New EventArgs)
         ElseIf AR_Code.Button_Up Then
-            Pb_Up_Click(sender, e)
+            Pb_Up_Click(0, New EventArgs)
         ElseIf AR_Code.Button_Right Then
-            Pb_Right_Click(sender, e)
+            Pb_Right_Click(0, New EventArgs)
         ElseIf AR_Code.Button_Left Then
-            Pb_Left_Click(sender, e)
+            Pb_Left_Click(0, New EventArgs)
         End If
     End Sub
 #End Region
@@ -854,7 +854,7 @@ You can look me up later.", vbOKOnly, "Error 404")
                     If GenderRatio = -1 Then im.UnknownGender = True
                     If Species = "???" Then im.NotCCpkm = True
                     If im.NeedMsg(im) Then
-                        Dim ans = MsgB(im.Message(im), 2, "Yes", "No",, "Error")
+                        Dim ans = MsgBox(im.Message(im), 2, "Yes", "No",, "Error")
                         Select Case ans
                             Case 6
                                 If Not File.Exists(Local & "\Other\" & FileSelect.SafeFileName) Then
@@ -865,7 +865,7 @@ You can look me up later.", vbOKOnly, "Error 404")
                                             File.WriteAllBytes(Local & "\Other\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
                                     End Select
                                 End If
-                                MsgB("Pokémon was put in the 'Other' folder.")
+                                MsgBox("Pokémon was put in the 'Other' folder.")
                             Case 7
                                 Exit Sub
                         End Select
@@ -891,13 +891,13 @@ You can look me up later.", vbOKOnly, "Error 404")
                                 End Select
                             End If
                         End If
-                        MsgB(Species)
+                        MsgBox(Species)
                     End If
                 End With
                 GetLeadList()
             End If
         Catch ex As Exception
-            MsgB(ex.Message)
+            MsgBox(ex.Message)
         End Try
     End Sub
 #End Region

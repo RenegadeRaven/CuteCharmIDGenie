@@ -158,6 +158,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PKM\PK4.vb" />
+    <Compile Include="PKM\PKMStrings.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Essentials\CustomMessageBox.resx">
