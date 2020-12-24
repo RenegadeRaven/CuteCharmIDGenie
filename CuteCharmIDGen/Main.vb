@@ -30,7 +30,7 @@ Public Class Main
         If Directory.Exists(Local.Replace("\Regnum", "")) Then LocalMove()
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        WriteIni()
+        WriteSettings()
     End Sub
 
     'Move old Local to new Local
@@ -183,11 +183,16 @@ You can look me up later.", vbOKOnly, "Error 404")
         CreateFolders(locals)
         CreateFiles({{Local & "\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead}, {Local & "\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead}})
 
-        If Not File.Exists(Local & "\settings.ini") Then
-            File.WriteAllText(Local & "\settings.ini", "")
-            WriteIni()
+        If File.Exists(Local & "\settings.ini") Then
+            ReadIni()
+            File.Delete(Local & "\settings.ini")
         End If
-        ReadIni()
+
+        If Not File.Exists(Local & "\settings.json") Then
+            'File.WriteAllText(Local & "\settings.json", "")
+            WriteSettings()
+        End If
+        ReadSettings()
     End Sub
 
     'Adds text onto the PictureBoxes
