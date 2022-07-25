@@ -213,20 +213,20 @@
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
-    <None Include="Resources\sg.png" />
+    <None Include="Resources\Images\sg.png" />
     <None Include="Resources\174 - MAGIC - D8D7F7D437DE.ek4" />
     <None Include="Resources\174 - MAGIC - D8D95E400116.ek4" />
-    <None Include="Resources\sg0.png" />
-    <None Include="Resources\shoulder.png" />
-    <None Include="Resources\dpadinner.png" />
-    <None Include="Resources\shoulderinner.png" />
-    <None Include="Resources\ovalbuttoninner.png" />
-    <None Include="Resources\buttoninner.png" />
-    <None Include="Resources\ovalbutton.png" />
-    <None Include="Resources\button.png" />
-    <None Include="Resources\dpad.png" />
-    <None Include="Resources\ppdbs.png" />
-    <None Include="Resources\ppdb.png" />
+    <None Include="Resources\Images\sg0.png" />
+    <None Include="Resources\Images\shoulder.png" />
+    <None Include="Resources\Images\dpadinner.png" />
+    <None Include="Resources\Images\shoulderinner.png" />
+    <None Include="Resources\Images\ovalbuttoninner.png" />
+    <None Include="Resources\Images\buttoninner.png" />
+    <None Include="Resources\Images\ovalbutton.png" />
+    <None Include="Resources\Images\button.png" />
+    <None Include="Resources\Images\dpad.png" />
+    <None Include="Resources\Images\ppdbs.png" />
+    <None Include="Resources\Images\ppdb.png" />
     <None Include="Resources\date.txt" />
   </ItemGroup>
   <ItemGroup>

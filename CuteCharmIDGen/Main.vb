@@ -27,31 +27,11 @@ Public Class Main
     End Sub
     Private Sub Main_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         Default_Form()
-        If Directory.Exists(Local.Replace("\Regnum", "")) Then LocalMove()
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         WriteSettings()
     End Sub
 
-    'Move old Local to new Local
-    Private Sub LocalMove() 'Moves to the new Local folder
-        Dim oldLocal As String = Local.Replace("\Regnum", "")
-        If Not Directory.Exists(oldLocal) Then Exit Sub
-        Dim folders As New List(Of String)({"\Male", "\Female", "\Other"})
-        For Each i As String In folders
-            Dim di As New IO.DirectoryInfo(oldLocal & i)
-            Dim aryFi As IO.FileInfo() = di.GetFiles("*.ek4")
-            For Each fi As IO.FileInfo In aryFi
-                If Not File.Exists(Local & i & "\" & fi.Name) Then
-                    File.Move(oldLocal & i & "\" & fi.Name, Local & i & "\" & fi.Name)
-                Else
-                    File.Delete(oldLocal & i & "\" & fi.Name)
-                End If
-            Next
-            Directory.Delete(oldLocal & i)
-        Next
-        Directory.Delete(oldLocal, True)
-    End Sub
 #Region "Essentials"
     'Checks For Update
     Private Sub UpdateCheck()
@@ -188,10 +168,7 @@ You can look me up later.", vbOKOnly, "Error 404")
             File.Delete(Local & "\settings.ini")
         End If
 
-        If Not File.Exists(Local & "\settings.json") Then
-            'File.WriteAllText(Local & "\settings.json", "")
-            WriteSettings()
-        End If
+        If Not File.Exists(Local & "\settings.json") Then WriteSettings()
         ReadSettings()
     End Sub
 
