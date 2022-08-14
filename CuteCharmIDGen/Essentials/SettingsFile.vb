@@ -1,7 +1,4 @@
-﻿Imports System.Text
-Imports System.IO
-Imports Newtonsoft.Json
-Imports Newtonsoft.Json.Linq
+﻿Imports Newtonsoft.Json.Linq
 Module SettingsFile
     Dim Settings As JObject
 

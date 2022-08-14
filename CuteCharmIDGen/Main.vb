@@ -1,6 +1,4 @@
 ﻿Imports System.Threading
-Imports System.IO
-Imports System.Drawing
 
 Public Class Main
 #Region "Variables"
@@ -21,8 +19,7 @@ Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
         UpdateCheck()
-        cb_LeadList.SelectedIndex = My.Settings.Default_Lead
-        If My.Settings.Default_Game <> Nothing Then cb_GameList.SelectedIndex = My.Settings.Default_Game
+        loadSettings()
         PicTXT()
     End Sub
     Private Sub Main_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -30,6 +27,10 @@ Public Class Main
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         WriteSettings()
+    End Sub
+    Private Sub loadSettings()
+        cb_LeadList.SelectedIndex = My.Settings.Default_Lead
+        If My.Settings.Default_Game <> Nothing Then cb_GameList.SelectedIndex = My.Settings.Default_Game
     End Sub
 
 #Region "Essentials"
@@ -123,10 +124,7 @@ You can look me up later.", vbOKOnly, "Error 404")
     Private Sub CreateFolders(ByVal dirs As String())
         Try
             For i = 0 To UBound(dirs) Step 1
-                If dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
-                Else
-                    dirs(i) = Local & dirs(i)
-                End If
+                If Not dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then dirs(i) = Local & dirs(i)
                 Do While Not Directory.Exists(dirs(i))
                     If Not Directory.Exists(dirs(i)) Then Directory.CreateDirectory(dirs(i))
                 Loop
@@ -138,10 +136,7 @@ You can look me up later.", vbOKOnly, "Error 404")
     Private Sub CreateFiles(ByVal files(,))
         Try
             For i = 0 To UBound(files) Step 1
-                If files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
-                Else
-                    files(i, 0) = Local & files(i, 0)
-                End If
+                If Not files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then files(i, 0) = Local & files(i, 0)
                 Do While Not File.Exists(files(i, 0))
                     If Not File.Exists(files(i, 0)) Then
                         If TypeOf files(i, 1) Is String Then
@@ -534,11 +529,7 @@ You can look me up later.", vbOKOnly, "Error 404")
     'Verifies IDs
     Private Function ValueCheck()
         Dim result As Integer = ((AR_Code.TrainerID Xor AR_Code.SecretID) >> 3)
-        If result = TSVt Then
-            Return False
-        Else
-            Return True
-        End If
+        Return Not (result = TSVt)
     End Function
 
     'Picks Group

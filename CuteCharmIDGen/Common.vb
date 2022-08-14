@@ -17,24 +17,7 @@
             End If
         End With
     End Sub
-    Public Sub WriteIni()
-        With Main.mySettings
-            .Filename = Main.Local & "\settings.ini"
-            If .OpenIniFile() Then
-                'Dim MyValue As String = .GetValue("MyKey")
-                .SetValue("Box Location", My.Settings.BoxLocation)
-                .SetValue("Activation Buttons", Hex(My.Settings.AR_Activation))
-                .SetValue("Default Game", My.Settings.Default_Game)
-                .SetValue("Default Lead", My.Settings.Default_Lead)
-                .SetValue("Cute Charm Lead?", My.Settings.CuteCharmLead)
-                If Not .SaveIni Then
-                    MsgBox("Trouble by writing Ini-File")
-                End If
-            Else
-                MsgBox("No Ini-File found")
-            End If
-        End With
-    End Sub
+
     'Adds needed zeros to hex string
     Public Function Hex_Zeros(ByVal hex_value As String, ByVal length As Integer) '*
         Dim Str As String = hex_value.ToUpper
