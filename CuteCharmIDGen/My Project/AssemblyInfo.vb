@@ -10,10 +10,10 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("CuteCharmIDGenie")>
 <Assembly: AssemblyDescription("Generates IDs for the Cute Charm Glitch")>
-<Assembly: AssemblyCompany("Regnum")>
+<Assembly: AssemblyCompany("RenegadeRaven")>
 <Assembly: AssemblyProduct("CuteCharmIDGenie")>
-<Assembly: AssemblyCopyright("Copyright © Regnum 2019-2020")>
-<Assembly: AssemblyTrademark("Regnum")>
+<Assembly: AssemblyCopyright("Copyright © RenegadeRaven 2019-2022")>
+<Assembly: AssemblyTrademark("RenegadeRaven")>
 
 <Assembly: ComVisible(False)>
 

@@ -1,15 +1,18 @@
 ﻿Imports System.Threading
+Imports Newtonsoft.Json.Linq
 
 Public Class Main
 #Region "Variables"
     Public Shared ReadOnly apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
     Public Shared ReadOnly res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Public Shared ReadOnly TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
-    Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\CuteCharmIDGenie" 'Path to Local
-    ReadOnly Natures() As String = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest",
+    Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\RenegadeRaven\CuteCharmIDGenie" 'Path to Local
+    Private Natures() As String = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest",
         "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"} 'List of Natures
     Public mySettings As New IniFile 'Settings.ini File
     Public AR_Code As New AR 'AR Code Class
+    Public LangData As JObject 'Language Array
+    Public LangRes As Resources.ResourceManager
     Dim doneLoad As Boolean = False 'Is it done loading?
 
     '* means potential future improvement
@@ -18,9 +21,9 @@ Public Class Main
 #End Region
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
-        UpdateCheck()
+        If Directory.Exists(Local.Replace("\RenegadeRaven", "\Regnum")) Then LocalMove()
         loadSettings()
-        PicTXT()
+        'UpdateCheck()
     End Sub
     Private Sub Main_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         Default_Form()
@@ -29,10 +32,98 @@ Public Class Main
         WriteSettings()
     End Sub
     Private Sub loadSettings()
+        tscb_Language.Text = My.Settings.Language
         cb_LeadList.SelectedIndex = My.Settings.Default_Lead
         If My.Settings.Default_Game <> Nothing Then cb_GameList.SelectedIndex = My.Settings.Default_Game
+        CheckLang()
     End Sub
 
+    'Move old Local to new Local
+    Private Sub LocalMove() 'Moves to the new Local folder
+        Dim oldLocal As String = Local.Replace("\RenegadeRaven", "\Regnum")
+        If Not Directory.Exists(oldLocal) Then Exit Sub
+        Dim folders As New List(Of String)({"\Male", "\Female", "\Other"})
+        For Each i As String In folders
+            Dim di As New IO.DirectoryInfo(oldLocal & i)
+            Dim aryFi As IO.FileInfo() = di.GetFiles("*.ek4")
+            For Each fi As IO.FileInfo In aryFi
+                If Not File.Exists(Local & "\Leads" & i & "\" & fi.Name) Then
+                    File.Move(oldLocal & i & "\" & fi.Name, Local & "\Leads" & i & "\" & fi.Name)
+                Else
+                    File.Delete(oldLocal & i & "\" & fi.Name)
+                End If
+            Next
+            Directory.Delete(oldLocal & i)
+        Next
+        Directory.Delete(oldLocal, True)
+        If Not Directory.EnumerateFileSystemEntries(oldLocal.Replace("\CuteCharmIDGenie", "")).Any Then Directory.Delete(oldLocal.Replace("\CuteCharmIDGenie", ""), True)
+    End Sub
+
+#Region "Language"
+    Private Sub CheckLang()
+        'If (My.Settings.Language <> tscb_Language.Items.Item(0).ToString()) And (My.Settings.Language <> tscb_Language.Items.Item(1).ToString()) Then LangBox()
+        'Dim lang As String = File.ReadAllText(My.Resources.English)
+        'LangData = JObject.Parse(lang)
+        My.Settings.Language = tscb_Language.Text
+        Select Case tscb_Language.Text
+            Case "English"
+                LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
+                lklb_Author.Location = New Point(17, 303)
+                cb_GameList.DropDownWidth = 139
+            Case "Français"
+                LangRes = New Resources.ResourceManager("CuteCharmIDGen.Français", Reflection.Assembly.GetExecutingAssembly())
+                lklb_Author.Location = New Point(21, 303)
+                cb_GameList.DropDownWidth = 165
+        End Select
+        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")"
+        Natures = {LangRes.GetString("Hardy"), LangRes.GetString("Lonely"), LangRes.GetString("Brave"), LangRes.GetString("Adamant"),
+            LangRes.GetString("Naughty"), LangRes.GetString("Bold"), LangRes.GetString("Docile"), LangRes.GetString("Relaxed"),
+            LangRes.GetString("Impish"), LangRes.GetString("Lax"), LangRes.GetString("Timid"), LangRes.GetString("Hasty"),
+            LangRes.GetString("Serious"), LangRes.GetString("Jolly"), LangRes.GetString("Naive"), LangRes.GetString("Modest"),
+            LangRes.GetString("Mild"), LangRes.GetString("Quiet"), LangRes.GetString("Bashful"), LangRes.GetString("Rash"),
+            LangRes.GetString("Calm"), LangRes.GetString("Gentle"), LangRes.GetString("Sassy"), LangRes.GetString("Careful"),
+            LangRes.GetString("Quirky")}
+        gb_ShinyGroups.Text = LangRes.GetString("Shiny Group")
+        gb_RandomChoice.Text = LangRes.GetString("Shiny Group Selection")
+        rb_RandomFixed.Text = LangRes.GetString("Random") & " (" & LangRes.GetString("w/o") & " " & LangRes.GetString("Group") & " 4)"
+        rb_RandomPure.Text = LangRes.GetString("Random") & " (" & LangRes.GetString("w/") & " " & LangRes.GetString("Group") & " 4)"
+        rb_Choose.Text = LangRes.GetString("Choose")
+        cb_LeadList.Items.Clear()
+        cb_LeadList.Items.Add(LangRes.GetString("Male") & " (" & LangRes.GetString("Any") & "% ♀)")
+        cb_LeadList.Items.Add(LangRes.GetString("Female") & " (87.5% ♂)")
+        cb_LeadList.Items.Add(LangRes.GetString("Female") & " (75% ♂)")
+        cb_LeadList.Items.Add(LangRes.GetString("Female") & " (50% ♂)")
+        cb_LeadList.Items.Add(LangRes.GetString("Female") & " (25% ♂)")
+        lb_Lead.Text = LangRes.GetString("Lead") & ":"
+        cb_LeadList.SelectedIndex = My.Settings.Default_Lead
+        cb_GameList.Items.Clear()
+        cb_GameList.Items.Add(LangRes.GetString("Diamond") & "/" & LangRes.GetString("Pearl"))
+        cb_GameList.Items.Add(LangRes.GetString("Platinum"))
+        cb_GameList.Items.Add(LangRes.GetString("HeartGold") & "/" & LangRes.GetString("SoulSilver"))
+        lb_Game.Text = LangRes.GetString("Version") & ":"
+        cb_GameList.SelectedIndex = My.Settings.Default_Game
+        gb_TrainerID.Text = LangRes.GetString("Trainer ID")
+        rb_RandomTID.Text = LangRes.GetString("Random")
+        lklb_Update.Text = LangRes.GetString("Update")
+        lb_By.Text = LangRes.GetString("By")
+        gb_CuteCharmLead.Text = LangRes.GetString("Cute Charm Pokemon")
+        cx_Lead.Text = If(cx_Lead.Checked, LangRes.GetString("Enabled"), LangRes.GetString("Disabled"))
+        lb_CuteCharmLead.Text = LangRes.GetString("Lead") & ":"
+        gb_Storage.Text = LangRes.GetString("Manage Leads")
+        gb_PC.Text = LangRes.GetString("PCLocation")
+        FillPC()
+        bt_Import.Text = LangRes.GetString("Import")
+        bt_Storage.Text = LangRes.GetString("Storage")
+        gb_ARButtons.Text = LangRes.GetString("ARButtons")
+        lb_ARCodeOutput.Text = LangRes.GetString("ARCode") & ":"
+        bt_Calculate.Text = LangRes.GetString("Calculate")
+    End Sub
+    Private Sub ChangeLang() Handles tscb_Language.TextChanged, tscb_Language.SelectedIndexChanged, tscb_Language.TextUpdate
+        My.Settings.Language = tscb_Language.Text
+        CheckLang()
+    End Sub
+
+#End Region
 #Region "Essentials"
     'Checks For Update
     Private Sub UpdateCheck()
@@ -43,8 +134,8 @@ Public Class Main
         File.WriteAllText(apppath & "..\..\..\version.json", "{
 " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
 }")
-        If My.Computer.Network.IsAvailable Then
-            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/CuteCharmIDGenie/master/CuteCharmIDGen/version.txt", TempPath & "\vsn.txt")
+        If My.Computer.Network.IsAvailable And Pinger() Then
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/RenegadeRaven/CuteCharmIDGenie/master/CuteCharmIDGen/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
@@ -52,14 +143,11 @@ Public Class Main
             If Application.ProductVersion <> v Then File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
         End If
         lklb_Update.Hide()
-        MenuStrip1.Location = New Point(0, 0)
 #Else
-        File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
-        Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
-        Me.Text = "Cute Charm Glitch ID Generator (" & dat & ")"
-        If My.Computer.Network.IsAvailable Then
+        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")"
+        If My.Computer.Network.IsAvailable And Pinger() Then
             Try
-                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/CuteCharmIDGenie/master/CuteCharmIDGen/Resources/date.txt", TempPath & "\dt.txt")
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/RenegadeRaven/CuteCharmIDGenie/master/CuteCharmIDGen/Resources/date.txt", TempPath & "\dt.txt")
             Catch
                 File.WriteAllText(TempPath & "\dt.txt", " ")
             End Try
@@ -67,13 +155,11 @@ Public Class Main
             Dim dtt As String = Reader.ReadToEnd
             Reader.Close()
             File.Delete(TempPath & "\dt.txt")
-            If dat <> dtt Then
-                lklb_Update.Text = "New Update Available! " & dtt
-                MenuStrip1.Location = New Point(175, 0)
+            If My.Resources._date <> dtt Then
+                lklb_Update.Text = LangRes.GetString("Update") & " " & dtt
                 lklb_Update.Show()
             Else
                 lklb_Update.Hide()
-                MenuStrip1.Location = New Point(0, 0)
             End If
         Else
             lklb_Update.Hide()
@@ -84,32 +170,32 @@ Public Class Main
 
     'Link to Update version
     Private Sub Lklb_Update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
-        If My.Computer.Network.IsAvailable Then
-            Process.Start("https://github.com/PlasticJustice/CuteCharmIDGenie/releases/latest")
+        If My.Computer.Network.IsAvailable And Pinger() Then
+            Process.Start("https://github.com/RenegadeRaven/CuteCharmIDGenie/releases/latest")
         Else
-            MsgBox("No Internet connection!
-You can not update at the moment.", vbOKOnly, "Error 404")
+            MsgBox(LangRes.GetString("No Internet connection") & "
+You can not update at the moment.", 1,,,, LangRes.GetString("Error 404"))
         End If
     End Sub
 
     'Link the Author's, yours truly, Github Page
     Private Sub Lklb_Author_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Author.LinkClicked
-        If My.Computer.Network.IsAvailable Then
-            Process.Start("https://github.com/PlasticJustice")
+        If My.Computer.Network.IsAvailable And Pinger() Then
+            Process.Start("https://github.com/RenegadeRaven")
         Else
-            MsgBox("No Internet connection!
-You can look me up later.", vbOKOnly, "Error 404")
+            MsgBox(LangRes.GetString("No Internet connection") & "
+You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
         End If
     End Sub
 
     'PayPal Donate Button
     Private Sub Pb_Donate_Click(sender As Object, e As EventArgs) Handles pb_Donate.Click, ToolStripMenuItem2.Click
         Thread.Sleep(200)
-        If My.Computer.Network.IsAvailable Then
+        If My.Computer.Network.IsAvailable And Pinger() Then
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
         Else
-            MsgBox("No Internet connection!
-        I appreciate the gesture.", vbOKOnly, "Error 404")
+            MsgBox(LangRes.GetString("No Internet connection") & "
+        I appreciate the gesture.", 1,,,, LangRes.GetString("Error 404"))
         End If
     End Sub
     Private Sub Pb_Donate_MouseDown(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseDown
@@ -118,6 +204,13 @@ You can look me up later.", vbOKOnly, "Error 404")
     Private Sub Pb_Donate_MouseUp(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseUp
         pb_Donate.Image = Nothing
     End Sub
+    Private Function Pinger()
+        Try
+            Return My.Computer.Network.Ping("2607:f8b0:400b:802::200e")
+        Catch
+            Return False
+        End Try
+    End Function
 #End Region
 #Region "Startup"
     'Creates Local Files and Folders
@@ -154,9 +247,9 @@ You can look me up later.", vbOKOnly, "Error 404")
 
     'Checks Local Folders
     Private Sub CheckLocal()
-        Dim locals As String() = {Local, Local & "\Male", Local & "\Female", Local & "\Other"}
+        Dim locals As String() = {Local, Local & "\Leads", Local & "\Leads\Male", Local & "\Leads\Female", Local & "\Leads\Other"}
         CreateFolders(locals)
-        CreateFiles({{Local & "\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead}, {Local & "\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead}})
+        CreateFiles({{Local & "\Leads\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead}, {Local & "\Leads\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead}})
 
         If File.Exists(Local & "\settings.ini") Then
             ReadIni()
@@ -215,7 +308,7 @@ You can look me up later.", vbOKOnly, "Error 404")
         Dim table As New List(Of PictureBox)({pb_ShinyGroup1, pb_ShinyGroup2, pb_ShinyGroup3, pb_ShinyGroup4})
         For Each i As PictureBox In table
             i.BackgroundImage = My.Resources.sg
-            DrawTXT("*Shiny Group " & index, i, New Point(11, 2),, 8)
+            DrawTXT("*" & LangRes.GetString("Shiny Group") & " " & index, i, New Point(LangRes.GetString("TableHeaderX"), LangRes.GetString("TableHeaderY")),, LangRes.GetString("TableHeaderFont"))
             index += 1
         Next
         Select Case cb_LeadList.SelectedIndex
@@ -288,12 +381,7 @@ You can look me up later.", vbOKOnly, "Error 404")
         pb_Right.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone)
         pb_Right.Size = New Size(24, 20)
 
-        For i = 1 To 18 Step 1
-            cb_BoxList.Items.Add("Box " & i)
-        Next i
-        For i = 1 To 30 Step 1
-            cb_SlotList.Items.Add("Slot " & i)
-        Next i
+        FillPC()
         Default_Values()
 
         If My.Settings.CuteCharmLead = True Then
@@ -304,8 +392,19 @@ You can look me up later.", vbOKOnly, "Error 404")
             Cx_Lead_CheckedChanged(0, New EventArgs)
         End If
         doneLoad = True
+        PicTXT()
         Dim table As New List(Of PictureBox)({pb_ShinyGroup1, pb_ShinyGroup2, pb_ShinyGroup3, pb_ShinyGroup4})
         ListDE(table)
+    End Sub
+    Private Sub FillPC()
+        cb_BoxList.Items.Clear()
+        For i = 1 To 18 Step 1
+            cb_BoxList.Items.Add(LangRes.GetString("Box") & " " & i)
+        Next i
+        cb_SlotList.Items.Clear()
+        For i = 1 To 30 Step 1
+            cb_SlotList.Items.Add(LangRes.GetString("Slot") & " " & i)
+        Next i
     End Sub
     Private Sub Default_Values()
         Dim defaultSlot() As String = My.Settings.BoxLocation.Split("/")
@@ -424,12 +523,12 @@ You can look me up later.", vbOKOnly, "Error 404")
     'Populates List of Lead Pokemon
     Private Sub GetLeadList()
         cb_EK4List.Items.Clear()
-        Dim di As New IO.DirectoryInfo(Local & If(cb_LeadList.SelectedIndex = 0, "\Male", "\Female"))
+        Dim di As New IO.DirectoryInfo(Local & "\Leads" & If(cb_LeadList.SelectedIndex = 0, "\Male", "\Female"))
         Dim aryFi As IO.FileInfo() = di.GetFiles("*.ek4")
         For Each fi As IO.FileInfo In aryFi
             cb_EK4List.Items.Add(fi.Name.Replace(".ek4", ""))
         Next
-        Dim di2 As New IO.DirectoryInfo(Local & "\Other")
+        Dim di2 As New IO.DirectoryInfo(Local & "\Leads" & "\Other")
         aryFi = di2.GetFiles("*.ek4")
         For Each fi As IO.FileInfo In aryFi
             cb_EK4List.Items.Add("『" & fi.Name.Replace(".ek4", "") & "』")
@@ -439,7 +538,7 @@ You can look me up later.", vbOKOnly, "Error 404")
 #Region "Menu"
     'Opens Local Folder where Leads are stored
     Private Sub Bt_Storage_Click(sender As Object, e As EventArgs) Handles bt_Storage.Click
-        Process.Start(Local)
+        Process.Start(Local & "\Leads")
     End Sub
 
     'Donate within the Options tab
@@ -472,13 +571,13 @@ You can look me up later.", vbOKOnly, "Error 404")
         End Select
         If My.Settings.CuteCharmLead = True Then
             If cb_EK4List.Text.Contains("『") Or cb_EK4List.Text.Contains("』") Then
-                EK4toAR(Local & "\Other\" & cb_EK4List.Text.Replace("『", "").Replace("』", "") & ".ek4")
+                EK4toAR(Local & "\Leads" & "\Other\" & cb_EK4List.Text.Replace("『", "").Replace("』", "") & ".ek4")
             Else
                 Select Case cb_LeadList.SelectedIndex
                     Case 0
-                        EK4toAR(Local & "\Male\" & cb_EK4List.Text & ".ek4")
+                        EK4toAR(Local & "\Leads" & "\Male\" & cb_EK4List.Text & ".ek4")
                     Case Else
-                        EK4toAR(Local & "\Female\" & cb_EK4List.Text & ".ek4")
+                        EK4toAR(Local & "\Leads" & "\Female\" & cb_EK4List.Text & ".ek4")
                 End Select
             End If
         End If
@@ -699,7 +798,7 @@ You can look me up later.", vbOKOnly, "Error 404")
     'Is Lead Enabled?
     Private Sub Cx_Lead_CheckedChanged(sender As Object, e As EventArgs) Handles cx_Lead.CheckedChanged
         If cx_Lead.Checked = True Then
-            cx_Lead.Text = "Enabled"
+            cx_Lead.Text = LangRes.GetString("Enabled")
             My.Settings.CuteCharmLead = True
             cb_BoxList.Enabled = True
             cb_SlotList.Enabled = True
@@ -711,7 +810,7 @@ You can look me up later.", vbOKOnly, "Error 404")
             gb_Storage.Enabled = True
             cx_Lead.ForeColor = DefaultForeColor
         ElseIf cx_Lead.Checked = False Then
-            cx_Lead.Text = "Disabled"
+            cx_Lead.Text = LangRes.GetString("Disabled")
             My.Settings.CuteCharmLead = False
             cb_BoxList.Enabled = False
             cb_SlotList.Enabled = False
@@ -830,12 +929,12 @@ You can look me up later.", vbOKOnly, "Error 404")
                         Dim ans = MsgBox(im.Message(im), 2, "Yes", "No",, "Error")
                         Select Case ans
                             Case 6
-                                If Not File.Exists(Local & "\Other\" & FileSelect.SafeFileName) Then
+                                If Not File.Exists(Local & "\Leads" & "\Other\" & FileSelect.SafeFileName) Then
                                     Select Case crypt
                                         Case True
-                                            File.Copy(FileSelect.FileName, Local & "\Other\" & FileSelect.SafeFileName)
+                                            File.Copy(FileSelect.FileName, Local & "\Leads" & "\Other\" & FileSelect.SafeFileName)
                                         Case False
-                                            File.WriteAllBytes(Local & "\Other\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
+                                            File.WriteAllBytes(Local & "\Leads" & "\Other\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
                                     End Select
                                 End If
                                 MsgBox("Pokémon was put in the 'Other' folder.")
@@ -845,22 +944,22 @@ You can look me up later.", vbOKOnly, "Error 404")
                     Else
                         If Gender <= GenderRatio Then
                             Species &= " - Female"
-                            If Not File.Exists(Local & "\Female\" & FileSelect.SafeFileName) Then
+                            If Not File.Exists(Local & "\Leads" & "\Female\" & FileSelect.SafeFileName) Then
                                 Select Case crypt
                                     Case True
-                                        File.Copy(FileSelect.FileName, Local & "\Female\" & FileSelect.SafeFileName)
+                                        File.Copy(FileSelect.FileName, Local & "\Leads" & "\Female\" & FileSelect.SafeFileName)
                                     Case False
-                                        File.WriteAllBytes(Local & "\Female\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
+                                        File.WriteAllBytes(Local & "\Leads" & "\Female\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
                                 End Select
                             End If
                         Else
                             Species &= " - Male"
-                            If Not File.Exists(Local & "\Male\" & FileSelect.SafeFileName) Then
+                            If Not File.Exists(Local & "\Leads" & "\Male\" & FileSelect.SafeFileName) Then
                                 Select Case crypt
                                     Case True
-                                        File.Copy(FileSelect.FileName, Local & "\Male\" & FileSelect.SafeFileName)
+                                        File.Copy(FileSelect.FileName, Local & "\Leads" & "\Male\" & FileSelect.SafeFileName)
                                     Case False
-                                        File.WriteAllBytes(Local & "\Male\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
+                                        File.WriteAllBytes(Local & "\Leads" & "\Male\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
                                 End Select
                             End If
                         End If
@@ -887,6 +986,10 @@ You can look me up later.", vbOKOnly, "Error 404")
             cb_GameList.ForeColor = Color.Red
             lb_Game.ForeColor = Color.Red
             Return True
+        ElseIf cb_LeadList.SelectedItem = "" Then
+            cb_LeadList.ForeColor = Color.Red
+            lb_Lead.ForeColor = Color.Red
+            Return True
         ElseIf Group = 0 And rb_Choose.Checked = True Then
             gb_ShinyGroups.ForeColor = Color.Red
             Return True
@@ -904,7 +1007,9 @@ You can look me up later.", vbOKOnly, "Error 404")
             Return True
         Else
             cb_GameList.ForeColor = DefaultForeColor
+            cb_LeadList.ForeColor = DefaultForeColor
             lb_Game.ForeColor = DefaultForeColor
+            lb_Lead.ForeColor = DefaultForeColor
             gb_RandomChoice.ForeColor = DefaultForeColor
             gb_ShinyGroups.ForeColor = DefaultForeColor
             gb_ARButtons.ForeColor = DefaultForeColor

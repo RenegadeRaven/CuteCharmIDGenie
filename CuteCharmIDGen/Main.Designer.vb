@@ -83,6 +83,7 @@ Partial Class Main
         Me.lb_SIDValue = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tscb_Language = New System.Windows.Forms.ToolStripComboBox()
         Me.Importek4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -269,7 +270,7 @@ Partial Class Main
         '
         'bt_Calculate
         '
-        Me.bt_Calculate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bt_Calculate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.bt_Calculate.Location = New System.Drawing.Point(520, 264)
         Me.bt_Calculate.Name = "bt_Calculate"
         Me.bt_Calculate.Size = New System.Drawing.Size(103, 33)
@@ -295,7 +296,7 @@ Partial Class Main
         'lb_TID
         '
         Me.lb_TID.AutoSize = True
-        Me.lb_TID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_TID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
         Me.lb_TID.Location = New System.Drawing.Point(493, 204)
         Me.lb_TID.Name = "lb_TID"
         Me.lb_TID.Size = New System.Drawing.Size(39, 18)
@@ -305,7 +306,7 @@ Partial Class Main
         'lb_SID
         '
         Me.lb_SID.AutoSize = True
-        Me.lb_SID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_SID.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
         Me.lb_SID.Location = New System.Drawing.Point(595, 204)
         Me.lb_SID.Name = "lb_SID"
         Me.lb_SID.Size = New System.Drawing.Size(40, 18)
@@ -315,6 +316,7 @@ Partial Class Main
         'lb_ARCodeOutput
         '
         Me.lb_ARCodeOutput.AutoSize = True
+        Me.lb_ARCodeOutput.BackColor = System.Drawing.Color.Transparent
         Me.lb_ARCodeOutput.Location = New System.Drawing.Point(687, 113)
         Me.lb_ARCodeOutput.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.lb_ARCodeOutput.Name = "lb_ARCodeOutput"
@@ -479,9 +481,11 @@ Partial Class Main
         '
         Me.cb_GameList.BackColor = System.Drawing.SystemColors.Window
         Me.cb_GameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_GameList.DropDownWidth = 150
         Me.cb_GameList.FormattingEnabled = True
         Me.cb_GameList.Items.AddRange(New Object() {"Diamond/Pearl", "Platinum", "HeartGold/SoulSilver"})
         Me.cb_GameList.Location = New System.Drawing.Point(133, 36)
+        Me.cb_GameList.MaxDropDownItems = 3
         Me.cb_GameList.Name = "cb_GameList"
         Me.cb_GameList.Size = New System.Drawing.Size(139, 21)
         Me.cb_GameList.TabIndex = 21
@@ -564,14 +568,14 @@ Partial Class Main
         Me.gb_Storage.Controls.Add(Me.bt_Import)
         Me.gb_Storage.Location = New System.Drawing.Point(6, 38)
         Me.gb_Storage.Name = "gb_Storage"
-        Me.gb_Storage.Size = New System.Drawing.Size(208, 40)
+        Me.gb_Storage.Size = New System.Drawing.Size(188, 40)
         Me.gb_Storage.TabIndex = 30
         Me.gb_Storage.TabStop = False
         Me.gb_Storage.Text = "Manage Leads"
         '
         'bt_Storage
         '
-        Me.bt_Storage.Location = New System.Drawing.Point(115, 13)
+        Me.bt_Storage.Location = New System.Drawing.Point(105, 13)
         Me.bt_Storage.Name = "bt_Storage"
         Me.bt_Storage.Size = New System.Drawing.Size(75, 23)
         Me.bt_Storage.TabIndex = 1
@@ -580,7 +584,7 @@ Partial Class Main
         '
         'bt_Import
         '
-        Me.bt_Import.Location = New System.Drawing.Point(19, 13)
+        Me.bt_Import.Location = New System.Drawing.Point(9, 13)
         Me.bt_Import.Name = "bt_Import"
         Me.bt_Import.Size = New System.Drawing.Size(75, 23)
         Me.bt_Import.TabIndex = 0
@@ -609,9 +613,9 @@ Partial Class Main
         '
         Me.gb_PC.Controls.Add(Me.cb_BoxList)
         Me.gb_PC.Controls.Add(Me.cb_SlotList)
-        Me.gb_PC.Location = New System.Drawing.Point(219, 38)
+        Me.gb_PC.Location = New System.Drawing.Point(200, 38)
         Me.gb_PC.Name = "gb_PC"
-        Me.gb_PC.Size = New System.Drawing.Size(133, 40)
+        Me.gb_PC.Size = New System.Drawing.Size(152, 40)
         Me.gb_PC.TabIndex = 3
         Me.gb_PC.TabStop = False
         Me.gb_PC.Text = "Location in the PC"
@@ -622,16 +626,16 @@ Partial Class Main
         Me.cb_BoxList.FormattingEnabled = True
         Me.cb_BoxList.Location = New System.Drawing.Point(6, 13)
         Me.cb_BoxList.Name = "cb_BoxList"
-        Me.cb_BoxList.Size = New System.Drawing.Size(60, 21)
+        Me.cb_BoxList.Size = New System.Drawing.Size(68, 21)
         Me.cb_BoxList.TabIndex = 1
         '
         'cb_SlotList
         '
         Me.cb_SlotList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_SlotList.FormattingEnabled = True
-        Me.cb_SlotList.Location = New System.Drawing.Point(68, 13)
+        Me.cb_SlotList.Location = New System.Drawing.Point(78, 13)
         Me.cb_SlotList.Name = "cb_SlotList"
-        Me.cb_SlotList.Size = New System.Drawing.Size(60, 21)
+        Me.cb_SlotList.Size = New System.Drawing.Size(68, 21)
         Me.cb_SlotList.TabIndex = 2
         '
         'cx_Lead
@@ -660,10 +664,10 @@ Partial Class Main
         Me.lklb_Author.AutoSize = True
         Me.lklb_Author.Location = New System.Drawing.Point(17, 303)
         Me.lklb_Author.Name = "lklb_Author"
-        Me.lklb_Author.Size = New System.Drawing.Size(47, 13)
+        Me.lklb_Author.Size = New System.Drawing.Size(89, 13)
         Me.lklb_Author.TabIndex = 16
         Me.lklb_Author.TabStop = True
-        Me.lklb_Author.Text = "Regnum"
+        Me.lklb_Author.Text = "RenegadeRaven"
         '
         'lb_Lead
         '
@@ -677,8 +681,9 @@ Partial Class Main
         'lb_ARGame
         '
         Me.lb_ARGame.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lb_ARGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lb_ARGame.Location = New System.Drawing.Point(784, 114)
+        Me.lb_ARGame.BackColor = System.Drawing.Color.Transparent
+        Me.lb_ARGame.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lb_ARGame.Location = New System.Drawing.Point(789, 114)
         Me.lb_ARGame.Name = "lb_ARGame"
         Me.lb_ARGame.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lb_ARGame.Size = New System.Drawing.Size(46, 13)
@@ -697,7 +702,7 @@ Partial Class Main
         'lb_TIDValue
         '
         Me.lb_TIDValue.AutoSize = True
-        Me.lb_TIDValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_TIDValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold)
         Me.lb_TIDValue.Location = New System.Drawing.Point(498, 224)
         Me.lb_TIDValue.Name = "lb_TIDValue"
         Me.lb_TIDValue.Size = New System.Drawing.Size(0, 18)
@@ -706,7 +711,7 @@ Partial Class Main
         'lb_SIDValue
         '
         Me.lb_SIDValue.AutoSize = True
-        Me.lb_SIDValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_SIDValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold)
         Me.lb_SIDValue.Location = New System.Drawing.Point(600, 224)
         Me.lb_SIDValue.Name = "lb_SIDValue"
         Me.lb_SIDValue.Size = New System.Drawing.Size(0, 18)
@@ -714,10 +719,11 @@ Partial Class Main
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
         Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.None
         Me.MenuStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
-        Me.MenuStrip1.Location = New System.Drawing.Point(113, 0)
+        Me.MenuStrip1.Location = New System.Drawing.Point(682, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(69, 24)
         Me.MenuStrip1.Stretch = False
@@ -726,10 +732,18 @@ Partial Class Main
         '
         'ToolStripMenuItem1
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Importek4ToolStripMenuItem, Me.ToolStripSeparator1, Me.ToolStripMenuItem2})
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_Language, Me.Importek4ToolStripMenuItem, Me.ToolStripSeparator1, Me.ToolStripMenuItem2})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(61, 20)
         Me.ToolStripMenuItem1.Text = "Options"
+        '
+        'tscb_Language
+        '
+        Me.tscb_Language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tscb_Language.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+        Me.tscb_Language.Items.AddRange(New Object() {"English", "Français"})
+        Me.tscb_Language.Name = "tscb_Language"
+        Me.tscb_Language.Size = New System.Drawing.Size(121, 23)
         '
         'Importek4ToolStripMenuItem
         '
@@ -784,8 +798,8 @@ Partial Class Main
         Me.Controls.Add(Me.gb_RandomChoice)
         Me.Controls.Add(Me.lklb_Author)
         Me.Controls.Add(Me.lb_By)
-        Me.Controls.Add(Me.lb_ARGame)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.lb_ARGame)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Main"
@@ -888,4 +902,5 @@ Partial Class Main
     Friend WithEvents bt_Storage As Button
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents tscb_Language As ToolStripComboBox
 End Class

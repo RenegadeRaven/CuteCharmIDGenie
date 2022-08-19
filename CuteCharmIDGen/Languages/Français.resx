@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Adamant" xml:space="preserve">
+    <value>Rigide</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>Tous</value>
+    <comment>Control cb</comment>
+  </data>
+  <data name="ARButtons" xml:space="preserve">
+    <value>Boutons d'Activation</value>
+    <comment>Control gb</comment>
+  </data>
+  <data name="ARCode" xml:space="preserve">
+    <value>Code d'Action Replay</value>
+    <comment>Control lb</comment>
+  </data>
+  <data name="Bashful" xml:space="preserve">
+    <value>Pudique</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Bold" xml:space="preserve">
+    <value>Assuré</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Box" xml:space="preserve">
+    <value>Boîte</value>
+    <comment>Control cb</comment>
+  </data>
+  <data name="Brave" xml:space="preserve">
+    <value>Brave</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>par</value>
+    <comment>Control lb</comment>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculer</value>
+    <comment>Control bt</comment>
+  </data>
+  <data name="Calm" xml:space="preserve">
+    <value>Calme</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Careful" xml:space="preserve">
+    <value>Prudent</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choisir</value>
+    <comment>Control rb</comment>
+  </data>
+  <data name="Cute Charm Pokemon" xml:space="preserve">
+    <value>Pokémon dotés avec Joli Sourire</value>
+    <comment>Control gb</comment>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>Diamant</value>
+    <comment>Game</comment>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Désactivé</value>
+    <comment>Control cx</comment>
+  </data>
+  <data name="Docile" xml:space="preserve">
+    <value>Docile</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Activé</value>
+    <comment>Control cx</comment>
+  </data>
+  <data name="Error 404" xml:space="preserve">
+    <value>Erreur 404</value>
+    <comment>msg h</comment>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Femelle</value>
+    <comment>Control cb</comment>
+  </data>
+  <data name="Gentle" xml:space="preserve">
+    <value>Gentil</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Groupe</value>
+    <comment>Control rb</comment>
+  </data>
+  <data name="Hardy" xml:space="preserve">
+    <value>Hardi</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Hasty" xml:space="preserve">
+    <value>Pressé</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="HeartGold" xml:space="preserve">
+    <value>Or HeartGold</value>
+    <comment>Game</comment>
+  </data>
+  <data name="Impish" xml:space="preserve">
+    <value>Malin</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importer</value>
+    <comment>Control bt</comment>
+  </data>
+  <data name="Jolly" xml:space="preserve">
+    <value>Jovial</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Lax" xml:space="preserve">
+    <value>Lâche</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Lead" xml:space="preserve">
+    <value>Chef</value>
+    <comment>Control lb</comment>
+  </data>
+  <data name="Lonely" xml:space="preserve">
+    <value>Solo</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Mâle</value>
+    <comment>Control cb</comment>
+  </data>
+  <data name="Manage Leads" xml:space="preserve">
+    <value>Gérer tes Chefs</value>
+    <comment>Control gb</comment>
+  </data>
+  <data name="Mild" xml:space="preserve">
+    <value>Doux</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Modest" xml:space="preserve">
+    <value>Modeste</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Naive" xml:space="preserve">
+    <value>Naïf</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Naughty" xml:space="preserve">
+    <value>Mauvais</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="No Internet connection" xml:space="preserve">
+    <value>Aucune connexion d'Internet!</value>
+    <comment>msg m</comment>
+  </data>
+  <data name="PCLocation" xml:space="preserve">
+    <value>Position dans l'ordis</value>
+    <comment>Control gb</comment>
+  </data>
+  <data name="Pearl" xml:space="preserve">
+    <value>Perle</value>
+    <comment>Game</comment>
+  </data>
+  <data name="Platinum" xml:space="preserve">
+    <value>Platine</value>
+    <comment>Game</comment>
+  </data>
+  <data name="Quiet" xml:space="preserve">
+    <value>Discret</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Quirky" xml:space="preserve">
+    <value>Bizarre</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Au Hasard</value>
+    <comment>Control rb</comment>
+  </data>
+  <data name="Rash" xml:space="preserve">
+    <value>Foufou</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Relaxed" xml:space="preserve">
+    <value>Relax</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Sassy" xml:space="preserve">
+    <value>Malpoli</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Serious" xml:space="preserve">
+    <value>Sérieux</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Shiny Group" xml:space="preserve">
+    <value>Groupe Chromatique</value>
+    <comment>Control Table</comment>
+  </data>
+  <data name="Shiny Group Selection" xml:space="preserve">
+    <value>Sélection de Groupe Chromatique</value>
+    <comment>Control gb</comment>
+  </data>
+  <data name="Slot" xml:space="preserve">
+    <value>Place</value>
+    <comment>Control cb</comment>
+  </data>
+  <data name="SoulSilver" xml:space="preserve">
+    <value>Argent SoulSilver</value>
+    <comment>Game</comment>
+  </data>
+  <data name="Storage" xml:space="preserve">
+    <value>Entrepôt</value>
+    <comment>Control bt</comment>
+  </data>
+  <data name="TableHeaderFont" xml:space="preserve">
+    <value>6</value>
+    <comment>Control Table</comment>
+  </data>
+  <data name="TableHeaderX" xml:space="preserve">
+    <value>6</value>
+    <comment>Control Table</comment>
+  </data>
+  <data name="TableHeaderY" xml:space="preserve">
+    <value>4</value>
+    <comment>Control Table</comment>
+  </data>
+  <data name="Timid" xml:space="preserve">
+    <value>Timide</value>
+    <comment>Nature</comment>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Générateur de Nº ID pour le bug de Joli Sourire</value>
+    <comment>Control Form</comment>
+  </data>
+  <data name="Trainer ID" xml:space="preserve">
+    <value>Nº ID du Dresseur</value>
+    <comment>Control gb</comment>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Nouvelle mise à jour disponible!</value>
+    <comment>Control lklb</comment>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+    <comment>Control lb</comment>
+  </data>
+  <data name="w/" xml:space="preserve">
+    <value>avec</value>
+    <comment>Control rb</comment>
+  </data>
+  <data name="w/o" xml:space="preserve">
+    <value>sans</value>
+    <comment>Control rb</comment>
+  </data>
+</root>

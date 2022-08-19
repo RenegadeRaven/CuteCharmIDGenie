@@ -17,5 +17,8 @@
     <Setting Name="BoxLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">18/30</Value>
     </Setting>
+    <Setting Name="Language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

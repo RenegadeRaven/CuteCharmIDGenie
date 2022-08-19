@@ -168,8 +168,15 @@
     <EmbeddedResource Include="Essentials\CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Languages\English.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Français.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -228,9 +235,6 @@
     <None Include="Resources\Images\ppdbs.png" />
     <None Include="Resources\Images\ppdb.png" />
     <None Include="Resources\date.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
