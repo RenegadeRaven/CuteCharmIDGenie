@@ -1,5 +1,4 @@
 ﻿Imports System.Threading
-Imports Newtonsoft.Json.Linq
 
 Public Class Main
 #Region "Variables"
@@ -9,10 +8,8 @@ Public Class Main
     Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\RenegadeRaven\CuteCharmIDGenie" 'Path to Local
     Private Natures() As String = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest",
         "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"} 'List of Natures
-    Public mySettings As New IniFile 'Settings.ini File
     Public AR_Code As New AR 'AR Code Class
-    Public LangData As JObject 'Language Array
-    Public LangRes As Resources.ResourceManager
+    Public Shared LangRes As Resources.ResourceManager
     Dim doneLoad As Boolean = False 'Is it done loading?
 
     '* means potential future improvement
@@ -23,7 +20,7 @@ Public Class Main
         CheckLocal()
         If Directory.Exists(Local.Replace("\RenegadeRaven", "\Regnum")) Then LocalMove()
         loadSettings()
-        'UpdateCheck()
+        UpdateCheck()
     End Sub
     Private Sub Main_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         Default_Form()
@@ -61,9 +58,6 @@ Public Class Main
 
 #Region "Language"
     Private Sub CheckLang()
-        'If (My.Settings.Language <> tscb_Language.Items.Item(0).ToString()) And (My.Settings.Language <> tscb_Language.Items.Item(1).ToString()) Then LangBox()
-        'Dim lang As String = File.ReadAllText(My.Resources.English)
-        'LangData = JObject.Parse(lang)
         My.Settings.Language = tscb_Language.Text
         Select Case tscb_Language.Text
             Case "English"
@@ -117,6 +111,7 @@ Public Class Main
         gb_ARButtons.Text = LangRes.GetString("ARButtons")
         lb_ARCodeOutput.Text = LangRes.GetString("ARCode") & ":"
         bt_Calculate.Text = LangRes.GetString("Calculate")
+        Importek4ToolStripMenuItem.Text = LangRes.GetString("Import") & " PKM"
     End Sub
     Private Sub ChangeLang() Handles tscb_Language.TextChanged, tscb_Language.SelectedIndexChanged, tscb_Language.TextUpdate
         My.Settings.Language = tscb_Language.Text
@@ -174,7 +169,7 @@ Public Class Main
             Process.Start("https://github.com/RenegadeRaven/CuteCharmIDGenie/releases/latest")
         Else
             MsgBox(LangRes.GetString("No Internet connection") & "
-You can not update at the moment.", 1,,,, LangRes.GetString("Error 404"))
+" & LangRes.GetString("NoUpdate"), 1,,,, LangRes.GetString("Error") & " 404")
         End If
     End Sub
 
@@ -184,7 +179,7 @@ You can not update at the moment.", 1,,,, LangRes.GetString("Error 404"))
             Process.Start("https://github.com/RenegadeRaven")
         Else
             MsgBox(LangRes.GetString("No Internet connection") & "
-You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
+" & LangRes.GetString("LookMeUp"), 1,,,, LangRes.GetString("Error") & " 404")
         End If
     End Sub
 
@@ -195,7 +190,7 @@ You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
         Else
             MsgBox(LangRes.GetString("No Internet connection") & "
-        I appreciate the gesture.", 1,,,, LangRes.GetString("Error 404"))
+" & LangRes.GetString("Gesture"), 1,,,, LangRes.GetString("Error") & " 404")
         End If
     End Sub
     Private Sub Pb_Donate_MouseDown(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseDown
@@ -251,12 +246,7 @@ You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
         CreateFolders(locals)
         CreateFiles({{Local & "\Leads\Male\174 - MAGIC - D8D7F7D437DE.ek4", My.Resources.MaleLead}, {Local & "\Leads\Female\174 - MAGIC - D8D95E400116.ek4", My.Resources.FemaleLead}})
 
-        If File.Exists(Local & "\settings.ini") Then
-            ReadIni()
-            File.Delete(Local & "\settings.ini")
-        End If
-
-        If Not File.Exists(Local & "\settings.json") Then WriteSettings()
+        If Not File.Exists(Local & "\settings.xml") Then WriteSettings()
         ReadSettings()
     End Sub
 
@@ -834,20 +824,23 @@ You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
         Public NotCCAbility As Boolean = False
         Public NotCCpkm As Boolean = False
         Public UnknownGender As Boolean = False
+
         Public Function NeedMsg(im As ImportMessage)
-            If im.NotCCAbility Then Return True
-            If im.NotCCpkm Then Return True
-            If im.UnknownGender Then Return True
+            If im.NotCCAbility Or im.NotCCpkm Or im.UnknownGender Then Return True
             Return False
         End Function
 
         Public Function Message(im As ImportMessage)
             If NeedMsg(im) Then
-                Dim msg As String = "Couldn't determine "
-                If im.NotCCpkm = True Then msg += "Species, "
-                If im.UnknownGender = True Then msg += "Gender, "
-                If im.NotCCAbility = True Then msg += "Ability. "
-                msg += "Do you still want to import this Pokémon?"
+                Dim msg As String = LangRes.GetString("Undetermined") & "
+"
+                If im.NotCCpkm = True Then msg += " - " & LangRes.GetString("Species") & "
+"
+                If im.UnknownGender = True Then msg += " - " & LangRes.GetString("Gender") & "
+"
+                If im.NotCCAbility = True Then msg += " - " & LangRes.GetString("Ability") & "
+"
+                msg += LangRes.GetString("ImportMon")
                 Return msg
             Else
                 Return Nothing
@@ -857,28 +850,26 @@ You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
 
     'List of Cute Charm Pokemon
     Public Class Pokemon
-        Public Property ID As Integer
+        Public Property ID As Short
         Public Property Name As String
         Public Function Pokemons() As List(Of Pokemon)
             Return New List(Of Pokemon) From {
-               New Pokemon With {.ID = 35, .Name = “Clefairy”},
-               New Pokemon With {.ID = 36, .Name = "Clefable"},
-               New Pokemon With {.ID = 39, .Name = "Jigglypuff"},
-               New Pokemon With {.ID = 40, .Name = "Wigglytuff"},
-               New Pokemon With {.ID = 173, .Name = "Cleffa"},
-               New Pokemon With {.ID = 174, .Name = "Igglybuff"},
-               New Pokemon With {.ID = 300, .Name = "Skitty"},
-               New Pokemon With {.ID = 301, .Name = "Delcatty"},
-               New Pokemon With {.ID = 428, .Name = "Lopunny"},
+               New Pokemon With {.ID = 35, .Name = LangRes.GetString("Clefairy")},
+               New Pokemon With {.ID = 36, .Name = LangRes.GetString("Clefable")},
+               New Pokemon With {.ID = 39, .Name = LangRes.GetString("Jigglypuff")},
+               New Pokemon With {.ID = 40, .Name = LangRes.GetString("Wigglytuff")},
+               New Pokemon With {.ID = 173, .Name = LangRes.GetString("Cleffa")},
+               New Pokemon With {.ID = 174, .Name = LangRes.GetString("Igglybuff")},
+               New Pokemon With {.ID = 300, .Name = LangRes.GetString("Skitty")},
+               New Pokemon With {.ID = 301, .Name = LangRes.GetString("Delcatty")},
+               New Pokemon With {.ID = 428, .Name = LangRes.GetString("Lopunny")},
                New Pokemon With {.ID = -1, .Name = "???"}
                }
         End Function
         Public Function GetPokeName(Dex As Integer)
             Dim list As List(Of Pokemon) = Pokemons()
             For Each i As Pokemon In list
-                If i.ID = Dex Then
-                    Return i.Name
-                End If
+                If i.ID = Dex Then Return i.Name
             Next
             Return Nothing
         End Function
@@ -900,77 +891,66 @@ You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
         Try
             Dim FileSelect As New OpenFileDialog With {.Filter = "PKM File (*.pk4;*.ek4)|*.pk4;*.ek4|All files (*.*)|*.*"}
             Dim res As DialogResult = FileSelect.ShowDialog()
-            If res = Windows.Forms.DialogResult.Cancel Then
-                Exit Sub
-            Else
-                Dim pkm As New PK4
-                Dim ekm As Byte() = Nothing
-                Dim crypt As Boolean
-                If FileSelect.FileName.EndsWith(".ek4") Then
-                    crypt = True
-                    pkm.Data = Crypto(FileSelect.FileName)
-                ElseIf FileSelect.FileName.EndsWith(".pk4") Then
-                    crypt = False
-                    pkm.Data = File.ReadAllBytes(FileSelect.FileName)
-                    ekm = EncryptIfDecrypted45(pkm.Data)
-                End If
-                Dim t As New Pokemon With {.ID = pkm.Dex}
-                Dim im As New ImportMessage
-                With pkm
-                    Dim CPoke As Boolean = t.Pokemons().Any(Function(x) x.ID = pkm.Dex)
-                    Dim Species As String = t.GetPokeName(If(CPoke = True, pkm.Dex, -1))
-                    Dim GenderRatio As Short = If(pkm.Dex = 428, 126, If(CPoke = True, 190, -1))
-                    Dim Ability As Boolean = (Convert.ToString(.PID, 2)).EndsWith("0")
-                    Dim Gender As UInteger = .PID Mod 256
-                    If Ability = False Then im.NotCCAbility = True
-                    If GenderRatio = -1 Then im.UnknownGender = True
-                    If Species = "???" Then im.NotCCpkm = True
-                    If im.NeedMsg(im) Then
-                        Dim ans = MsgBox(im.Message(im), 2, "Yes", "No",, "Error")
-                        Select Case ans
-                            Case 6
-                                If Not File.Exists(Local & "\Leads" & "\Other\" & FileSelect.SafeFileName) Then
-                                    Select Case crypt
-                                        Case True
-                                            File.Copy(FileSelect.FileName, Local & "\Leads" & "\Other\" & FileSelect.SafeFileName)
-                                        Case False
-                                            File.WriteAllBytes(Local & "\Leads" & "\Other\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
-                                    End Select
-                                End If
-                                MsgBox("Pokémon was put in the 'Other' folder.")
-                            Case 7
-                                Exit Sub
-                        End Select
-                    Else
-                        If Gender <= GenderRatio Then
-                            Species &= " - Female"
-                            If Not File.Exists(Local & "\Leads" & "\Female\" & FileSelect.SafeFileName) Then
-                                Select Case crypt
-                                    Case True
-                                        File.Copy(FileSelect.FileName, Local & "\Leads" & "\Female\" & FileSelect.SafeFileName)
-                                    Case False
-                                        File.WriteAllBytes(Local & "\Leads" & "\Female\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
-                                End Select
-                            End If
-                        Else
-                            Species &= " - Male"
-                            If Not File.Exists(Local & "\Leads" & "\Male\" & FileSelect.SafeFileName) Then
-                                Select Case crypt
-                                    Case True
-                                        File.Copy(FileSelect.FileName, Local & "\Leads" & "\Male\" & FileSelect.SafeFileName)
-                                    Case False
-                                        File.WriteAllBytes(Local & "\Leads" & "\Male\" & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
-                                End Select
-                            End If
-                        End If
-                        MsgBox(Species)
-                    End If
-                End With
-                GetLeadList()
+            If res = Windows.Forms.DialogResult.Cancel Then Exit Sub
+            Dim pkm As New PK4
+            Dim ekm As Byte() = Nothing
+            Dim crypt As Boolean
+            Dim LeadPath As String = Local & "\Leads\Gender\"
+            If FileSelect.FileName.EndsWith(".ek4") Then
+                crypt = True
+                pkm.Data = Crypto(FileSelect.FileName)
+            ElseIf FileSelect.FileName.EndsWith(".pk4") Then
+                crypt = False
+                pkm.Data = File.ReadAllBytes(FileSelect.FileName)
+                ekm = EncryptIfDecrypted45(pkm.Data)
             End If
+            Dim t As New Pokemon With {.ID = pkm.Dex}
+            Dim im As New ImportMessage
+            With pkm
+                Dim CPoke As Boolean = t.Pokemons().Any(Function(x) x.ID = pkm.Dex)
+                Dim Species As String = t.GetPokeName(If(CPoke = True, pkm.Dex, -1))
+                Dim GenderRatio As SByte = If(pkm.Dex = 428, 126, If(CPoke = True, 190, -1))
+                Dim Ability As Boolean = (Convert.ToString(.PID, 2)).EndsWith("0")
+                Dim Gender As UInteger = .PID Mod 256
+                If Ability = False Then im.NotCCAbility = True
+                If GenderRatio = -1 Then im.UnknownGender = True
+                If Species = "???" Then im.NotCCpkm = True
+                If im.NeedMsg(im) Then
+                    Select Case MsgBox(im.Message(im), 2, LangRes.GetString("Yes"), LangRes.GetString("No"),, LangRes.GetString("Error"))
+                        Case 6
+                            LeadPath = LeadPath.Replace("\Leads\Gender\", "\Leads\Other\")
+                            PlaceLeadFile(FileSelect, ekm, LeadPath, crypt)
+                            MsgBox(LangRes.GetString("OtherMon"))
+                        Case 7
+                            Exit Sub
+                    End Select
+                Else
+                    Select Case Gender <= GenderRatio
+                        Case True
+                            Species &= " - " & LangRes.GetString("Female")
+                            LeadPath = LeadPath.Replace("\Leads\Gender\", "\Leads\Female\")
+                        Case False
+                            Species &= " - " & LangRes.GetString("Male")
+                            LeadPath = LeadPath.Replace("\Leads\Gender\", "\Leads\Male\")
+                    End Select
+                    PlaceLeadFile(FileSelect, ekm, LeadPath, crypt)
+                    MsgBox(Species)
+                End If
+            End With
+            GetLeadList()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+    Private Sub PlaceLeadFile(FileSelect As OpenFileDialog, ekm As Byte(), LeadPath As String, crypt As Boolean)
+        If Not File.Exists(LeadPath & FileSelect.SafeFileName) Then
+            Select Case crypt
+                Case True
+                    File.Copy(FileSelect.FileName, LeadPath & FileSelect.SafeFileName)
+                Case False
+                    File.WriteAllBytes(LeadPath & FileSelect.SafeFileName.Replace(".pk4", ".ek4"), ekm)
+            End Select
+        End If
     End Sub
 #End Region
 
@@ -993,7 +973,7 @@ You can look me up later.", 1,,,, LangRes.GetString("Error 404"))
         ElseIf Group = 0 And rb_Choose.Checked = True Then
             gb_ShinyGroups.ForeColor = Color.Red
             Return True
-        ElseIf rb_RandomFixed.Checked = False And rb_Randompure.Checked = False And rb_Choose.Checked = False Then
+        ElseIf rb_RandomFixed.Checked = False And rb_RandomPure.Checked = False And rb_Choose.Checked = False Then
             gb_RandomChoice.ForeColor = Color.Red
             Return True
         ElseIf AR_Code.ActivateButtons = 0 Then

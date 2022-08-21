@@ -69,9 +69,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property Default_Lead() As Integer
+        Public Property Default_Lead() As Byte
             Get
-                Return CType(Me("Default_Lead"),Integer)
+                Return CType(Me("Default_Lead"),Byte)
             End Get
             Set
                 Me("Default_Lead") = value

@@ -5,7 +5,7 @@
     <Setting Name="AR_Activation" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">64767</Value>
     </Setting>
-    <Setting Name="Default_Lead" Type="System.Int32" Scope="User">
+    <Setting Name="Default_Lead" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="Default_Game" Type="System.Byte" Scope="User">

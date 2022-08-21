@@ -1,23 +1,4 @@
 ﻿Module Common
-    Public Sub ReadIni()
-        With Main.mySettings
-            .Filename = Main.Local & "\settings.ini"
-            If .OpenIniFile() Then
-                My.Settings.BoxLocation = .GetValue("Box Location")
-                My.Settings.AR_Activation = Convert.ToUInt16(.GetValue("Activation Buttons"), 16)
-                My.Settings.Default_Game = .GetValue("Default Game")
-                My.Settings.Default_Lead = .GetValue("Default Lead")
-                My.Settings.CuteCharmLead = .GetValue("Cute Charm Lead?")
-                '.SetValue("Ticket", My.Settings.ticket)
-                If Not .SaveIni Then
-                    MsgBox("Trouble writing Ini-File")
-                End If
-            Else
-                MsgBox("No Ini-File found")
-            End If
-        End With
-    End Sub
-
     'Adds needed zeros to hex string
     Public Function Hex_Zeros(ByVal hex_value As String, ByVal length As Integer) '*
         Dim Str As String = hex_value.ToUpper

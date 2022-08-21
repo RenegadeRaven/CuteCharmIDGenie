@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Ability" xml:space="preserve">
+    <value>Ability</value>
+    <comment>msg m</comment>
+  </data>
   <data name="Adamant" xml:space="preserve">
     <value>Adamant</value>
     <comment>Nature</comment>
@@ -169,9 +173,25 @@
     <value>Choose</value>
     <comment>Control rb</comment>
   </data>
+  <data name="Clefable" xml:space="preserve">
+    <value>Clefable</value>
+    <comment>Pokémon</comment>
+  </data>
+  <data name="Clefairy" xml:space="preserve">
+    <value>Clefairy</value>
+    <comment>Pokémon</comment>
+  </data>
+  <data name="Cleffa" xml:space="preserve">
+    <value>Cleffa</value>
+    <comment>Pokémon</comment>
+  </data>
   <data name="Cute Charm Pokemon" xml:space="preserve">
     <value>Cute Charm Pokémon</value>
     <comment>Control gb</comment>
+  </data>
+  <data name="Delcatty" xml:space="preserve">
+    <value>Delcatty</value>
+    <comment>Pokémon</comment>
   </data>
   <data name="Diamond" xml:space="preserve">
     <value>Diamond</value>
@@ -189,17 +209,25 @@
     <value>Enabled</value>
     <comment>Control cx</comment>
   </data>
-  <data name="Error 404" xml:space="preserve">
-    <value>Error 404</value>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
     <comment>msg h</comment>
   </data>
   <data name="Female" xml:space="preserve">
     <value>Female</value>
     <comment>Control cb</comment>
   </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+    <comment>msg m</comment>
+  </data>
   <data name="Gentle" xml:space="preserve">
     <value>Gentle</value>
     <comment>Nature</comment>
+  </data>
+  <data name="Gesture" xml:space="preserve">
+    <value>I appreciate the gesture.</value>
+    <comment>msg m</comment>
   </data>
   <data name="Group" xml:space="preserve">
     <value>Group</value>
@@ -217,6 +245,10 @@
     <value>HeartGold</value>
     <comment>Game</comment>
   </data>
+  <data name="Igglybuff" xml:space="preserve">
+    <value>Igglybuff</value>
+    <comment>Pokémon</comment>
+  </data>
   <data name="Impish" xml:space="preserve">
     <value>Impish</value>
     <comment>Nature</comment>
@@ -224,6 +256,14 @@
   <data name="Import" xml:space="preserve">
     <value>Import</value>
     <comment>Control bt</comment>
+  </data>
+  <data name="ImportMon" xml:space="preserve">
+    <value>Do you still want to import this Pokémon?</value>
+    <comment>msg m</comment>
+  </data>
+  <data name="Jigglypuff" xml:space="preserve">
+    <value>Jigglypuff</value>
+    <comment>Pokémon</comment>
   </data>
   <data name="Jolly" xml:space="preserve">
     <value>Jolly</value>
@@ -240,6 +280,14 @@
   <data name="Lonely" xml:space="preserve">
     <value>Lonely</value>
     <comment>Nature</comment>
+  </data>
+  <data name="LookMeUp" xml:space="preserve">
+    <value>You can look me up later.</value>
+    <comment>msg m</comment>
+  </data>
+  <data name="Lopunny" xml:space="preserve">
+    <value>Lopunny</value>
+    <comment>Pokémon</comment>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Male</value>
@@ -265,8 +313,20 @@
     <value>Naughty</value>
     <comment>Nature</comment>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+    <comment>msg b</comment>
+  </data>
   <data name="No Internet connection" xml:space="preserve">
     <value>No Internet connection!</value>
+    <comment>msg m</comment>
+  </data>
+  <data name="NoUpdate" xml:space="preserve">
+    <value>You can not update at the moment.</value>
+    <comment>msg m</comment>
+  </data>
+  <data name="OtherMon" xml:space="preserve">
+    <value>Pokémon was put in the 'Other' folder.</value>
     <comment>msg m</comment>
   </data>
   <data name="PCLocation" xml:space="preserve">
@@ -317,6 +377,10 @@
     <value>Shiny Group Selection</value>
     <comment>Control gb</comment>
   </data>
+  <data name="Skitty" xml:space="preserve">
+    <value>Skitty</value>
+    <comment>Pokémon</comment>
+  </data>
   <data name="Slot" xml:space="preserve">
     <value>Slot</value>
     <comment>Control cb</comment>
@@ -324,6 +388,10 @@
   <data name="SoulSilver" xml:space="preserve">
     <value>SoulSilver</value>
     <comment>Game</comment>
+  </data>
+  <data name="Species" xml:space="preserve">
+    <value>Species</value>
+    <comment>msg m</comment>
   </data>
   <data name="Storage" xml:space="preserve">
     <value>Storage</value>
@@ -353,6 +421,10 @@
     <value>Trainer ID</value>
     <comment>Control gb</comment>
   </data>
+  <data name="Undetermined" xml:space="preserve">
+    <value>Couldn't determine:</value>
+    <comment>msg m</comment>
+  </data>
   <data name="Update" xml:space="preserve">
     <value>New Update Available!</value>
     <comment>Control lklb</comment>
@@ -368,5 +440,13 @@
   <data name="w/o" xml:space="preserve">
     <value>w/o</value>
     <comment>Control rb</comment>
+  </data>
+  <data name="Wigglytuff" xml:space="preserve">
+    <value>Wigglytuff</value>
+    <comment>Pokémon</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+    <comment>msg b</comment>
   </data>
 </root>
