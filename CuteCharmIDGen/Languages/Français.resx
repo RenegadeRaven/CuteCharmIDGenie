@@ -205,6 +205,9 @@
     <value>Docile</value>
     <comment>Nature</comment>
   </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donner</value>
+  </data>
   <data name="Enabled" xml:space="preserve">
     <value>Activé</value>
     <comment>Control cx</comment>

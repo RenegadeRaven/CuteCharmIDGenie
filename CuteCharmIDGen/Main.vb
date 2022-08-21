@@ -112,6 +112,8 @@ Public Class Main
         lb_ARCodeOutput.Text = LangRes.GetString("ARCode") & ":"
         bt_Calculate.Text = LangRes.GetString("Calculate")
         Importek4ToolStripMenuItem.Text = LangRes.GetString("Import") & " PKM"
+        ToolStripMenuItem2.Text = "                  " & LangRes.GetString("Donate")
+        MenuStrip1.Refresh()
     End Sub
     Private Sub ChangeLang() Handles tscb_Language.TextChanged, tscb_Language.SelectedIndexChanged, tscb_Language.TextUpdate
         My.Settings.Language = tscb_Language.Text
