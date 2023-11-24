@@ -4,18 +4,22 @@
     Public EndCode(&H8) As Byte
 
     Public Const ButtonCheck As UInteger = &H94000130UI
+    Public Const EK4_Length As Byte = &H88
+
+    '{ENG, FRE, SPA, ITA, GER, KOR, JAP, CHS, CHT}
     Public Const Pointer_DP As UInteger = &HB2106FC0UI
     Public Const Pointer_Pt As UInteger = &HB2101D40UI
-    Public Const Pointer_HGSS As UInteger = &HB2111880UI
+    'Public Const Pointer_HGSS As UInteger = &HB2111880UI
+    Public Shared ReadOnly Pointer_HGSS As UInteger() = {&HB2111880UI, &HB2111880UI, 0, 0, &HB2111860UI, 0, 0, 0, 0}
     Public Const ID_Location_DP As UShort = &H288
     Public Const ID_Location_Pt As UShort = &H8C
-    Public Const ID_Location_HGSS As UShort = &H84
+    Public Const ID_Location_HGSS As UShort = &H84 'ENG = GER
     Public Const Box_Location_DP As UShort = &HC370
     Public Const Box_Location_Pt As UShort = &HCF44
-    Public Const Box_Location_HGSS As UShort = &HF710
+    Public Const Box_Location_HGSS As UShort = &HF710 'ENG = GER
     Public Const Box_Buffer_DPPt As UShort = &HFF0
-    Public Const Box_Buffer_HGSS As UShort = &H1000
-    Public Const EK4_Length As Byte = &H88
+    Public Const Box_Buffer_HGSS As UShort = &H1000 'ENG = GER
+
     Sub New()
         ButtonCondition = ButtonCheck
         ActivateButtons = &HFFFF

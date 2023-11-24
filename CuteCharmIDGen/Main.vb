@@ -68,8 +68,20 @@ Public Class Main
                 LangRes = New Resources.ResourceManager("CuteCharmIDGen.Français", Reflection.Assembly.GetExecutingAssembly())
                 lklb_Author.Location = New Point(21, 303)
                 cb_GameList.DropDownWidth = 165
+            Case "Español"
+                LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
+                lklb_Author.Location = New Point(17, 303)
+                cb_GameList.DropDownWidth = 139
+            Case "Italiano"
+                LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
+                lklb_Author.Location = New Point(17, 303)
+                cb_GameList.DropDownWidth = 139
+            Case "Deutsch"
+                LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
+                lklb_Author.Location = New Point(17, 303)
+                cb_GameList.DropDownWidth = 139
         End Select
-        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")"
+        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")" & " alpha-dev" & "(" & Date.Today.Year & "/" & Date.Today.Month & "/" & Date.Today.Day & ")"
         Natures = {LangRes.GetString("Hardy"), LangRes.GetString("Lonely"), LangRes.GetString("Brave"), LangRes.GetString("Adamant"),
             LangRes.GetString("Naughty"), LangRes.GetString("Bold"), LangRes.GetString("Docile"), LangRes.GetString("Relaxed"),
             LangRes.GetString("Impish"), LangRes.GetString("Lax"), LangRes.GetString("Timid"), LangRes.GetString("Hasty"),
@@ -556,7 +568,7 @@ Public Class Main
                 AR_Code.Box_Location = AR.Box_Location_Pt + (cb_BoxList.SelectedIndex * AR.Box_Buffer_DPPt) + (cb_SlotList.SelectedIndex * AR.EK4_Length)
                 lb_ARGame.Text = "Pt"
             Case 2 'HGSS
-                AR_Code.Pointer = AR.Pointer_HGSS
+                AR_Code.Pointer = AR.Pointer_HGSS(tscb_Language.SelectedIndex)
                 AR_Code.ID_Location = AR.ID_Location_HGSS
                 AR_Code.Box_Location = AR.Box_Location_HGSS + (cb_BoxList.SelectedIndex * AR.Box_Buffer_HGSS) + (cb_SlotList.SelectedIndex * AR.EK4_Length)
                 lb_ARGame.Text = "HGSS"
