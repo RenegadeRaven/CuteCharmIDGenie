@@ -27,7 +27,7 @@
         Lead_CodeType = &HE0
         Lead_Count = EK4_Length
     End Sub
-    Public Function Build(IsLead As Boolean)
+    Public Function Build(IsLead As Boolean) As Byte()
         Dim Code(&H20) As Byte
         Dim LCode(&HB0) As Byte
         Select Case IsLead

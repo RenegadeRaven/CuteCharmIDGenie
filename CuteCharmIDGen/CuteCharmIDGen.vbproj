@@ -169,6 +169,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\English.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Français.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>

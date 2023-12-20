@@ -19,7 +19,7 @@ Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
         If Directory.Exists(Local.Replace("\RenegadeRaven", "\Regnum")) Then LocalMove()
-        loadSettings()
+        LoadSettings()
         UpdateCheck()
     End Sub
     Private Sub Main_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -28,7 +28,7 @@ Public Class Main
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         WriteSettings()
     End Sub
-    Private Sub loadSettings()
+    Private Sub LoadSettings()
         tscb_LanguageUI.Text = My.Settings.LanguageUI
         tscb_LanguageGame.Text = My.Settings.Language
         cb_LeadList.SelectedIndex = My.Settings.Default_Lead
@@ -82,7 +82,7 @@ Public Class Main
                 lklb_Author.Location = New Point(17, 303)
                 cb_GameList.DropDownWidth = 139
         End Select
-        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")" ' & " alpha-dev" & "(" & Date.Today.Year & "/" & Date.Today.Month & "/" & Date.Today.Day & ")"
+        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")" & " alpha-dev(2023/12/20)"
         Natures = {LangRes.GetString("Hardy"), LangRes.GetString("Lonely"), LangRes.GetString("Brave"), LangRes.GetString("Adamant"),
             LangRes.GetString("Naughty"), LangRes.GetString("Bold"), LangRes.GetString("Docile"), LangRes.GetString("Relaxed"),
             LangRes.GetString("Impish"), LangRes.GetString("Lax"), LangRes.GetString("Timid"), LangRes.GetString("Hasty"),
@@ -221,7 +221,7 @@ Public Class Main
     End Sub
     Private Function Pinger()
         Try
-            Return My.Computer.Network.Ping("2607:f8b0:400b:802::200e")
+            Return My.Computer.Network.Ping("google.com")
         Catch
             Return False
         End Try
@@ -272,7 +272,7 @@ Public Class Main
 
     'Adds text onto the PictureBoxes
     Private Sub DrawTXT(ByVal txt As String, ByVal pb As PictureBox, ByVal pnt As Point, Optional bg As Boolean = True, Optional fnts As Single = 9) '*
-        Dim myfont As Font = New Font("Calibri", fnts, FontStyle.Regular)
+        Dim myfont As New Font("Calibri", fnts, FontStyle.Regular)
         Dim myBrush As Brush = Brushes.Black
         If txt.Contains("\") Then
             txt = txt.Replace("\", "")
@@ -561,7 +561,7 @@ Public Class Main
 #End Region
 #Region "AR Code"
     'Generates AR Code
-    Private Function GenAR()
+    Private Function GenAR() As Byte()
         Select Case cb_GameList.SelectedIndex
             Case 0 'DP
                 AR_Code.Pointer = AR.Pointer_DP(tscb_LanguageGame.SelectedIndex)
@@ -597,9 +597,7 @@ Public Class Main
     'Converts EK4 to Action Replay Code compatible data
     Private Sub EK4toAR(ByVal myFile As String) '*
         Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
-        Dim EK4 As String = ByteArrayToHexString(myBytes)
-        EK4 = EK4.Remove(272, 472 - 272).ToArray()
-        AR_Code.Lead_EK4 = HexStringToByteArray(ToLE(EK4))
+        AR_Code.Lead_EK4 = LittleEndian(myBytes.Take(AR.EK4_Length).ToArray())
     End Sub
 
     'Formats string into AR Code

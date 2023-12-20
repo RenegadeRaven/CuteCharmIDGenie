@@ -1281,7 +1281,7 @@
             Data(&H83) = CByte(If(value <= &H10, value, 4)) ' Cap at Cherish Ball
 
             ' HGSS Exclusive Balls
-            If (value > &H10 Or (If(Origin = &HB OrElse &HC, True, False) And Not FatefulEncounter)) Then
+            If (value > &H10 Or ((Origin = &HB OrElse &HC) And Not FatefulEncounter)) Then
                 Data(&H86) = CByte(If(value <= &H18, value, 4)) ' Cap at Comp Ball
             Else
                 Data(&H86) = 0 ' Unused

@@ -34,7 +34,7 @@ Module SettingsFile
         Catch
             SettingNode = Nothing
         End Try
-        If Not SettingNode Is Nothing Then
+        If SettingNode IsNot Nothing Then
             SettingNode.InnerText = SettingValue
         Else
             SettingNode = Settings.CreateElement(SettingName)
