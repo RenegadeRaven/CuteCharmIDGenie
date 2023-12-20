@@ -5,6 +5,7 @@ Module SettingsFile
     Public Sub ReadSettings()
         Settings = New XmlDocument
         Settings.Load(Main.Local & "\settings.xml")
+        My.Settings.LanguageUI = GetValue("LanguageUI")
         My.Settings.Language = GetValue("Language")
         My.Settings.BoxLocation = GetValue("BoxLocation")
         My.Settings.AR_Activation = Convert.ToUInt16(GetValue("ARButtons"), 16)
@@ -17,6 +18,7 @@ Module SettingsFile
     End Function
     Public Sub WriteSettings()
         If Not File.Exists(Main.Local & "\settings.xml") Then CreateSettings()
+        SetValue("LanguageUI", My.Settings.LanguageUI)
         SetValue("Language", My.Settings.Language)
         SetValue("BoxLocation", My.Settings.BoxLocation)
         SetValue("ARButtons", Hex(My.Settings.AR_Activation))

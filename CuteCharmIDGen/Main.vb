@@ -29,7 +29,8 @@ Public Class Main
         WriteSettings()
     End Sub
     Private Sub loadSettings()
-        tscb_Language.Text = My.Settings.Language
+        tscb_LanguageUI.Text = My.Settings.LanguageUI
+        tscb_LanguageGame.Text = My.Settings.Language
         cb_LeadList.SelectedIndex = My.Settings.Default_Lead
         If My.Settings.Default_Game <> Nothing Then cb_GameList.SelectedIndex = My.Settings.Default_Game
         CheckLang()
@@ -58,8 +59,8 @@ Public Class Main
 
 #Region "Language"
     Private Sub CheckLang()
-        My.Settings.Language = tscb_Language.Text
-        Select Case tscb_Language.Text
+        My.Settings.LanguageUI = tscb_LanguageUI.Text
+        Select Case tscb_LanguageUI.Text
             Case "English"
                 LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
                 lklb_Author.Location = New Point(17, 303)
@@ -81,7 +82,7 @@ Public Class Main
                 lklb_Author.Location = New Point(17, 303)
                 cb_GameList.DropDownWidth = 139
         End Select
-        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")" & " alpha-dev" & "(" & Date.Today.Year & "/" & Date.Today.Month & "/" & Date.Today.Day & ")"
+        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")" ' & " alpha-dev" & "(" & Date.Today.Year & "/" & Date.Today.Month & "/" & Date.Today.Day & ")"
         Natures = {LangRes.GetString("Hardy"), LangRes.GetString("Lonely"), LangRes.GetString("Brave"), LangRes.GetString("Adamant"),
             LangRes.GetString("Naughty"), LangRes.GetString("Bold"), LangRes.GetString("Docile"), LangRes.GetString("Relaxed"),
             LangRes.GetString("Impish"), LangRes.GetString("Lax"), LangRes.GetString("Timid"), LangRes.GetString("Hasty"),
@@ -123,13 +124,18 @@ Public Class Main
         gb_ARButtons.Text = LangRes.GetString("ARButtons")
         lb_ARCodeOutput.Text = LangRes.GetString("ARCode") & ":"
         bt_Calculate.Text = LangRes.GetString("Calculate")
+        tsmi_Language.Text = LangRes.GetString("Language")
+        tsmi_LangGame.Text = LangRes.GetString("Game")
         Importek4ToolStripMenuItem.Text = LangRes.GetString("Import") & " PKM"
         ToolStripMenuItem2.Text = "                  " & LangRes.GetString("Donate")
         MenuStrip1.Refresh()
     End Sub
-    Private Sub ChangeLang() Handles tscb_Language.TextChanged, tscb_Language.SelectedIndexChanged, tscb_Language.TextUpdate
-        My.Settings.Language = tscb_Language.Text
+    Private Sub ChangeLangUI() Handles tscb_LanguageUI.TextChanged, tscb_LanguageUI.SelectedIndexChanged, tscb_LanguageUI.TextUpdate
+        My.Settings.LanguageUI = tscb_LanguageUI.Text
         CheckLang()
+    End Sub
+    Private Sub ChangeLangGame() Handles tscb_LanguageGame.TextChanged, tscb_LanguageGame.SelectedIndexChanged, tscb_LanguageGame.TextUpdate
+        My.Settings.Language = tscb_LanguageGame.Text
     End Sub
 
 #End Region
@@ -558,17 +564,17 @@ Public Class Main
     Private Function GenAR()
         Select Case cb_GameList.SelectedIndex
             Case 0 'DP
-                AR_Code.Pointer = AR.Pointer_DP
+                AR_Code.Pointer = AR.Pointer_DP(tscb_LanguageGame.SelectedIndex)
                 AR_Code.ID_Location = AR.ID_Location_DP
                 AR_Code.Box_Location = AR.Box_Location_DP + (cb_BoxList.SelectedIndex * AR.Box_Buffer_DPPt) + (cb_SlotList.SelectedIndex * AR.EK4_Length)
                 lb_ARGame.Text = "DP"
             Case 1 'Pt
-                AR_Code.Pointer = AR.Pointer_Pt
+                AR_Code.Pointer = AR.Pointer_Pt(tscb_LanguageGame.SelectedIndex)
                 AR_Code.ID_Location = AR.ID_Location_Pt
                 AR_Code.Box_Location = AR.Box_Location_Pt + (cb_BoxList.SelectedIndex * AR.Box_Buffer_DPPt) + (cb_SlotList.SelectedIndex * AR.EK4_Length)
                 lb_ARGame.Text = "Pt"
             Case 2 'HGSS
-                AR_Code.Pointer = AR.Pointer_HGSS(tscb_Language.SelectedIndex)
+                AR_Code.Pointer = AR.Pointer_HGSS(tscb_LanguageGame.SelectedIndex)
                 AR_Code.ID_Location = AR.ID_Location_HGSS
                 AR_Code.Box_Location = AR.Box_Location_HGSS + (cb_BoxList.SelectedIndex * AR.Box_Buffer_HGSS) + (cb_SlotList.SelectedIndex * AR.EK4_Length)
                 lb_ARGame.Text = "HGSS"

@@ -83,10 +83,14 @@ Partial Class Main
         Me.lb_SIDValue = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tscb_Language = New System.Windows.Forms.ToolStripComboBox()
         Me.Importek4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmi_Language = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmi_LangUI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tscb_LanguageUI = New System.Windows.Forms.ToolStripComboBox()
+        Me.tsmi_LangGame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tscb_LanguageGame = New System.Windows.Forms.ToolStripComboBox()
         Me.gb_ShinyGroups.SuspendLayout()
         CType(Me.pb_ShinyGroup4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb_ShinyGroup3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -795,18 +799,10 @@ Partial Class Main
         '
         'ToolStripMenuItem1
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_Language, Me.Importek4ToolStripMenuItem, Me.ToolStripSeparator1, Me.ToolStripMenuItem2})
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_Language, Me.Importek4ToolStripMenuItem, Me.ToolStripSeparator1, Me.ToolStripMenuItem2})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(92, 29)
         Me.ToolStripMenuItem1.Text = "Options"
-        '
-        'tscb_Language
-        '
-        Me.tscb_Language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tscb_Language.FlatStyle = System.Windows.Forms.FlatStyle.Standard
-        Me.tscb_Language.Items.AddRange(New Object() {"English", "(UI Only) Français", "(Not Working) Espanol", "(Not Working) Italiano", "(HGSS AR Code Only) Deutsch"})
-        Me.tscb_Language.Name = "tscb_Language"
-        Me.tscb_Language.Size = New System.Drawing.Size(200, 33)
         '
         'Importek4ToolStripMenuItem
         '
@@ -835,6 +831,43 @@ Partial Class Main
         Me.ToolStripMenuItem2.Size = New System.Drawing.Size(324, 34)
         Me.ToolStripMenuItem2.Text = "                  Donate"
         Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsmi_Language
+        '
+        Me.tsmi_Language.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_LangUI, Me.tsmi_LangGame})
+        Me.tsmi_Language.Name = "tsmi_Language"
+        Me.tsmi_Language.Size = New System.Drawing.Size(324, 34)
+        Me.tsmi_Language.Text = "Language"
+        '
+        'tsmi_LangUI
+        '
+        Me.tsmi_LangUI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_LanguageUI})
+        Me.tsmi_LangUI.Name = "tsmi_LangUI"
+        Me.tsmi_LangUI.Size = New System.Drawing.Size(160, 34)
+        Me.tsmi_LangUI.Text = "UI"
+        '
+        'tscb_LanguageUI
+        '
+        Me.tscb_LanguageUI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tscb_LanguageUI.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+        Me.tscb_LanguageUI.Items.AddRange(New Object() {"English", "Français"})
+        Me.tscb_LanguageUI.Name = "tscb_LanguageUI"
+        Me.tscb_LanguageUI.Size = New System.Drawing.Size(121, 33)
+        '
+        'tsmi_LangGame
+        '
+        Me.tsmi_LangGame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_LanguageGame})
+        Me.tsmi_LangGame.Name = "tsmi_LangGame"
+        Me.tsmi_LangGame.Size = New System.Drawing.Size(160, 34)
+        Me.tsmi_LangGame.Text = "Game"
+        '
+        'tscb_LanguageGame
+        '
+        Me.tscb_LanguageGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tscb_LanguageGame.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+        Me.tscb_LanguageGame.Items.AddRange(New Object() {"English", "Français", "Deutsch"})
+        Me.tscb_LanguageGame.Name = "tscb_LanguageGame"
+        Me.tscb_LanguageGame.Size = New System.Drawing.Size(121, 33)
         '
         'Main
         '
@@ -966,5 +999,9 @@ Partial Class Main
     Friend WithEvents bt_Storage As Button
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
-    Friend WithEvents tscb_Language As ToolStripComboBox
+    Friend WithEvents tsmi_Language As ToolStripMenuItem
+    Friend WithEvents tsmi_LangUI As ToolStripMenuItem
+    Friend WithEvents tscb_LanguageUI As ToolStripComboBox
+    Friend WithEvents tsmi_LangGame As ToolStripMenuItem
+    Friend WithEvents tscb_LanguageGame As ToolStripComboBox
 End Class

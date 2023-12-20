@@ -207,6 +207,7 @@
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Donner</value>
+    <comment>Control tsmi</comment>
   </data>
   <data name="Enabled" xml:space="preserve">
     <value>Activé</value>
@@ -219,6 +220,10 @@
   <data name="Female" xml:space="preserve">
     <value>Femelle</value>
     <comment>Control cb</comment>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>Jeu</value>
+    <comment>Control tsmi</comment>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Genre</value>
@@ -271,6 +276,10 @@
   <data name="Jolly" xml:space="preserve">
     <value>Jovial</value>
     <comment>Nature</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langage</value>
+    <comment>Control tsmi</comment>
   </data>
   <data name="Lax" xml:space="preserve">
     <value>Lâche</value>
