@@ -207,7 +207,7 @@ Public Class Main
     Private Sub Pb_Donate_Click(sender As Object, e As EventArgs) Handles pb_Donate.Click, ToolStripMenuItem2.Click
         Thread.Sleep(200)
         If My.Computer.Network.IsAvailable And Pinger() Then
-            Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
+            Process.Start("https://www.paypal.com/donate/?hosted_button_id=V3U6Q93MJ9MZC")
         Else
             MsgBox(LangRes.GetString("No Internet connection") & "
 " & LangRes.GetString("Gesture"), 1,,,, LangRes.GetString("Error") & " 404")

@@ -55,4 +55,4 @@ Puts my Handle on the app, like signing a work of art. The link takes the user t
 
 ### PayPal Donate Button
 Gives the user the option to help support the developper through PayPal Donations. *Pretty Please.* <br>
-[![button](https://i.imgur.com/4yHCJNa.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E) *Come on, I know you want to.*
+[![button](https://i.imgur.com/4yHCJNa.png)](https://www.paypal.com/donate/?hosted_button_id=V3U6Q93MJ9MZC) *Come on, I know you want to.*

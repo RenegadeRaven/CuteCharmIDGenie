@@ -83,14 +83,14 @@ Partial Class Main
         Me.lb_SIDValue = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Importek4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmi_Language = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmi_LangUI = New System.Windows.Forms.ToolStripMenuItem()
         Me.tscb_LanguageUI = New System.Windows.Forms.ToolStripComboBox()
         Me.tsmi_LangGame = New System.Windows.Forms.ToolStripMenuItem()
         Me.tscb_LanguageGame = New System.Windows.Forms.ToolStripComboBox()
+        Me.Importek4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.gb_ShinyGroups.SuspendLayout()
         CType(Me.pb_ShinyGroup4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb_ShinyGroup3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -804,34 +804,6 @@ Partial Class Main
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(92, 29)
         Me.ToolStripMenuItem1.Text = "Options"
         '
-        'Importek4ToolStripMenuItem
-        '
-        Me.Importek4ToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Importek4ToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.Importek4ToolStripMenuItem.Name = "Importek4ToolStripMenuItem"
-        Me.Importek4ToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Importek4ToolStripMenuItem.ShortcutKeyDisplayString = "(Ctrl+Shift+I)"
-        Me.Importek4ToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
-            Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
-        Me.Importek4ToolStripMenuItem.Size = New System.Drawing.Size(324, 34)
-        Me.Importek4ToolStripMenuItem.Text = "Import PKM"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(321, 6)
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.ppdb
-        Me.ToolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ToolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(324, 34)
-        Me.ToolStripMenuItem2.Text = "                  Donate"
-        Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
         'tsmi_Language
         '
         Me.tsmi_Language.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_LangUI, Me.tsmi_LangGame})
@@ -865,9 +837,37 @@ Partial Class Main
         '
         Me.tscb_LanguageGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tscb_LanguageGame.FlatStyle = System.Windows.Forms.FlatStyle.Standard
-        Me.tscb_LanguageGame.Items.AddRange(New Object() {"English", "Français", "Deutsch"})
+        Me.tscb_LanguageGame.Items.AddRange(New Object() {"English", "Français", "Español", "Italiano", "Deutsch", "日本語"})
         Me.tscb_LanguageGame.Name = "tscb_LanguageGame"
         Me.tscb_LanguageGame.Size = New System.Drawing.Size(121, 33)
+        '
+        'Importek4ToolStripMenuItem
+        '
+        Me.Importek4ToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Importek4ToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.Importek4ToolStripMenuItem.Name = "Importek4ToolStripMenuItem"
+        Me.Importek4ToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.Importek4ToolStripMenuItem.ShortcutKeyDisplayString = "(Ctrl+Shift+I)"
+        Me.Importek4ToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
+        Me.Importek4ToolStripMenuItem.Size = New System.Drawing.Size(324, 34)
+        Me.Importek4ToolStripMenuItem.Text = "Import PKM"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(321, 6)
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.BackgroundImage = Global.CuteCharmIDGen.My.Resources.Resources.ppdb
+        Me.ToolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ToolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(324, 34)
+        Me.ToolStripMenuItem2.Text = "                  Donate"
+        Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'Main
         '
