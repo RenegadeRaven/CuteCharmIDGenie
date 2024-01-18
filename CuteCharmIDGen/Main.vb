@@ -47,18 +47,6 @@ Public Class Main
                 LangRes = New Resources.ResourceManager("CuteCharmIDGen.Français", Reflection.Assembly.GetExecutingAssembly())
                 lklb_Author.Location = New Point(21, 303)
                 cb_GameList.DropDownWidth = 165
-            Case "Español"
-                LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
-                lklb_Author.Location = New Point(17, 303)
-                cb_GameList.DropDownWidth = 139
-            Case "Italiano"
-                LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
-                lklb_Author.Location = New Point(17, 303)
-                cb_GameList.DropDownWidth = 139
-            Case "Deutsch"
-                LangRes = New Resources.ResourceManager("CuteCharmIDGen.English", Reflection.Assembly.GetExecutingAssembly())
-                lklb_Author.Location = New Point(17, 303)
-                cb_GameList.DropDownWidth = 139
         End Select
         Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")"
         Natures = {LangRes.GetString("Hardy"), LangRes.GetString("Lonely"), LangRes.GetString("Brave"), LangRes.GetString("Adamant"),
@@ -115,7 +103,6 @@ Public Class Main
     Private Sub ChangeLangGame() Handles tscb_LanguageGame.TextChanged, tscb_LanguageGame.SelectedIndexChanged, tscb_LanguageGame.TextUpdate
         My.Settings.LanguageGame = tscb_LanguageGame.Text
     End Sub
-
 #End Region
 #Region "Essentials"
     'Link to Update version
@@ -511,7 +498,6 @@ Public Class Main
         Next
         Return tempStr
     End Function
-
 #End Region
 #Region "Pick ID"
     'Picks IDs

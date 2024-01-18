@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Generates IDs for the Cute Charm Glitch")>
 <Assembly: AssemblyCompany("RenegadeRaven")>
 <Assembly: AssemblyProduct("CuteCharmIDGenie")>
-<Assembly: AssemblyCopyright("Copyright © RenegadeRaven 2019-2022")>
+<Assembly: AssemblyCopyright("Copyright © RenegadeRaven 2019-2024")>
 <Assembly: AssemblyTrademark("RenegadeRaven")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.1.6.0")>
-<Assembly: AssemblyFileVersion("1.1.6.0")>
+<Assembly: AssemblyVersion("1.2.0.0")>
+<Assembly: AssemblyFileVersion("1.2.0.0")>

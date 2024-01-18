@@ -5,7 +5,7 @@ Module SettingsFile
     Public Sub ReadSettings()
         Settings = New XmlDocument
         Settings.Load(Main.Local & "\settings.xml")
-        Dim vers As Version = Version.Parse(If(GetValue("Version"), "1.1.5.0"))
+        Dim vers As Version = Version.Parse(If(GetValue("Version"), "1.1.6.0"))
         My.Settings.BoxLocation = GetValueOrDefault("BoxLocation")
         My.Settings.AR_Activation = Convert.ToUInt16(If(GetValue("ARButtons"), Hex(My.Settings.PropertyValues("ARButtons").Property.DefaultValue)), 16)
         My.Settings.Default_Game = GetValueOrDefault("DefaultGame")
@@ -15,7 +15,7 @@ Module SettingsFile
             My.Settings.LanguageUI = GetValueOrDefault("LanguageUI")
             My.Settings.LanguageGame = GetValueOrDefault("LanguageGame")
         Else
-            My.Settings.LanguageUI = GetValueOrDefault("Language")
+            If (vers.ToString() = "1.1.6.0") Then My.Settings.LanguageUI = GetValueOrDefault("Language")
             File.Delete(Main.Local & "\settings.xml")
             WriteSettings()
         End If
