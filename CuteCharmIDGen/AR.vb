@@ -6,11 +6,10 @@
     Public Const ButtonCheck As UInteger = &H94000130UI
     Public Const EK4_Length As Byte = &H88
 
-    'will be {ENG, FRE, SPA, ITA, GER, JAP, KOR, CHS, CHT}
-    'currently {ENG, FRE, SPA, ITA, GER, JAP}
-    Public Shared ReadOnly Pointer_DP As UInteger() = {&HB2106FC0UI, &H2107140UI, &H2107160UI, &H21070A0UI, &H2107100UI, &H2108818UI}
-    Public Shared ReadOnly Pointer_Pt As UInteger() = {&HB2101D40UI, &H2101F20UI, &H2101F40UI, &H2101EA0UI, &H2101EE0UI, &H2101140UI}
-    Public Shared ReadOnly Pointer_HGSS As UInteger() = {&HB2111880UI, &HB21118A0UI, &H21118A0UI, &H2111820UI, &HB2111860UI, &H2110DC0UI}
+    '{ENG, FRE, SPA, ITA, GER, JAP, KOR}
+    Public Shared ReadOnly Pointer_DP As UInteger() = {&HB2106FC0UI, &H2107140UI, &H2107160UI, &H21070A0UI, &H2107100UI, &H2108818UI, &H21045C0UI}
+    Public Shared ReadOnly Pointer_Pt As UInteger() = {&HB2101D40UI, &H2101F20UI, &H2101F40UI, &H2101EA0UI, &H2101EE0UI, &H2101140UI, &H2102C40UI}
+    Public Shared ReadOnly Pointer_HGSS As UInteger() = {&HB2111880UI, &HB21118A0UI, &H21118A0UI, &H2111820UI, &HB2111860UI, &H2110DC0UI, &H2112280UI}
     Public Const ID_Location_DP As UShort = &H288
     Public Const ID_Location_Pt As UShort = &H8C
     Public Const ID_Location_HGSS As UShort = &H84

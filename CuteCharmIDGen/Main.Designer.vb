@@ -786,13 +786,12 @@ Partial Class Main
         '
         Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
         Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.None
-        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MenuStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(1023, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(280, 33)
+        Me.MenuStrip1.Size = New System.Drawing.Size(100, 33)
         Me.MenuStrip1.Stretch = False
         Me.MenuStrip1.TabIndex = 29
         Me.MenuStrip1.Text = "MenuStrip1"
@@ -837,7 +836,7 @@ Partial Class Main
         '
         Me.tscb_LanguageGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tscb_LanguageGame.FlatStyle = System.Windows.Forms.FlatStyle.Standard
-        Me.tscb_LanguageGame.Items.AddRange(New Object() {"English", "Français", "Español", "Italiano", "Deutsch", "日本語"})
+        Me.tscb_LanguageGame.Items.AddRange(New Object() {"English", "Français", "Español", "Italiano", "Deutsch", "日本語", "한국어"})
         Me.tscb_LanguageGame.Name = "tscb_LanguageGame"
         Me.tscb_LanguageGame.Size = New System.Drawing.Size(121, 33)
         '

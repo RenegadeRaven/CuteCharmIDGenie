@@ -18,7 +18,6 @@ Public Class Main
 #End Region
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
-        If Directory.Exists(Local.Replace("\RenegadeRaven", "\Regnum")) Then LocalMove()
         LoadSettings()
         UpdateCheck()
     End Sub
@@ -34,27 +33,6 @@ Public Class Main
         cb_LeadList.SelectedIndex = My.Settings.Default_Lead
         If My.Settings.Default_Game <> Nothing Then cb_GameList.SelectedIndex = My.Settings.Default_Game
         CheckLang()
-    End Sub
-
-    'Move old Local to new Local
-    Private Sub LocalMove() 'Moves to the new Local folder
-        Dim oldLocal As String = Local.Replace("\RenegadeRaven", "\Regnum")
-        If Not Directory.Exists(oldLocal) Then Exit Sub
-        Dim folders As New List(Of String)({"\Male", "\Female", "\Other"})
-        For Each i As String In folders
-            Dim di As New IO.DirectoryInfo(oldLocal & i)
-            Dim aryFi As IO.FileInfo() = di.GetFiles("*.ek4")
-            For Each fi As IO.FileInfo In aryFi
-                If Not File.Exists(Local & "\Leads" & i & "\" & fi.Name) Then
-                    File.Move(oldLocal & i & "\" & fi.Name, Local & "\Leads" & i & "\" & fi.Name)
-                Else
-                    File.Delete(oldLocal & i & "\" & fi.Name)
-                End If
-            Next
-            Directory.Delete(oldLocal & i)
-        Next
-        Directory.Delete(oldLocal, True)
-        If Not Directory.EnumerateFileSystemEntries(oldLocal.Replace("\CuteCharmIDGenie", "")).Any Then Directory.Delete(oldLocal.Replace("\CuteCharmIDGenie", ""), True)
     End Sub
 
 #Region "Language"
