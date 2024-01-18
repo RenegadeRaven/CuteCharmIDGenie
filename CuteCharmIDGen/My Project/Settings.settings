@@ -20,7 +20,7 @@
     <Setting Name="LanguageUI" Type="System.String" Scope="User">
       <Value Profile="(Default)">English</Value>
     </Setting>
-    <Setting Name="Language" Type="System.String" Scope="User">
+    <Setting Name="LanguageGame" Type="System.String" Scope="User">
       <Value Profile="(Default)">English</Value>
     </Setting>
   </Settings>

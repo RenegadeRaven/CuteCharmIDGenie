@@ -128,8 +128,9 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="AR.vb" />
-    <Compile Include="Common.vb" />
+    <Compile Include="Essentials\Essentials.vb" />
     <Compile Include="Essentials\SettingsFile.vb" />
+    <Compile Include="Essentials\Startup.vb" />
     <Compile Include="PKM\Cryption.vb" />
     <Compile Include="Essentials\CustomMessageBox.Designer.vb">
       <DependentUpon>CustomMessageBox.vb</DependentUpon>

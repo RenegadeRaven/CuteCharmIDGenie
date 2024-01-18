@@ -5,21 +5,34 @@ Module SettingsFile
     Public Sub ReadSettings()
         Settings = New XmlDocument
         Settings.Load(Main.Local & "\settings.xml")
-        My.Settings.LanguageUI = GetValue("LanguageUI")
-        My.Settings.Language = GetValue("Language")
-        My.Settings.BoxLocation = GetValue("BoxLocation")
-        My.Settings.AR_Activation = Convert.ToUInt16(GetValue("ARButtons"), 16)
-        My.Settings.Default_Game = GetValue("DefaultGame")
-        My.Settings.Default_Lead = GetValue("DefaultLead")
-        My.Settings.CuteCharmLead = GetValue("UseLead")
+        Dim vers As Version = Version.Parse(If(GetValue("Version"), "1.1.5.0"))
+        My.Settings.BoxLocation = GetValueOrDefault("BoxLocation")
+        My.Settings.AR_Activation = Convert.ToUInt16(If(GetValue("ARButtons"), Hex(My.Settings.PropertyValues("ARButtons").Property.DefaultValue)), 16)
+        My.Settings.Default_Game = GetValueOrDefault("DefaultGame")
+        My.Settings.Default_Lead = GetValueOrDefault("DefaultLead")
+        My.Settings.CuteCharmLead = GetValueOrDefault("UseLead")
+        If (My.Application.Info.Version.CompareTo(vers) <= 0) Then
+            My.Settings.LanguageUI = GetValueOrDefault("LanguageUI")
+            My.Settings.LanguageGame = GetValueOrDefault("LanguageGame")
+        Else
+            My.Settings.LanguageUI = GetValueOrDefault("Language")
+            File.Delete(Main.Local & "\settings.xml")
+            WriteSettings()
+        End If
     End Sub
     Private Function GetValue(SettingName) As String
-        Return Settings.SelectSingleNode("Settings/" & SettingName).InnerText
+        Dim node As XmlNode = Settings.SelectSingleNode("Settings/" & SettingName)
+        Return node?.InnerText
+    End Function
+    Private Function GetValueOrDefault(SettingName) As String
+        Dim node As XmlNode = Settings.SelectSingleNode("Settings/" & SettingName)
+        Return If(node.InnerText, My.Settings.PropertyValues(SettingName).Property.DefaultValue)
     End Function
     Public Sub WriteSettings()
         If Not File.Exists(Main.Local & "\settings.xml") Then CreateSettings()
+        SetValue("Version", My.Application.Info.Version.ToString())
         SetValue("LanguageUI", My.Settings.LanguageUI)
-        SetValue("Language", My.Settings.Language)
+        SetValue("LanguageGame", My.Settings.LanguageGame)
         SetValue("BoxLocation", My.Settings.BoxLocation)
         SetValue("ARButtons", Hex(My.Settings.AR_Activation))
         SetValue("DefaultGame", My.Settings.Default_Game)

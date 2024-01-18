@@ -129,12 +129,12 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("English")>  _
-        Public Property Language() As String
+        Public Property LanguageGame() As String
             Get
-                Return CType(Me("Language"),String)
+                Return CType(Me("LanguageGame"),String)
             End Get
             Set
-                Me("Language") = value
+                Me("LanguageGame") = value
             End Set
         End Property
     End Class

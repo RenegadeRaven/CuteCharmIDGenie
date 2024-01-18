@@ -30,7 +30,7 @@ Public Class Main
     End Sub
     Private Sub LoadSettings()
         tscb_LanguageUI.Text = My.Settings.LanguageUI
-        tscb_LanguageGame.Text = My.Settings.Language
+        tscb_LanguageGame.Text = My.Settings.LanguageGame
         cb_LeadList.SelectedIndex = My.Settings.Default_Lead
         If My.Settings.Default_Game <> Nothing Then cb_GameList.SelectedIndex = My.Settings.Default_Game
         CheckLang()
@@ -82,7 +82,7 @@ Public Class Main
                 lklb_Author.Location = New Point(17, 303)
                 cb_GameList.DropDownWidth = 139
         End Select
-        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")" & " alpha-dev(2023/12/20)"
+        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")"
         Natures = {LangRes.GetString("Hardy"), LangRes.GetString("Lonely"), LangRes.GetString("Brave"), LangRes.GetString("Adamant"),
             LangRes.GetString("Naughty"), LangRes.GetString("Bold"), LangRes.GetString("Docile"), LangRes.GetString("Relaxed"),
             LangRes.GetString("Impish"), LangRes.GetString("Lax"), LangRes.GetString("Timid"), LangRes.GetString("Hasty"),
@@ -135,54 +135,11 @@ Public Class Main
         CheckLang()
     End Sub
     Private Sub ChangeLangGame() Handles tscb_LanguageGame.TextChanged, tscb_LanguageGame.SelectedIndexChanged, tscb_LanguageGame.TextUpdate
-        My.Settings.Language = tscb_LanguageGame.Text
+        My.Settings.LanguageGame = tscb_LanguageGame.Text
     End Sub
 
 #End Region
 #Region "Essentials"
-    'Checks For Update
-    Private Sub UpdateCheck()
-        If File.Exists(TempPath & "\vsn.txt") Then File.Delete(TempPath & "\vsn.txt")
-        If File.Exists(TempPath & "\dt.txt") Then File.Delete(TempPath & "\dt.txt")
-#If DEBUG Then
-        File.WriteAllText(apppath & "..\..\..\version.txt", My.Application.Info.Version.ToString)
-        File.WriteAllText(apppath & "..\..\..\version.json", "{
-" & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
-}")
-        If My.Computer.Network.IsAvailable And Pinger() Then
-            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/RenegadeRaven/CuteCharmIDGenie/master/CuteCharmIDGen/version.txt", TempPath & "\vsn.txt")
-            Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
-            Dim v As String = Reader.ReadToEnd
-            Reader.Close()
-            File.Delete(TempPath & "\vsn.txt")
-            If Application.ProductVersion <> v Then File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
-        End If
-        lklb_Update.Hide()
-#Else
-        Me.Text = LangRes.GetString("Title") & " (" & My.Resources._date & ")"
-        If My.Computer.Network.IsAvailable And Pinger() Then
-            Try
-                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/RenegadeRaven/CuteCharmIDGenie/master/CuteCharmIDGen/Resources/date.txt", TempPath & "\dt.txt")
-            Catch
-                File.WriteAllText(TempPath & "\dt.txt", " ")
-            End Try
-            Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
-            Dim dtt As String = Reader.ReadToEnd
-            Reader.Close()
-            File.Delete(TempPath & "\dt.txt")
-            If My.Resources._date <> dtt Then
-                lklb_Update.Text = LangRes.GetString("Update") & " " & dtt
-                lklb_Update.Show()
-            Else
-                lklb_Update.Hide()
-            End If
-        Else
-            lklb_Update.Hide()
-        End If
-        File.Delete(TempPath & "\date.txt")
-#End If
-    End Sub
-
     'Link to Update version
     Private Sub Lklb_Update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
         If My.Computer.Network.IsAvailable And Pinger() Then
@@ -219,47 +176,8 @@ Public Class Main
     Private Sub Pb_Donate_MouseUp(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseUp
         pb_Donate.Image = Nothing
     End Sub
-    Private Function Pinger()
-        Try
-            Return My.Computer.Network.Ping("google.com")
-        Catch
-            Return False
-        End Try
-    End Function
 #End Region
 #Region "Startup"
-    'Creates Local Files and Folders
-    Private Sub CreateFolders(ByVal dirs As String())
-        Try
-            For i = 0 To UBound(dirs) Step 1
-                If Not dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then dirs(i) = Local & dirs(i)
-                Do While Not Directory.Exists(dirs(i))
-                    If Not Directory.Exists(dirs(i)) Then Directory.CreateDirectory(dirs(i))
-                Loop
-            Next i
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-    Private Sub CreateFiles(ByVal files(,))
-        Try
-            For i = 0 To UBound(files) Step 1
-                If Not files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then files(i, 0) = Local & files(i, 0)
-                Do While Not File.Exists(files(i, 0))
-                    If Not File.Exists(files(i, 0)) Then
-                        If TypeOf files(i, 1) Is String Then
-                            File.WriteAllText(files(i, 0), files(i, 1))
-                        Else
-                            File.WriteAllBytes(files(i, 0), files(i, 1))
-                        End If
-                    End If
-                Loop
-            Next i
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
     'Checks Local Folders
     Private Sub CheckLocal()
         Dim locals As String() = {Local, Local & "\Leads", Local & "\Leads\Male", Local & "\Leads\Female", Local & "\Leads\Other"}
@@ -597,7 +515,7 @@ Public Class Main
     'Converts EK4 to Action Replay Code compatible data
     Private Sub EK4toAR(ByVal myFile As String) '*
         Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
-        AR_Code.Lead_EK4 = LittleEndian(myBytes.Take(AR.EK4_Length).ToArray())
+        AR_Code.Lead_EK4 = LittleEndian.LittleEndian(myBytes.Take(AR.EK4_Length).ToArray())
     End Sub
 
     'Formats string into AR Code
